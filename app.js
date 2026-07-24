@@ -1,0 +1,416 @@
+(function () {
+  "use strict";
+
+  var html = document.documentElement;
+  var B = window.BRIEFING;
+  var archive = window.ARCHIVE || {};
+  var current = (B && B.meta && B.meta.date) || "2026-07-15";
+
+  /* —— 主题 —— */
+  var saved = null;
+  try { saved = localStorage.getItem("briefing-theme"); } catch (e) {}
+  if (saved) html.setAttribute("data-theme", saved);
+  var toggle = document.getElementById("themeToggle");
+  if (toggle) {
+    toggle.addEventListener("click", function () {
+      var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      html.setAttribute("data-theme", next);
+      try { localStorage.setItem("briefing-theme", next); } catch (e) {}
+    });
+  }
+
+  /* —— 工具 —— */
+  function setText(id, text) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  function clear(id) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = "";
+    return el;
+  }
+
+  function fillList(id, arr, make) {
+    var host = document.getElementById(id);
+    if (!host || !arr) return;
+    arr.forEach(function (x) { host.appendChild(make(x)); });
+  }
+
+  /* —— 报头 —— */
+  function renderMeta(meta) {
+    if (!meta) return;
+    setText("kicker", meta.kicker);
+    setText("title", meta.title);
+    setText("date", meta.date);
+    setText("tagline", meta.tagline);
+    document.title = meta.title + " · " + meta.date;
+  }
+
+  /* —— 今日三句话 —— */
+  function renderEditorFrame(list) {
+    var host = clear("editorFrame");
+    if (!host || !list) return;
+    list.forEach(function (text) {
+      var li = document.createElement("li");
+      li.textContent = text;
+      host.appendChild(li);
+    });
+  }
+
+  /* —— 层级 —— */
+  function renderLayer(key, layer) {
+    var host = clear("layer" + key);
+    if (!host || !layer || !layer.items) return;
+    layer.items.forEach(function (item) {
+      var btn = document.createElement("button");
+      btn.className = "item";
+      btn.type = "button";
+      btn.setAttribute("data-layer", key);
+
+      var idx = document.createElement("div");
+      idx.className = "item__idx";
+      idx.textContent = item.idx || "";
+      btn.appendChild(idx);
+
+      var main = document.createElement("div");
+      main.className = "item__main";
+
+      var t = document.createElement("h3");
+      t.className = "item__title";
+      t.textContent = item.title;
+      main.appendChild(t);
+
+      var sum = document.createElement("p");
+      sum.className = "item__summary";
+      sum.textContent = item.summary || "";
+      main.appendChild(sum);
+
+      var foot = document.createElement("div");
+      foot.className = "item__foot";
+
+      var links = document.createElement("div");
+      links.className = "item__links";
+      (item.links || []).forEach(function (l) {
+        var a = document.createElement("a");
+        a.className = "src";
+        a.href = l.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+        a.textContent = l.label;
+        links.appendChild(a);
+      });
+      foot.appendChild(links);
+
+      var more = document.createElement("span");
+      more.className = "item__more";
+      more.textContent = "展开价值 / 行业判断 →";
+      foot.appendChild(more);
+
+      main.appendChild(foot);
+      btn.appendChild(main);
+
+      btn.addEventListener("click", function () { openDetail(item, key); });
+      host.appendChild(btn);
+    });
+  }
+
+  /* —— 二级浮层：详情 —— */
+  var dialog = document.getElementById("detail");
+  var detailBody = document.getElementById("detailBody");
+  var detailClose = document.getElementById("detailClose");
+
+  function openDetail(item, layerKey) {
+    detailBody.innerHTML = "";
+    var tag = document.createElement("div");
+    tag.className = "d-tag";
+    tag.textContent = (layerKey === "B" ? "AI 上游信息" : "游戏美术应用层");
+    detailBody.appendChild(tag);
+
+    var h = document.createElement("h3");
+    h.className = "d-title";
+    h.id = "detailTitle";
+    h.textContent = item.title;
+    detailBody.appendChild(h);
+
+    if (item.links && item.links.length) {
+      var lk = document.createElement("div");
+      lk.className = "d-links";
+      lk.style.marginBottom = "var(--s-5)";
+      item.links.forEach(function (l) {
+        var a = document.createElement("a");
+        a.href = l.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+        a.textContent = "↗ " + l.label;
+        lk.appendChild(a);
+      });
+      detailBody.appendChild(lk);
+    }
+
+    detailBody.appendChild(block("value", "🎯", "对你的价值", item.value));
+    detailBody.appendChild(block("impact", "🌐", "行业影响判断", item.impact));
+    if (item.conduction) {
+      detailBody.appendChild(block("conduction", "↗", "传导到你的游戏美术生产", item.conduction));
+    }
+
+    if (typeof dialog.showModal === "function") dialog.showModal();
+    else dialog.setAttribute("open", "");
+  }
+
+  function block(kind, ic, label, text) {
+    var wrap = document.createElement("div");
+    wrap.className = "d-block d-block--" + kind;
+    var hh = document.createElement("div");
+    hh.className = "d-block__h";
+    var i = document.createElement("span");
+    i.className = "ic"; i.textContent = ic;
+    var s = document.createElement("span"); s.textContent = label;
+    hh.appendChild(i); hh.appendChild(s);
+    var p = document.createElement("p");
+    p.textContent = text;
+    wrap.appendChild(hh); wrap.appendChild(p);
+    return wrap;
+  }
+
+  if (detailClose) {
+    detailClose.addEventListener("click", function () { dialog.close(); });
+  }
+
+  /* —— 行动：展开路径 + 可复制提示词 —— */
+  function renderActions(actions, paths) {
+    var host = clear("actions");
+    if (!host || !actions) return;
+    actions.forEach(function (text, i) {
+      var li = document.createElement("li");
+      li.className = "action";
+
+      var head = document.createElement("div");
+      head.className = "action__head";
+      head.textContent = text;
+      li.appendChild(head);
+
+      var path = (paths || [])[i];
+      if (path) {
+        var expand = document.createElement("button");
+        expand.className = "action__expand";
+        expand.type = "button";
+        expand.textContent = "展开行动路径 / 复制提示词";
+        li.appendChild(expand);
+
+        var body = document.createElement("div");
+        body.className = "action__body";
+        body.style.display = "none";
+
+        var summary = document.createElement("p");
+        summary.className = "action__summary";
+        summary.textContent = path.summary || "";
+        body.appendChild(summary);
+
+        if (path.deploy && path.deploy.length) {
+          var deployH = document.createElement("div");
+          deployH.className = "action__sub";
+          deployH.textContent = "部署/开发所需信息";
+          body.appendChild(deployH);
+          var ul = document.createElement("ul");
+          ul.className = "action__deploy";
+          path.deploy.forEach(function (d) {
+            var dli = document.createElement("li");
+            dli.textContent = d;
+            ul.appendChild(dli);
+          });
+          body.appendChild(ul);
+        }
+
+        var promptH = document.createElement("div");
+        promptH.className = "action__sub";
+        promptH.textContent = "可一键复制的完整提示词";
+        body.appendChild(promptH);
+
+        var pre = document.createElement("pre");
+        pre.className = "action__prompt";
+        pre.textContent = path.prompt || "";
+        body.appendChild(pre);
+
+        var copy = document.createElement("button");
+        copy.className = "action__copy";
+        copy.type = "button";
+        copy.textContent = "复制提示词";
+        copy.addEventListener("click", function () {
+          copyText(path.prompt || "");
+        });
+        body.appendChild(copy);
+
+        expand.addEventListener("click", function () {
+          var open = body.style.display === "block";
+          body.style.display = open ? "none" : "block";
+          expand.textContent = open ? "展开行动路径 / 复制提示词" : "收起";
+        });
+
+        li.appendChild(body);
+      }
+
+      host.appendChild(li);
+    });
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(showCopyToast, function () { fallbackCopy(text); });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+      showCopyToast();
+    } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  function showCopyToast() {
+    var toast = document.getElementById("copyToast");
+    if (!toast) return;
+    toast.classList.add("copy-toast--show");
+    setTimeout(function () { toast.classList.remove("copy-toast--show"); }, 2000);
+  }
+
+  /* —— 时间轴 —— */
+  function renderTimeline(timeline) {
+    var host = document.getElementById("timelineNodes");
+    if (!host || !timeline) return;
+    host.innerHTML = "";
+
+    var nodes = [];
+
+    // 月总结
+    if (timeline.monthly) {
+      nodes.push({
+        type: "month",
+        date: timeline.monthly.id,
+        label: "月",
+        sub: timeline.monthly.range,
+        data: timeline.monthly
+      });
+    }
+
+    // 周总结
+    if (timeline.weekly) {
+      nodes.push({
+        type: "week",
+        date: timeline.weekly.id,
+        label: "周",
+        sub: timeline.weekly.range,
+        data: timeline.weekly
+      });
+    }
+
+    // 日报
+    (timeline.days || []).forEach(function (d) {
+      nodes.push({
+        type: "day",
+        date: d.date,
+        label: d.label,
+        sub: d.weekday,
+        active: d.date === current
+      });
+    });
+
+    nodes.forEach(function (n) {
+      var node = document.createElement("button");
+      node.className = "timeline__node";
+      node.type = "button";
+      if (n.type === "week") node.classList.add("timeline__node--week");
+      if (n.type === "month") node.classList.add("timeline__node--month");
+      if (n.type === "day" && n.active) node.classList.add("timeline__node--active");
+      node.setAttribute("aria-label", (n.type === "day" ? "日报 " : "总结 ") + n.date);
+
+      var dot = document.createElement("span");
+      dot.className = "timeline__dot";
+      node.appendChild(dot);
+
+      var lab = document.createElement("span");
+      lab.className = "timeline__label";
+      lab.textContent = n.label;
+      node.appendChild(lab);
+
+      var sub = document.createElement("span");
+      sub.className = "timeline__sub";
+      sub.textContent = n.sub || "";
+      node.appendChild(sub);
+
+      node.addEventListener("click", function () {
+        if (n.type === "day") loadDay(n.date);
+        else openSummary(n.data, n.type === "week" ? "周总结" : "月总结");
+      });
+
+      host.appendChild(node);
+    });
+  }
+
+  /* —— 总结弹窗 —— */
+  var summaryDialog = document.getElementById("summary");
+  var summaryBody = document.getElementById("summaryBody");
+  var summaryClose = document.getElementById("summaryClose");
+
+  function openSummary(data, title) {
+    if (!summaryBody || !data) return;
+    summaryBody.innerHTML = "";
+
+    var tag = document.createElement("div");
+    tag.className = "summary__tag";
+    tag.textContent = data.range || "";
+    summaryBody.appendChild(tag);
+
+    var h = document.createElement("h3");
+    h.className = "summary__title";
+    h.id = "summaryTitle";
+    h.textContent = title;
+    summaryBody.appendChild(h);
+
+    var h2 = document.createElement("div");
+    h2.className = "summary__sub";
+    h2.textContent = "这个周期最值得去验证和跑通的事";
+    summaryBody.appendChild(h2);
+
+    var p = document.createElement("p");
+    p.className = "summary__focus";
+    p.textContent = data.focus || "本期没有特别值得立即验证的事。";
+    summaryBody.appendChild(p);
+
+    if (typeof summaryDialog.showModal === "function") summaryDialog.showModal();
+    else summaryDialog.setAttribute("open", "");
+  }
+
+  if (summaryClose) {
+    summaryClose.addEventListener("click", function () { summaryDialog.close(); });
+  }
+
+  /* —— 切换日期 —— */
+  function loadDay(date) {
+    var data = archive[date];
+    if (!data) return;
+    current = date;
+    B = data;
+    renderAll(data);
+  }
+
+  function renderAll(data) {
+    renderMeta(data.meta);
+    renderEditorFrame(data.editorFrame);
+    if (data.layers) {
+      renderLayer("A", data.layers.A);
+      renderLayer("B", data.layers.B);
+    }
+    renderActions(data.actions, data.actionPaths);
+    if (data.timeline) renderTimeline(data.timeline);
+    else renderTimeline(window.BRIEFING && window.BRIEFING.timeline);
+  }
+
+  /* —— 初始化 —— */
+  renderAll(B);
+})();

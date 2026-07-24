@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>每日 AI 美术情报</title>
+  <meta name="description" content="面向全栈游戏美术负责人 / AI 降本增效研究的每日晨报：游戏美术应用层 + AI 上游信息。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <aside class="timeline" aria-label="报告时间轴">
+    <div class="timeline__track">
+      <div class="timeline__bar" aria-hidden="true"></div>
+      <div class="timeline__nodes" id="timelineNodes"></div>
+    </div>
+  </aside>
+
+  <div class="page">
+    <header class="masthead">
+      <div class="masthead__top">
+        <span class="kicker" id="kicker">DAILY AI ART INTELLIGENCE</span>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换浅色 / 深色主题">
+          <span class="theme-toggle__icon" aria-hidden="true">◐</span>
+          <span class="theme-toggle__label">主题</span>
+        </button>
+      </div>
+      <h1 class="masthead__title" id="title">每日 AI 美术情报</h1>
+      <div class="masthead__meta">
+        <span id="date">2026-07-14</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <span id="issue">每日 9:00 更新</span>
+      </div>
+      <p class="masthead__tagline" id="tagline">面向全栈游戏美术负责人 / AI 降本增效研究</p>
+    </header>
+
+    <section class="frame" aria-labelledby="frameTitle">
+      <h2 class="frame__title" id="frameTitle">今日三句话</h2>
+      <ol class="frame__list" id="editorFrame"></ol>
+    </section>
+
+    <main id="main">
+      <section class="layer" data-layer="A" aria-labelledby="layerA-title">
+        <div class="layer__head">
+          <span class="layer__tag" id="layerA-tag">A 层</span>
+          <h2 class="layer__title" id="layerA-title">游戏美术应用层</h2>
+          <span class="layer__hint">点卡片展开价值与行业判断 →</span>
+        </div>
+        <div class="feed" id="layerA"></div>
+      </section>
+
+      <section class="layer" data-layer="B" aria-labelledby="layerB-title">
+        <div class="layer__head">
+          <span class="layer__tag" id="layerB-tag">B 层</span>
+          <h2 class="layer__title" id="layerB-title">AI 上游信息</h2>
+          <span class="layer__hint">模型 / Agent / 开源 / 机器人 / 安全 / 产品化</span>
+        </div>
+        <div class="feed" id="layerB"></div>
+      </section>
+
+      <section class="actions" aria-labelledby="actionsTitle">
+        <h2 class="actions__title" id="actionsTitle">本周建议行动</h2>
+        <ol class="actions__list" id="actions"></ol>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>本简报每日 9:00 自动更新并推送。上游信息源来自你指定的高信号账号清单（@karpathy @fchollet @ylecun @ilyasut @OpenAI @AnthropicAI @GoogleDeepMind @hwchase17 @goodside @DrJimFan 等）。</p>
+      <p class="foot__sub">解释性内容（价值 / 行业影响 / 传导路径）收纳于每张卡片的二级浮层，主视图只保留可读摘要。</p>
+    </footer>
+  </div>
+
+  <!-- 二级浮层：详情 -->
+  <dialog class="detail" id="detail" aria-labelledby="detailTitle">
+    <button class="detail__close" id="detailClose" type="button" aria-label="关闭">✕</button>
+    <div class="detail__body" id="detailBody"></div>
+  </dialog>
+
+  <!-- 二级浮层：周/月总结 -->
+  <dialog class="summary" id="summary" aria-labelledby="summaryTitle">
+    <button class="summary__close" id="summaryClose" type="button" aria-label="关闭">✕</button>
+    <div class="summary__body" id="summaryBody"></div>
+  </dialog>
+
+  <!-- 提示词复制成功提示 -->
+  <div class="copy-toast" id="copyToast" role="status" aria-live="polite">已复制到剪贴板</div>
+
+  <script src="archive.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
