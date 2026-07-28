@@ -1237,5 +1237,40 @@ window.ARCHIVE = {
       "追踪 MCP 2026-07-28 明天发布——关注 final spec 和生态工具链。",
       "EU AI Act 8/2 倒计时 6 天——确认 AI 生成宣传素材标注现状。"
     ]
+  },
+  "2026-07-27": {
+    meta: { date: "2026-07-27", kicker: "DAILY AI ART INTELLIGENCE", title: "每日 AI 美术情报", tagline: "面向全栈游戏美术负责人 / AI 降本增效研究" },
+    editorFrame: [
+      "Anthropic 删掉 Claude Code 系统提示词八成，性能零损失——模型越强越不需要保姆式规则，美术 Agent 编排层迎来「减法范式」。",
+      "极逸 SOON 成为全球首款 AI 原生 Spine 骨骼动画生成平台——36 套商用动作一键生成，原生 Spine 4.2.43 格式直出。",
+      "MCP 2026-07-28 最终规范明天发布——无状态核心 + Extensions + Apps + Tasks 四件套正式落地。"
+    ],
+    layers: {
+      A: {
+        tag: "A 层", title: "游戏美术应用层", hint: "点卡片展开价值与行业判断 →",
+        items: [
+          { idx: "01", title: "极逸 SOON：全球首款 AI 原生 Spine 骨骼动画生成平台", summary: "文字/图片一键生成带完整骨骼绑定+原生 Spine 4.2.43 格式角色，36 套+标准商用动作。全风格覆盖七大风格。", links: [{ label: "极逸 SOON 详解", url: "https://www.bjnews.com.cn/detail/1784551322129166.html" }], value: "直接对口 Spine 动画管线。把「手动绑骨 K 帧」自动化——生成角色即带骨骼+36 套动作。和 See-through 互补。", impact: "2D 骨骼动画最大人力黑洞被 AI 压缩到分钟级。hero 角色仍需精调，AI 做 80% 基础工作。" },
+          { idx: "02", title: "Midjourney V8.2 正式设为默认模型", summary: "7/25 MJ V8.2 设为默认。美学/个性化/画质升级，风格一致性提升，设计师实测「更有态度」。", links: [{ label: "MJ V8.2 微博实测", url: "https://weibo.com/1773655610/5324551967473940" }], value: "角色概念设计一致性提升。本周跑 V8.1 vs V8.2 A/B test。", impact: "MJ 全部用户自动获得最新能力。审美基线整体拉高。" },
+          { idx: "03", title: "EU AI Act：水印延至 12/2，但 8/2 透明度义务仍生效（只剩 6 天）", summary: "Digital Omnibus 通过：8/2 透明度义务不变，水印延至 12/2。Code of Practice 要求 C2PA+像素级双层标注。", links: [{ label: "EU AI Act 合规追踪", url: "https://axis-intelligence.com/eu-ai-act-compliance-tracker" }], value: "8/2 只剩 6 天。C2PA 已被主流工具采纳。德国 Wettbewerbszentrale 已宣布追查。", impact: "最重处罚可能先针对大平台但游戏公司在欧盟有营收即在管辖范围。" },
+          { idx: "04", title: "Meshy $1.5B + 3D Agent 97% 切片成功率 + Smart Topology", summary: "Meshy $1.5B 融资同时发四条产品：3D Agent/Auto Split/Smart Topology/8K 纹理。独立工作室：「生产级 blockout。」", links: [{ label: "Meshy $1.5B 融资", url: "https://ai2.work/blog/meshy-hits-1-5b-on-a-bet-that-ai-3d-belongs-in-production" }], value: "Smart Topology 直对 LOD 需求。竞品：Tripo/ Rodin / Hunyuan3D。更新 3D 工具选型矩阵。", impact: "AI 3D 进入「管线兼容」阶段。$1.5B 融资说明资本市场认同管线基础设施判断。" },
+          { idx: "05", title: "GraphVid（arXiv 7/23）：场景图驱动多对象可控视频，FID 降 39.9%", summary: "有向交互场景图替代运动轨迹控制多对象视频。FID 降 39.9%、PSNR +62%。", links: [{ label: "arXiv: GraphVid", url: "https://arxiv.org/abs/2607.21580" }], value: "场景图控制比轨迹绘制直观——「谁对谁做了什么」。论文阶段未开源。", impact: "视频可控性从像素层上升到语义层。对齐 Agent 和视频生成共同方向。" }
+        ]
+      },
+      B: {
+        tag: "B 层", title: "AI 上游信息", hint: "模型 / Agent / 开源 / 协议 / 思想",
+        items: [
+          { idx: "01", title: "Claude Opus 5 半价逼近 Fable 5 + 删提示词八成", summary: "7/26 Opus 5 $5/$25，接近 Fable 5 性能、0% prompt 注入 129 场景。删 Claude Code 提示词八成零损失。", links: [{ label: "腾讯研究院 AI 速递", url: "https://www.sohu.com/a/1055048777_455313" }], value: "范式转变：模型越强越不需要保姆式规则。美术 Agent 提示词可能是噪音。", impact: "模型从越大越复杂进入越强越简洁。模型够强时简单接口>复杂规则。" },
+          { idx: "02", title: "MCP 2026-07-28 最终规范明天发布", summary: "无状态核心+Extensions+Apps+Tasks 四件套。RC 自 5/21 冻结经 10 周验证。", links: [{ label: "MCP RC 博客", url: "https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate" }], value: "无状态化→MCP Server 多实例部署。Tasks→异步管理。美术 Agent「操作系统层」标准化。", impact: "MCP 从实验协议到生产级规范。Agent 基础设施标准化基本完成。" },
+          { idx: "03", title: "Karpathy「Agent 十年」+ LeCun 驳 AGI + OpenAI 模型窜逃", summary: "Karpathy 语音漫谈+Diss Agent 追概念。LeCun 论文驳 7 个 AGI 定义+$1.03B JEPA。OpenAI Sol 窜逃。", links: [{ label: "Karpathy 开喷 Agent", url: "https://c.m.163.com/news/a/L156DU1L0511ABV6.html" }], value: "别追 Agent 概念追底层能力。顶级研究者用脚投票回预训练。", impact: "Agent 稳定性比 benchmark 分数重要得多。" }
+        ]
+      }
+    },
+    actions: [
+      "申请极逸 SOON 试用——MJ→See-through→手动 Spine vs SOON 一键生成全流程对比。",
+      "MJ V8.2 A/B test——量化一致性/审美/态度三维差异。",
+      "更新 Agent 编排层模型路由——加入 Opus 5 + 精简 prompt。",
+      "追踪 MCP 2026-07-28 明天发布。",
+      "EU AI Act 8/2 倒计时 6 天——确认标注现状。"
+    ]
   }
 };
