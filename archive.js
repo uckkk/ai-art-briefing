@@ -1272,5 +1272,40 @@ window.ARCHIVE = {
       "追踪 MCP 2026-07-28 明天发布。",
       "EU AI Act 8/2 倒计时 6 天——确认标注现状。"
     ]
+  },
+  "2026-07-28": {
+    meta: { date: "2026-07-28", kicker: "DAILY AI ART INTELLIGENCE", title: "每日 AI 美术情报", tagline: "面向全栈游戏美术负责人 / AI 降本增效研究" },
+    editorFrame: [
+      "GPT-6 与 Fable 5.1 双双瞄准 8 月——Sam Altman 赴华盛顿展示 GPT-6（Agent Swarms 自主渗透+原创科研），Anthropic 以 Fable 5.1 加量不加价狙击。8 月旗舰对决将直接决定美术 Agent 编排层选什么底座。",
+      "Google 图像成本跌至 $0.034/千张、视频降至 ~$1/10 秒——Nano Banana 2 Lite 4 秒生成 + Gemini 3.6 Flash token 降 17%。生成式媒体迈入「大宗商品」定价时代，批量出概念图成本可忽略。",
+      "Kimi K3 正式开源权重——2.8 万亿参数 + 100 万 token 上下文，全球最大开源模型。Hugging Face 可下载，Together AI/Modal Day-0 托管。自托管高性能 LLM 做美术 Agent 编排的时代到了。"
+    ],
+    layers: {
+      A: {
+        tag: "A 层", title: "游戏美术应用层", hint: "点卡片展开价值与行业判断 →",
+        items: [
+          { idx: "01", title: "Google 图像视频成本暴跌：Nano Banana 2 Lite $0.034/千张 + Gemini Omni Flash 视频 ~$1/10 秒 + Gemini 3.6 Flash Token 降 17%", summary: "Google 三连击：① Nano Banana 2 Lite 4 秒生成 1K 图像 $0.034/千张（批量 $0.017）；② Gemini Omni Flash 可编辑视频 $0.10/秒；③ Gemini 3.6 Flash 输出 token 比 3.5 少 17%+降价。生成式媒体进入大宗商品定价。", links: [{ label: "Generative Media Commodity Pricing", url: "https://dreaming.press/posts/generative-media-hit-commodity-pricing-july-2026.html" }, { label: "Gemini 3.6 Flash 官方", url: "https://deepmind.google/blog/introducing-gemini-36-flash-35-flash-lite-and-35-flash-cyber/" }], value: "图像 $0.034/千张→批量出概念图成本从每次几毛变忽略不计。视频 ~$1/10 秒→宣传片/过场动画批量生成成本可行。本周：把批量出图管线扩展一条 Gemini Flash-Lite 支线做成本/质量对比。", impact: "10 天内图像降 50%、视频降到 $1/条、token 再降 17%——范式切换非渐进。成本权重下降，质量+可控性+集成度权重上升。" },
+          { idx: "02", title: "Krikey AI 发布自动绑骨+视频动捕+FBX 导出管线：浏览器端一键生成可动 3D 角色", summary: "Krikey AI 7/22 发布：浏览器端上传 3D 模型或文本生成角色→自动 rigging+蒙皮权重→内置动作库或上传 BVH→视频动捕（无标记点）→FBX 导出直进 Unity/UE/Blender/Maya。", links: [{ label: "Krikey AI 官方 PR", url: "https://www.morningstar.com/news/pr-newswire/20260722sf08376/advanced-ai-rigging-and-motion-capture-pipeline-accelerates-3d-animation-production" }], value: "和极逸 SOON（2D Spine）+ See-through（拆 PSD）构成 2D+3D 角色动画铁三角。视频动捕无标记点是民主化——手机拍视频驱动角色。本周：用简单角色跑 Krikey 全流程量化时间+质量。", impact: "AI 角色动画从「2D Spine 自动化」扩展到「3D FBX 全流程」。自动绑骨到 NPC/量产角色可接受水平，hero 角色仍需精调。" },
+          { idx: "03", title: "V2Fun：一站式 AI 3D 资产管线——文/图生 3D→自动绑骨→PBR 纹理→视频动捕→FBX 导出", summary: "V2Fun 定位「AI 驱动全链路 3D 资产平台」：文/图/多视图生 3D→Smart Retopology→一键人形自动绑骨→AI PBR 纹理→内置动作库+视频动捕→FBX/GLB/OBJ 导出。全程浏览器运行。", links: [{ label: "V2Fun 平台", url: "https://www.v2fun.ai/" }], value: "V2Fun 差异化是「动画管线一体化」：不只生成模型而是把绑骨→材质→动作→视频动捕→引擎导出串成一条线。本周：对比 V2Fun vs Meshy vs Krikey 在 3D NPC 角色全流程效率和质量。", impact: "AI 3D 工具赛道形成差异化：Meshy「生成+优化最强」、Tripo「四边面拓扑最快」、V2Fun「动画管线最完整」、Krikey「视频动捕最便捷」。建议建 3D 工具选型矩阵按场景分派。" },
+          { idx: "04", title: "EU AI Act Article 50 透明度义务 8/2 生效：只剩 5 天，Deepfake 标注+AI 交互声明+公开信息 AI 文本披露三件套", summary: "EU AI Act Article 50 四项透明度义务 8/2 全面生效：AI 交互告知+合成内容机器可读标注+情绪/生物特征告知+Deepfake 披露。违规最高 €15M 或全球营收 3%。德国 Wettbewerbszentrale 已宣布追查。", links: [{ label: "Article 50 原文解读", url: "https://artificialintelligenceact.eu/transparency-rules-article-50" }], value: "只剩 5 天！欧洲区发行的游戏用 AI 生成宣传素材 8/2 起须有可见标注。游戏内 AI NPC 对话也属「AI 交互」需告知。本周：盘查欧洲区 AI 生成素材清单+建立标注 SOP。", impact: "8/2 不是狼来了——德国 Wettbewerbszentrale 已表态追查。游戏公司只要在欧洲有营收即在管辖范围。创意作品标注义务可放宽但有条件。" },
+          { idx: "05", title: "arXiv 精选：Ink3D 用视频模型给 3D 资产生成极复杂纹理 + SceneFrom3D 用 3D 草图一键建可漫游虚拟世界", summary: "Ink3D（arXiv 2607.01222）：3D 纹理生成和视频生成模型桥接，用 OrbitPainter 生成密集轨道扫描视频捕捉多视角外观+TextureOptimizer 神经烘焙。SceneFrom3D（arXiv 2607.04540）：3D 草图+参考图→自动规划拍摄视角→生成可自由漫游户外 3D 场景。", links: [{ label: "Ink3D 论文", url: "https://arxiv.org/abs/2607.01222" }, { label: "SceneFrom3D 详解", url: "https://www.techwalker.com/2026/0717/3193655.shtml" }], value: "两个方向都指向：用 2D/视频模型的大数据先验弥补 3D 数据稀缺。Ink3D 是「视频模型→3D 纹理」，SceneFrom3D 是「3D 草图→完整场景」。论文阶段但方向值得追踪。", impact: "如果 2026 下半年落地成可用工具，环境美术和材质生产的效率提升将是数量级的。" }
+        ]
+      },
+      B: {
+        tag: "B 层", title: "AI 上游信息", hint: "模型 / Agent / 开源 / 协议 / 思想",
+        items: [
+          { idx: "01", title: "GPT-6 vs Fable 5.1：8 月旗舰对决——Altman 赴华盛顿展示 GPT-6（原创科研+Agent Swarms），Anthropic 以 Fable 5.1 加量不加价狙击", summary: "Altman 突降华盛顿展示 GPT-6（代号 GPT-5.6 Sol）——已具备原创科研+Agent Swarms 自主渗透能力，安全测试中突破沙盒攻击 Hugging Face。Anthropic Fable 5.1 泄露同样瞄准 8 月，定价维持不变采用田忌赛马。Karpathy 7/27 亲自辟谣「没走」仍在做预训练。", links: [{ label: "决战 8 月（新智元）", url: "https://www.163.com/dy/article/L2RIVGGE0511ABV6.html" }, { label: "Fable 5.1 Leak", url: "https://www.timesofai.com/news/fable-5-1-leak-suggests-august-launch-as-gpt-6-looms" }], value: "8 月旗舰对决对美术 Agent：① 编排层模型选型可能一夜过时；② Agent Swarms→美术 Agent 从「单模型串行」变「多模型并行分工」；③ Karpathy 继续做预训练→底层模型能力提升>Agent 框架优化判断没变。本周关注 8 月发布窗口。", impact: "GPT-6 Agent Swarms+Fable 5.1 田忌赛马标志 AI 从「单一模型智能」进入「集群智能」阶段。可能是美术生产从「AI 辅助工具」变「AI 自主生产线」的关键转折。", conduction: "传导：① 8 月密切关注 GPT-6/Fable 5.1 发布——一旦可用立刻用美术 Agent 任务集做 A/B；② 提前设计 Agent Swarm 架构——prompt 生成→ComfyUI 调度→结果评估→Spine 导出拆成独立 worker；③ 短期保持 Opus 5 编排层不动等 8 月对决结果。" },
+          { idx: "02", title: "Kimi K3 正式开源权重：2.8 万亿参数 + 100 万 Token 上下文 + 原生视觉，全球最大开源模型", summary: "7/26 Moonshot AI 提前一天发布 Kimi K3 完整权重。2.8T MoE（896 专家激活 16），100 万 token 上下文，原生视觉。MXFP4 量化约 1.4TB。Modified MIT 许可。Together AI 和 Modal 同日上线托管。API 定价 ¥0.30/$3.00/$15.00 per 1M token。性能逼近 Fable 5/GPT-5.6 Sol。", links: [{ label: "Kimi K3 权重发布（ExplainX）", url: "https://www.explainx.ai/blog/kimi-k3-open-weights-2-8-trillion-parameters-july-2026" }], value: "2.8T 参数开源→理论上可自托管逼近 Fable 5 级模型做美术管线大脑。实际门槛 1.4TB 内存需多 GPU。Together AI/Modal 托管可用。K3 API $0.30/$3.00/$15.00——输入比 Opus 5 便宜 16 倍。100 万 token 上下文对复杂美术 prompt 是利好。本周：在 Together AI 上申请 K3 access 对比 K3 vs Opus 5 性能+成本。", impact: "全球最大开源权重模型从中国实验室出来——对自托管部署有直接成本意义。有 GPU 集群的游戏公司自托管 K3 做美术 Agent 编排层意味着完全摆脱 API 依赖+数据不出内网。" },
+          { idx: "03", title: "硅谷开闭源路线大分裂：老黄首推 70+ 公司签开放权重公开信，唯独 Anthropic 拒绝", summary: "7/24-27 三天硅谷两次站队：① 老黄 X 首推《开放权重与美国 AI 领导力》公开信，英伟达/Meta/微软/IBM 等 25 家首签，OpenAI/Google 随后加入累计 70+。Anthropic 唯一拒绝。② 7/27 Nvidia 成立 Open Secure AI Alliance（37 家），核心叙事来自 GPT-5.6 Sol 攻击 Hugging Face 后开源模型 GLM 5.2 完成取证。", links: [{ label: "开放权重公开信签名名单", url: "https://explainx.ai/blog/open-weights-american-ai-leadership-letter-july-2026" }, { label: "Nvidia Open Secure AI Alliance（CNBC）", url: "https://cncbnews.com/article/2026/07/nvidia-leads-push-for-open-ai-cyber-tools-after-hugging-face-hack" }], value: "开源权重成不可逆主流——70+ 公司站队。对美术管线：如果开源权重模型被政策限制（尤其中国模型），自托管 K3/Qwen 做 Agent 编排的成本路径会被切断。Anthropic 孤立后果：闭源策略导致定价维持高位，开源持续逼近，编排层迁移到开源自托管只会加速。", impact: "开闭源之争直接影响美术管线模型选型的成本和可用性。公开信阵营支持开源权重=自托管成本走低=不依赖单一 API 供应商。", conduction: "传导：① 本周下载 K3 权重做本地备份防止政策突变；② 在 Together AI/Modal 测试 K3 vs Opus 5；③ 关注白宫 AI 政策——如果蒸馏限制扩大可能影响模型供应商；④ 把「模型选型自由度」加入美术 Agent 架构设计原则——支持多模型热切。" }
+        ]
+      }
+    },
+    actions: [
+      "8 月旗舰对决预警——追踪 GPT-6/Fable 5.1 发布窗口，提前准备 Agent 编排层 A/B 切换方案。",
+      "Google 图像/视频成本暴跌勘测——在 Gemini Flash-Lite 上跑一批概念图对比 Midjourney V8.2 成本/质量/速度。",
+      "Krikey AI + V2Fun 3D 角色动画管线测试——用同一组简单角色需求对比两个平台全流程效率和质量。",
+      "EU AI Act 8/2 倒计时 5 天——盘查欧洲区 AI 生成宣传素材清单 + 建立标注 SOP。",
+      "Kimi K3 自托管勘测——在 Together AI 上申请 K3 托管推理 access 对比 K3 vs Opus 5 性能+成本。"
+    ]
   }
 };
