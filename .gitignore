@@ -1,0 +1,10 @@
+# EdgeOne local state (don't commit)
+.edgeone/
+
+# Local secrets / empty env file
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
