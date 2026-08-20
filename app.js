@@ -415,7 +415,6 @@
     if (!node) return;
     currentView = { type: type, key: node.id };
 
-    setText("svTag", type === "week" ? "WEEKLY SUMMARY · 周总结" : "MONTHLY SUMMARY · 月总结");
     setText("svTitle", node.label + " · " + (type === "week" ? "周总结" : "月总结"));
     setText("svRange", node.range || "");
     setText("date", node.range || "");

@@ -443,11 +443,6 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 /* —— 周/月总结视图（主界面内联切换，非弹窗） —— */
 .summary-view { margin-bottom: var(--s-8); }
 .summary-view[hidden] { display: none; }
-.summary-view__tag {
-  display: inline-block; font-size: var(--fs-xs); letter-spacing: 0.16em;
-  text-transform: uppercase; font-weight: 700; color: var(--accent);
-  margin-bottom: var(--s-3);
-}
 .summary-view__title {
   font-family: "Fraunces", serif; font-weight: 600; font-size: var(--fs-xl);
   line-height: 1.2; margin: 0 0 var(--s-2); letter-spacing: -0.01em;
@@ -462,8 +457,6 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 .summary-view__list {
   margin: 0; padding: 0; list-style: none; counter-reset: sv;
   display: flex; flex-direction: column; gap: var(--s-4);
-  border-left: 2px solid var(--accent);
-  padding-left: var(--s-5);
 }
 .summary-view__list > li {
   counter-increment: sv; position: relative;
