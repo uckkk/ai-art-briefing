@@ -28,8 +28,6 @@
 
   /* 时间轴 */
   --timeline-w: 72px;
-  --timeline-week: #c47a52;   /* 灰橙色 */
-  --timeline-month: #b76100;  /* 指定月总结色 */
 }
 
 /* —— 深色（默认）：单色，无彩色点缀 —— */
@@ -58,9 +56,9 @@
   --text:      oklch(24% 0.02 60);
   --text-dim:  oklch(42% 0.018 60);
   --text-faint:oklch(56% 0.014 60);
-  --accent:    oklch(58% 0.15 62);
+  --accent:    oklch(15% 0 0);            /* 单色：极深灰 —— A 层 */
   --accent-ink:oklch(99% 0 0);
-  --accent-2:  oklch(52% 0.12 232);
+  --accent-2:  oklch(45% 0 0);            /* 单色：中灰 —— B 层 */
   --accent-2-ink: oklch(99% 0 0);
   --shadow: 0 1px 2px oklch(0% 0 0 / 0.05), 0 20px 44px -28px oklch(0% 0 0 / 0.28);
   --backdrop: oklch(40% 0.02 60 / 0.32);
@@ -334,18 +332,19 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 .item__title {
   font-size: var(--fs-lg); font-weight: 600; line-height: 1.35;
   margin: 0 0 var(--s-2); letter-spacing: -0.01em;
+  transition: color var(--dur) var(--ease-out);
 }
-.item__summary { margin: 0 0 var(--s-3); color: var(--text-dim); font-size: var(--fs-base); }
+.item__summary { margin: 0 0 var(--s-3); color: var(--text-dim); font-size: var(--fs-base); transition: color var(--dur) var(--ease-out); }
 .item__foot { display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; }
 .item__links { display: flex; gap: var(--s-3); flex-wrap: wrap; }
 .src {
   display: inline-flex; align-items: center; gap: 5px;
-  font-size: var(--fs-sm); font-weight: 500; color: var(--accent);
+  font-size: var(--fs-sm); font-weight: 500; color: var(--text-dim);
   text-decoration: none; border-bottom: 1px solid transparent;
-  transition: border-color var(--dur) var(--ease-out);
+  transition: color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
 }
-.item[data-layer="B"] .src { color: var(--accent-2); }
-.src:hover { border-color: currentColor; }
+.item[data-layer="B"] .src { color: var(--text-dim); }
+.src:hover { color: var(--text); border-color: currentColor; }
 .src::before { content: "↗"; font-size: 0.85em; }
 
 /* —— 本周行动 —— */
