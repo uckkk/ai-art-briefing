@@ -320,9 +320,9 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
   padding: var(--s-5) 0; border-bottom: 1px solid var(--border);
   text-align: left; width: 100%; background: none; border-left: 0; border-right: 0; border-top: 0;
   cursor: pointer; font: inherit; color: inherit;
-  transition: padding-left var(--dur) var(--ease-out);
 }
-.item:hover { padding-left: var(--s-3); }
+/* hover 反馈只用颜色，不用 padding/transform —— 避免文字重新换行闪烁 */
+.item:hover .item__title { color: var(--accent); }
 .item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: var(--radius-sm); }
 .item__idx {
   font-family: "Fraunces", serif; font-weight: 600; font-size: var(--fs-xl);
@@ -570,11 +570,6 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
     border-bottom: 1px solid var(--border);
     border-radius: 0;
     margin-bottom: 0;
-    transition: padding-left var(--dur) var(--ease-out);
-  }
-  .item:hover {
-    padding-left: var(--s-3);
-    transform: none;
   }
 
   /* 行动：双列 */
