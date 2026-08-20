@@ -411,7 +411,6 @@
     currentView = { type: type, key: node.id };
 
     setText("svTitle", node.label + " · " + (type === "week" ? "周总结" : "月总结"));
-    setText("svRange", node.range || "");
     setText("date", node.range || "");
 
     /* focus 按分号拆成编号列表 */

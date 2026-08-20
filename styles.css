@@ -256,7 +256,6 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
   color: var(--text-dim); font-size: var(--fs-sm); font-weight: 500;
   margin-bottom: var(--s-2);
 }
-.masthead__meta .dot { color: var(--accent); }
 .masthead__tagline { margin: 0; color: var(--text-faint); font-size: var(--fs-base); }
 
 /* —— 今日三句话（导语，非重复） —— */
@@ -442,9 +441,6 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 .summary-view__title {
   font-family: "Fraunces", serif; font-weight: 600; font-size: var(--fs-xl);
   line-height: 1.2; margin: 0 0 var(--s-2); letter-spacing: -0.01em;
-}
-.summary-view__range {
-  margin: 0 0 var(--s-5); color: var(--text-dim); font-size: var(--fs-sm); font-weight: 500;
 }
 .summary-view__sub {
   font-size: var(--fs-sm); font-weight: 700; color: var(--text-faint);
