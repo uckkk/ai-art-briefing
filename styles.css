@@ -166,23 +166,21 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 
 .timeline__node--active { opacity: 1; color: var(--text); }
 
-/* 周总结标签：描边小药丸 */
+/* 周总结标签：靠字重/字号/字色区分，去掉封闭边框 */
 .timeline__node--week {
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 2px 8px;
-  margin: 2px 0;
-  border: 1px solid var(--border);
-  border-radius: 999px;
+  letter-spacing: 0.06em;
+  padding: 2px 4px;
+  margin: 4px 0;
+  border: 0;
   color: var(--text-faint);
   background: transparent;
   opacity: 1;
-  transition: color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+  transition: color var(--dur) var(--ease-out);
 }
 .timeline__node--week:hover {
   color: var(--accent);
-  border-color: var(--accent);
   opacity: 1;
 }
 
@@ -204,10 +202,9 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
   opacity: 1;
 }
 
-/* 激活态：周（描边高亮）/ 月（反色实心） */
+/* 激活态：周（字色变实）/ 月（反色实心） */
 .timeline__node--week.timeline__node--active {
   color: var(--text);
-  border-color: var(--text-dim);
   opacity: 1;
 }
 .timeline__node--month.timeline__node--active {
@@ -239,11 +236,12 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 .theme-toggle {
   display: inline-flex; align-items: center; gap: var(--s-2);
   background: transparent; color: var(--text-dim);
-  border: 1px solid var(--border); border-radius: 999px;
+  border: 0;
+  border-radius: 999px;
   padding: var(--s-2) var(--s-3); cursor: pointer; font: inherit;
-  font-size: var(--fs-sm); transition: color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+  font-size: var(--fs-sm); transition: color var(--dur) var(--ease-out);
 }
-.theme-toggle:hover { color: var(--text); border-color: var(--accent); }
+.theme-toggle:hover { color: var(--text); }
 .theme-toggle__icon { font-size: 1.05em; line-height: 1; }
 
 .masthead__title {
@@ -373,7 +371,8 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
   content: counter(act); position: absolute; left: 0; top: 0.05em;
   width: 1.6em; height: 1.6em; display: grid; place-items: center;
   font-family: "Fraunces", serif; font-weight: 600; font-size: var(--fs-sm);
-  color: var(--accent); border: 1px solid var(--border); border-radius: 50%;
+  color: var(--text-faint);
+  background: transparent;
 }
 
 .action { display: flex; flex-direction: column; gap: var(--s-2); }
@@ -381,19 +380,19 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 .action__expand,
 .action__copy {
   align-self: flex-start;
-  background: transparent; color: var(--accent);
-  border: 1px solid var(--border); border-radius: var(--radius-sm);
-  padding: var(--s-2) var(--s-3); cursor: pointer; font: inherit; font-size: var(--fs-sm); font-weight: 600;
-  transition: background var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+  background: transparent; color: var(--text-dim);
+  border: 0;
+  border-radius: 0;
+  padding: var(--s-1) 0; cursor: pointer; font: inherit; font-size: var(--fs-sm); font-weight: 600;
+  transition: color var(--dur) var(--ease-out);
 }
 .action__expand:hover,
-.action__copy:hover { background: var(--surface-2); border-color: var(--accent); }
+.action__copy:hover { color: var(--text); }
 .action__body {
-  margin-top: var(--s-2);
-  padding: var(--s-4);
-  background: var(--surface-1);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  margin-top: var(--s-3);
+  padding: 0;
+  background: transparent;
+  border: 0;
   display: flex; flex-direction: column; gap: var(--s-3);
 }
 .action__summary {
@@ -411,9 +410,9 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 }
 .action__deploy li { margin-bottom: var(--s-1); }
 .action__prompt {
-  margin: 0; padding: var(--s-3);
-  background: var(--surface-2); color: var(--text);
-  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  margin: 0; padding: 0;
+  background: transparent; color: var(--text-dim);
+  border: 0;
   font-size: 0.8rem; line-height: 1.55;
   white-space: pre-wrap; word-break: break-word;
   max-height: 260px; overflow: auto;
@@ -483,7 +482,8 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
   width: min(620px, 92vw); max-height: 86vh; overflow: auto;
   padding: clamp(var(--s-5), 4vw, var(--s-7));
   background: var(--surface-1); color: var(--text);
-  border: 1px solid var(--border); border-radius: var(--radius);
+  border: 0;
+  border-radius: 0;
   box-shadow: var(--shadow);
   margin: auto;
 }
@@ -496,11 +496,11 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 .detail__close {
   position: sticky; top: 0; float: right;
   width: 36px; height: 36px; display: grid; place-items: center;
-  background: var(--surface-2); border: 1px solid var(--border);
+  background: transparent; border: 0;
   color: var(--text-dim); border-radius: 50%; cursor: pointer; font-size: 1rem;
-  transition: color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+  transition: color var(--dur) var(--ease-out);
 }
-.detail__close:hover { color: var(--text); border-color: var(--accent); }
+.detail__close:hover { color: var(--text); }
 .detail__body { clear: both; }
 
 .d-tag {
@@ -529,10 +529,10 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 }
 .d-links a:hover { border-color: currentColor; }
 
-/* —— 宽屏：填满大显示器，减少两侧留白 —— */
+/* —— 宽屏：拉宽主区域，消除两侧留白过大 —— */
 @media (min-width: 1100px) {
   :root {
-    --maxw: 1000px;
+    --maxw: 1080px;
     --fs-base: 1.0625rem;
     --fs-lg: 1.1875rem;
     --fs-xl: clamp(1.5rem, 1rem + 1.4vw, 2.1rem);
@@ -549,56 +549,62 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
   }
 }
 
+/* ≥1400px：进一步拉宽，去掉宽屏双列卡片化封装，保持单列流式更疏朗 */
 @media (min-width: 1400px) {
   :root {
-    --maxw: 1200px;
-    --fs-base: 1.0625rem;
-    --fs-lg: 1.1875rem;
+    --maxw: 1480px;
   }
   .page {
-    padding: clamp(var(--s-6), 5vw, var(--s-8)) clamp(var(--s-5), 4vw, var(--s-6)) var(--s-8);
-    padding-left: calc(var(--timeline-w) + clamp(var(--s-5), 4vw, var(--s-6)));
+    padding: clamp(var(--s-6), 5vw, var(--s-8)) clamp(var(--s-5), 4vw, var(--s-7)) var(--s-8);
+    padding-left: calc(var(--timeline-w) + clamp(var(--s-5), 4vw, var(--s-7)));
   }
 
-  /* 今日三句话：三列并排 */
+  /* 今日三句话：三列并排，纯背景无卡片框 */
   .frame__list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-5);
+    gap: var(--s-6);
   }
   .frame__list li {
     font-size: var(--fs-base);
   }
 
-  /* 信息流：双列卡片 */
-  .feed {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--s-4);
-  }
+  /* 信息流：保持单列流式，去掉原 .item 卡片封装（border / border-radius / background） */
   .item {
-    padding: var(--s-5);
-    background: var(--surface-1);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    padding: var(--s-6) 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
     margin-bottom: 0;
-    transition: transform var(--dur) var(--ease-out), padding-left var(--dur) var(--ease-out);
+    transition: padding-left var(--dur) var(--ease-out);
   }
   .item:hover {
-    padding-left: var(--s-5);
-    transform: translateY(-2px);
-  }
-  .item__more {
-    margin-left: 0;
-    display: block;
-    margin-top: var(--s-3);
+    padding-left: var(--s-3);
+    transform: none;
   }
 
   /* 行动：双列 */
   .actions__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--s-5);
+    gap: var(--s-6) var(--s-7);
+  }
+}
+
+/* ≥1800px：超宽屏顶满 1750px，外侧留白只剩时间轴固定宽度 */
+@media (min-width: 1800px) {
+  :root {
+    --maxw: 1750px;
+  }
+  .page {
+    padding: clamp(var(--s-6), 5vw, var(--s-8)) clamp(var(--s-6), 4vw, var(--s-8)) var(--s-8);
+    padding-left: calc(var(--timeline-w) + clamp(var(--s-6), 4vw, var(--s-8)));
+  }
+  /* 行动三列 */
+  .actions__list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-6) var(--s-7);
   }
 }
 
