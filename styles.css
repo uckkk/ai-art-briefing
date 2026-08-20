@@ -322,6 +322,7 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 }
 /* hover 反馈只用颜色，不用 padding/transform —— 避免文字重新换行闪烁 */
 .item:hover .item__title { color: var(--accent); }
+.item:hover .item__summary { color: var(--text); }
 .item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: var(--radius-sm); }
 .item__idx {
   font-family: "Fraunces", serif; font-weight: 600; font-size: var(--fs-xl);
