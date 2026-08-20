@@ -191,11 +191,6 @@
       });
       foot.appendChild(links);
 
-      var more = document.createElement("span");
-      more.className = "item__more";
-      more.textContent = "展开价值 / 行业判断 →";
-      foot.appendChild(more);
-
       main.appendChild(foot);
       btn.appendChild(main);
 

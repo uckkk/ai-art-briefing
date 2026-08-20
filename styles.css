@@ -347,10 +347,6 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 .item[data-layer="B"] .src { color: var(--accent-2); }
 .src:hover { border-color: currentColor; }
 .src::before { content: "↗"; font-size: 0.85em; }
-.item__more {
-  margin-left: auto; font-size: var(--fs-sm); color: var(--text-faint);
-  font-weight: 600; white-space: nowrap;
-}
 
 /* —— 本周行动 —— */
 .actions {
