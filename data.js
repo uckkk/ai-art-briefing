@@ -1,14 +1,14 @@
 window.BRIEFING = {
   meta: {
-    date: "2026-08-14",
+    date: "2026-08-20",
     kicker: "DAILY AI ART INTELLIGENCE",
     title: "每日 AI 美术情报",
     tagline: "面向全栈游戏美术负责人 / AI 降本增效研究"
   },
   editorFrame: [
-    "FLUX 3（Black Forest Labs）8/12 全面开放视频生成：Self-Flow 统一架构把图像/视频/音频/动作四模态塞进一个模型，原生音频、最长 20 秒，720P 下 93% 胜率击败 Luma Ray3.2、77% 击败 Runway Gen-4.5；图像版和开源版 Flux3Dev 即将推出——多模态「世界模型」路线对宣传片/过场动画选型是长期变量。",
-    "Grok Imagine Image 2.0（xAI，8/7 发布、8/12 全面上线）把生图做成「可迭代设计工具」：Magic Wand（魔术棒）局部改、一键抠透明底、最多 5 张多参考、Smart Resize 九种比例智能补全——Arena 生图/编辑双榜世界第二，对做透明抠图/活动弹窗/UI 素材直接可用。",
-    "DeepSeek 双招：开源 Agent 框架 Harness v0.1（MIT，一切皆插件，对标 Claude Code）+ API 峰谷定价 8/17 生效（闲时半价）——美术 Agent 管线可以彻底摆脱闭源统治、自托管降本。"
+    "Hi3D V3.0（8/18-19）把 AI 3D 模型精度推到 2048³ 体素 + 8K 纹理——2.37 倍体素密度提升，薄壁/悬空/层叠结构不再需要人工修补，AI 3D 资产从「能用」跨入「生产可交付」，48 小时免费窗口正好做 A/B 对比。",
+    "LTX-2.5 开源视频世界模型（8/11）：22B 参数、10 秒 720p 在 6.8 秒内生成（GB200）、原生多镜头角色/场景/声音一致性、16GB VRAM 可本地跑、$10M 以下营收免费——开源视频首次在速度上碾压闭源，ComfyUI 首日支持。",
+    "AI 定价格局反转（8/6-15）：OpenAI GPT-5.6 Luna 砍 80% 变成 ChatGPT 免费默认（$0.20/$1.20/M），DeepSeek V4 Flash 反涨 93%、V4 Pro 峰时涨 355%，Gemini 月活破 10 亿——「AI 越来越便宜」的叙事不再单向，成本路由需按任务复杂度五档重算。"
   ],
   layers: {
     A: {
@@ -18,59 +18,63 @@ window.BRIEFING = {
       items: [
         {
           idx: "01",
-          title: "Grok Imagine Image 2.0：生图进入「可迭代设计工具」，透明底 + 图层化 + 5 图多参考",
-          summary: "8 月 7 日 xAI 发布 Grok Imagine Image 2.0，8 月 12 日作为 Quality Mode 在 grok.com/imagine 及 iOS/Android App 全面上线（并入 SpaceX 后榜单以 SpaceXAI 署名）。核心能力：① 精准编辑套件——Magic Wand 只改圈选区域、分割精确选局部、背景移除可导出透明底主体；② 多参考编辑（Multi-Ref Editing）单次最多吃 5 张输入图，省去手动合成；③ Smart Resize——横图改 9:16 不是裁掉左右而是智能补全缺失画面，覆盖 1:2 到 16:9 共 9 种比例；④ 工作流模板内置照片编辑/产品换色/海报/头像/图标/游戏素材（game assets）等预设；⑤ Consistent World Building 角色/地点/道具分开生成但保持统一视觉风格。Arena 基准文生图与图像编辑双榜均为世界第二（文生图 Elo 1320 落后 GPT-Image-2 的 1380，编辑 Elo 1439 落后 1463）。定价 1K Low 约 $0.04/张起，API（grok-imagine-image-2.0）即将开放。",
+          title: "Hi3D V3.0：2048³ 体素 + 8K 纹理，AI 3D 资产进入「生产可交付」",
+          summary: "8 月 18-19 日 Hi3D 发布 V3.0——业界首个可商用 2048³ 体素级分辨率 AI 3D 模型。相比 V2.0 的 1536³，体素密度提升 2.37 倍；纹理输出上限拉至 8K；深度升级跨视角结构推理与自研 UV 补全算法。核心目标：大幅削减 AI 3D 资产进入下游生产流程所需的人工修补成本。升级三大突破：① 2048³ 高精还原——羽毛/鳞片层叠、文字/Logo 边缘、机械接缝等高频细节清晰可辨，薄壁与悬空等复杂结构重建更完整；② 跨视角稳定——侧面/背面/遮挡区域结构稳定性提升，减少「结构幻觉」；③ 8K 纹理 + UV 补全——图案边缘清晰度、色彩过渡连续性提升。8/19-20 48 小时全功能免费，同期年付 7 折。",
           links: [
-            { label: "xAI Launches Grok Imagine Image 2.0 With Precise Editing Tools（All Things Elon，8/12）", url: "https://www.allthings-elon.com/articles/xai-grok-imagine-image-2-0-quality-mode-2026-08-12" },
-            { label: "Grok Image 2 教學｜Imagine Image 2.0 新功能、價格一次看（GRENADE）", url: "https://grenade.tw/blog/grok-imagine-image-2/" },
-            { label: "XAI Launches Imagine Image 2.0 with Advanced Editing（The Next Gen Tech Insider）", url: "https://www.thenextgentechinsider.com/pulse/xai-launches-imagine-image-20-with-advanced-editing-and-professional-workflows" }
+            { label: "Hi3D V3.0 raises AI 3D models to 2048³ voxel resolution（3Dnatives）", url: "https://www.3dnatives.com/en/hi3d-v3-2048-voxel-resolution" },
+            { label: "Hi3D V3.0 官方新闻稿（PR Newswire）", url: "https://www.prnewswire.com/news-releases/hi3d-v3-0--the-first-commercially-available-ai-3d-model-with-2048-voxel-resolution-launches-with-48-hours-of-free-access-for-everyone-302854094.html" },
+            { label: "2048³ 超高精度 AI 3D 模型 Hi3D V3.0 正式发布（腾讯网）", url: "https://new.qq.com/rain/a/20260819A02ZU300" }
           ],
-          value: "① 透明底导出 + Magic Wand 局部改，直接命中你正在做的透明抠图/2x 导出场景——活动弹窗、角色立绘、UI 图标可以省去在 PS 里抠图/修图的来回。② 5 张多参考 + Smart Resize 让一套素材改多尺寸（App 商店图、公众号封面、小红书竖版、PPT 横版）从重画变成一键补全。③ 游戏素材模板和 Consistent World Building（角色/道具/场景分开生成但风格统一）是少见的、直接面向游戏资产生产的官方模板，值得作为风格统一性验证工具。④ 中文文字渲染仍比 GPT Image 2 粗糙（偶尔错字/细节偏差），做带中文的宣发物料建议让 GPT Image 2 做终稿、Image 2.0 做批量变体。",
-          impact: "生图竞争的胜负手从「谁出图更美」转向「谁更懂迭代编辑」。xAI 用「编辑是一等公民」（Magic Wand/分割/透明底/多参考/模板）切入，配合 Grok 4.6（想）+ Grok Bot（干）+ Imagine（视觉）+ Grok Build（做）把创意全家桶拼齐。对游戏美术的含义：① 生图工具的议价点正在从单张质量转向素材后处理链条完整度；② 透明底/局部编辑这类脏活越来越便宜，纯执行层的抠图/改尺寸外包进一步被内部化；③ 8 月生图圈集体上新（Midjourney 8.2 / GPT-Image-2 / Grok Image 2.0 / OpenAI 下一代 mona-lisa-1 已在竞技场秘密测试），别急着锁死单一订阅，按审美（MJ）/听话（GPT）/编辑（Grok）/便宜（国产开源）分场景选。"
+          value: "Hi3D 的核心价值不在精度数字本身，而在「大幅削减人工修补」——AI 3D 生成一直卡在「出模型容易、修模型难」的痛点上。2048³ + 8K 纹理 + 跨视角推理直接瞄准的就是「修模型」环节。如果你的管线在做「概念图→AI 生 3D→人工修拓扑→烘焙贴图→进引擎」，Hi3D V3.0 可以把后三步的工时压一半以上。48 小时免费窗口正好用来跑一组你的真实道具/角色需求做 A/B 对比。",
+          impact: "AI 3D 生成正在从「能出 preview」进入「按管线阶段选型 + 自动后处理 + 商用授权清晰」的成熟期。Hi3D 的方向（提高精度减少修补）和 TRELLIS.2/Hunyuan3D 的方向（开放权重自托管）是两条并行的路线。中低模道具/NPC 的 AI 生成渗透率会在 2026 下半年从 30% 拉到 70%+；但 hero 级资产仍需人工主导。"
         },
         {
           idx: "02",
-          title: "Claude 全链路 Blender + ComfyUI 管线：MCP 串联本地免费模型，一个人跑通 3D 资产生产",
-          summary: "8 月 13 日被大量转发的实测（创作者 Philip，频道 Pixel Artistry）演示了关键范式：把 Claude Desktop 通过 MCP（Model Context Protocol，模型上下文协议）连到本机已装的 Blender 和 ComfyUI，全程用免费本地模型（Z Image Turbo 生图 + Trellis 2 生 3D），Claude 作为「大脑」调度工具完成整条 3D 生产链：① 一句「做一套中世纪十件套道具包」自动生成概念图→逐个识别并转 3D→导入 Blender→摆进场景；② 把粗糙 AI 网格自动 merge 顶点、修正缩放、用 Quad Remesher 做低模、烘焙原始贴图（烘焙前主动申请许可，并把清理流程记进 memory 供复用）；③ 用 Kimodo（文生动画）+ Kimodo Blender Bridge 生成 5 段动画，配合 Rokoko 插件把 Kimodo 骨架自动重定向到 Rodin Gen-2.5 生成并 ComfyUI SkinTokens 绑定的角色上。全程无云端渲染、无订阅费。",
+          title: "LTX-2.5：22B 开源视频世界模型，6.8 秒生成 10 秒 720p，ComfyUI 首日支持",
+          summary: "8 月 11 日 Lightricks 旗下 LTX 发布 LTX-2.5，220 亿参数开源权重音视频基础模型。核心升级：新扩散视频解码器减少高运动伪影；原生多镜头（multishot）生成，单次生成可保持角色/场景/光照/声音一致的多个连续镜头；自定义 Gemma 4 12B 文本编码器 + prompt enhancer；Diffusion Fidelity Rendering 根据场景复杂度动态分配渲染算力；蒸馏模型经 NVIDIA 优化可在 RTX GPU/Mac 本地运行，最低 16GB VRAM。10 秒 720p 在 2×GB200 上仅需 6.8 秒生成（API 23.7 秒）。盲测胜率 67%。Hugging Face 开放权重，ComfyUI 首日原生支持，API 按秒计费（720p $0.09/秒、4K $0.37/秒）。许可对年收入 <$1000 万的企业免费商用。LTX 家族总下载量超 3300 万次。",
           links: [
-            { label: "Claude Just Ran An Entire Blender And ComfyUI Pipeline Solo（Gachoki Studios，8/13）", url: "https://gachoki.com/claude-just-ran-an-entire-blender-and-comfyui-pipeline-solo-and-the-results-are-wild/" }
+            { label: "LTX-2.5: Open Weights Video World Model（DataNorth AI）", url: "https://datanorth.ai/news/ltx-releases-ltx-2-5-open-weights-video-world-model" },
+            { label: "LTX-2.5 Hugging Face 权重", url: "https://huggingface.co/Lightricks/LTX-2.5" },
+            { label: "LTX-2.5: Free Open-Weights AI Video in 6.8 Seconds（GenMediaLab）", url: "https://www.genmedialab.com/news/ltx-25-open-weights-ai-video-faster-than-real-time" }
           ],
-          value: "① 这是「AI Agent 真正接管美术管线」的可复现样板——不是 demo，是本地、免费、已有工具（Blender/ComfyUI 你本来就有）上的真实跑通。② 直接可抄的三段式：概念图→生 3D→自动后处理；生网格→重拓扑→烘焙贴图；生角色→绑骨→生成动画→重定向。③ 关键启示是「Claude 把 workflow 记进 memory」——一次教会它重拓扑流程，下次同类模型自动走同一套清理，这正是自建美术 Agent 该有的可积累形态。④ 已知短板：批量和迭代仍偏慢，眼窝等刁钻拓扑会卡死循环（Claude 死循环不解决），说明自动化的边界在「高频固定流程」和「人类兜底刁钻情况」之间要划清楚。",
-          impact: "这条新闻的价值不在 Claude 多强，而在于 MCP 把「AI 大脑」和「DCC 工具（Blender/ComfyUI/Spine/FairyGUI）」之间的最后一公里打通了。之前 AI 生成和引擎/建模软件是割裂的两套，现在 Agent 能直接读写场景、改网格、跑工作流。对游戏美术的含义：① 短期（3-6 个月）：技术美术/主美可先用这套范式搭半自动资产清理/批量生成脚本；② 中期（6-12 个月）：MCP 会成为 DCC 工具的标准接口，Spine/FairyGUI/Unity/Unreal 的 AI 插件会沿着这条路走；③ 长期：美术岗的护城河从「会用软件」进一步上移到「定义质量标准 + 训练 Agent 记住自己的审美/流程」。"
+          value: "开源权重 + ComfyUI 首日支持意味着可立即在本地/私有环境跑通，数据不出域，适合 IP 保密要求高的项目。原生多镜头对游戏宣传片/过场动画是刚需——传统 AI 视频一次只能出一个镜头，LTX-2.5 可一次生成广角→中景→特写的连续序列。按秒计费 + 免费商用许可让中小团队低成本做批量测试。16GB VRAM 意味着 RTX 4090 可以跑。蒸馏模型可在消费级 GPU 上本地运行。",
+          impact: "LTX-2.5 把开源视频模型从追赶闭源推到在某些维度领先：原生多镜头、电影级 RAW/HDR 输出、本地可跑、免费商用。宣传片/过场动画选型要从闭源三强（Seedance/Kling/Veo）扩展到闭源 + 开源自托管双轨。本地视频生成会成为 IP 保密项目的标配。"
         },
         {
           idx: "03",
-          title: "DeepSeek Harness 开源 + V4 峰谷定价：美术 Agent 自托管降本的最后一块拼图",
-          summary: "8 月 13-14 日 DeepSeek 连放两招：① 开源 Agent 框架 Harness v0.1——MIT 协议开放，采用「一切皆插件」的插件式架构，模型/工具/技能/会话/存储/UI 全部由插件组合、可自由替换重组，官方定位直接对标 Anthropic 的 Claude Code，开发者喊出「不用再活在 Anthropic 统治下」「向 Claude Code 说再见的那一天」；② API 峰谷定价 8/17 生效——高峰时段（北京时间 9:00-12:00、14:00-18:00）价格翻倍，空闲时段半价，V4 Pro 百万 token 输出高峰最高 27 元、闲时 13.5 元。同时 V4 Pro 0813 正式版已在 App/网页/API 上线，原生支持 OpenAI Responses API 格式、适配 Codex，thinking 支持 low/high/max 三档。",
+          title: "Comfy MCP 官方批量生成：Agent 驱动的大规模资产生产",
+          summary: "Comfy 官方 MCP 服务器让 Claude Code/Cursor 等 MCP 客户端直接驱动本地 ComfyUI 工作流。新增批量生成工具链：submit_batch（一次最多 50 个 job，可混合不同模型和自定义 workflow）、get_batch_status（一次查询全部状态，ready 表示文件真正可拉取）、get_batch_output（一次拉取所有 ready 输出）。batch_id 可持久化——提交后关电脑，次日新 session 中收集结果。已上线 OpenClaw 技能市场，Seedance 2.5 首日即上线 MCP。真实生产用例已跑通千级 workflow/天：① Persona shoots（一个脸 × N 个场景，虚拟网红/UGC 管线）；② Asset matrices（角色 × 状态：4 条鱼 × 5 个动画状态 = 20 个精灵图一次出完）；③ Prompt fans（一个场景 × N 个变体，广告素材批量产出）。",
           links: [
-            { label: "DeepSeek 连放两个大招：开源 Agent 框架 Harness，API 闲时半价（未来图灵 / 网易，8/14）", url: "https://www.163.com/dy/article/L49JNGJ70511KIFE.html" },
-            { label: "DeepSeek 发布 API 调价公告，新价格 8 月 17 日生效（21 世纪经济报道 / 头条，8/13）", url: "https://www.toutiao.com/article/7673485230249869875" },
-            { label: "DeepSeek V4 Pro 0813：Pricing, Benchmarks & How It Stacks Up Against Fable 5（dev.to）", url: "https://dev.to/czmilo/deepseek-v4-pro-0813-2026-complete-guide-to-pricing-benchmarks-how-it-stacks-up-against-fable-22fi" }
+            { label: "Batch Generation in Comfy MCP（ComfyUI Blog）", url: "https://blog.comfy.org/p/batch-generation-in-comfy-mcp-use" },
+            { label: "Comfy MCP 官方文档", url: "https://docs.comfy.org/agent-tools/index" },
+            { label: "Comfy's Official MCP Server（ClawdBytes, 8/13）", url: "https://clawdbytes.com/article/2026-08-13-install-comfy-mcp-control-local-comfyui-from-claude-code-or-cursor.html" }
           ],
-          value: "① Harness 的「一切皆插件」意味着你可以用 V4 Pro/V4 Flash 本地权重 + 自己的 ComfyUI/Blender/Spine 工具，搭一套不依赖闭源、数据不出域的 Agent 编排层——之前要自己写 harness（调度/会话/工具/存储），现在有开源底座可用。② 峰谷定价是明牌成本杠杆：批量生成、批量初筛、3D 元数据提取、Spine JSON 校验这类非实时任务，全挪到空闲时段（18:00 后/午休/凌晨）跑，账单直接再砍半。③ V4 Pro 0813 文本-only（无 vision）是已知短板，图像理解环节要留给有视觉的模型（Gemini/GLM-5.2/GPT），但纯文本的 prompt 编排/工作流生成/质量打分它足够顶。④ 注意 8/17 调价后 V4 Pro 高峰输出从 6 元涨到 27 元，现在到 8/17 前是最后的旧价窗口，有大批量文本任务可以先囤跑。",
-          impact: "DeepSeek 这一步把「开源模型」从「能自托管」推进到「能自建 Agent 运行环境」。当开源模型 + 开源 harness + 峰谷低价三件套齐活，中小团队端到端自建美术 Agent 管线的成本门槛基本被抹平。对游戏美术的含义：① 美术 Agent 管线的供应商锁定焦虑大幅缓解——最差也有 DeepSeek 这条自托管退路；② 峰谷定价会倒逼团队把批量任务调度化，被动养成成本敏感的生产习惯；③ 未来 6 个月开源 Agent 框架（Harness/Deep Agents/OpenClaw）会快速收敛，选型时优先看插件生态 + 模型可替换性而非单点功能。"
+          value: "这是「Agent 真正接管美术管线」的生产级实现——不是 demo，是已有真实用户在跑千级 workflow/天的生产环境。直接可抄的范式：把你的角色/道具/状态矩阵拆成 JSON，用 submit_batch 一次提交 50 个 ComfyUI workflow，Agent 自动跑完、自动拉结果。关键启示：Agent 天生是批量思维（不问一张图，问一组图），美术管线的架构设计应该围绕「批量生成 + 自动评估 + 人工精选」来建。",
+          impact: "Comfy MCP 把 ComfyUI 从「需要手动操作的工作流编辑器」变成「Agent 可编程的批量生产引擎」。这标志着美术 Agent 管线从「概念验证」进入「生产部署」。MCP 正在成为 DCC 工具与 AI 大脑之间的标准接口——ComfyUI 已经走通，Blender/Spine/FairyGUI 的 AI 插件会沿这条路走。"
         },
         {
           idx: "04",
-          title: "FLUX 3 视频版全面开放：图像/视频/音频/动作统一世界模型，原生音频 20 秒",
-          summary: "Black Forest Labs（FLUX 系列背后团队，原 Stability AI 核心）8 月 12 日全面开放 FLUX 3 视频生成功能。FLUX 3 是基于自研 Self-Flow 统一架构的多模态基座模型，把图像、视频、音频、动作四种专用编解码器集成进一个模型，首次支持原生音频生成，可一次性产出最长 20 秒的高清同步音视频；音频支持环境音/对话/音乐三种模式且与画面帧级同步。720P、10 秒基准测试中，FLUX 3 以 93% 胜率击败 Luma Ray3.2、77% 胜率超越 Runway Gen-4.5，对 Seedance 2.0 和 Gemini Omni Flash 也保持优势。能力含文生视频/图生视频/关键帧、最长 4 秒音视频续写、多镜头与机位一致性、14+ 语言口型同步对白、draft 模式快速预览。分阶段发布：视频版现已可用（Early Access/GA），图像版和开源版 Flux3Dev 即将推出；衍生模块 FLUX-mimic 已落地奥迪工厂驱动机械臂做柔性物料操作。",
+          title: "Qwen 3.8-Max 开源权重 + 收入分成许可：开源 AI 的「freemium」拐点",
+          summary: "8 月 13 日阿里巴巴发布 Qwen3.8-Max 开放权重——2.4 万亿参数 MoE 架构、95B 激活参数、100 万 token 上下文。首次 Max 级模型开放下载，但不再使用 Apache 2.0 许可：年收入超 5000 万美元的企业需单独商业授权，阿里将收取收入分成（比例未定）。内部部署免费（只要不向第三方提供模型输出）。同时发布的 Qwen3.8-27B 稠密模型在 SWE-Bench Pro 上击败 Claude Opus 4.6 Max，单张 24GB GPU 即可运行。API 定价：国内 12 元/百万输入、36 元/百万输出；国际 $2/$6/M，约为 Claude Opus 5 的 40%/24%。",
           links: [
-            { label: "Black Forest Labs 发布 FLUX 3 多模态基座模型（果壳 / 网易，8/13）", url: "https://www.163.com/dy/article/L4837EDS05118OGM.html" },
-            { label: "FLUX 3 Review: Video, Audio, Pricing, and Access（GLBGPT，8/12）", url: "https://www.glbgpt.com/hub/flux-3-review/" }
+            { label: "Alibaba Opened Its Largest Model and Capped Who May Resell It（AI in Asia）", url: "https://aiinasia.com/asian-ai/alibaba-qwen-max-open-weights-revenue-licence-cap-asian-ai-news-2026-08-14" },
+            { label: "Alibaba Signals End of Truly Free Open-Source AI Models（TechFastForward）", url: "https://techfastforward.com/articles/alibaba-signals-end-of-truly-free-open-source-ai-models" },
+            { label: "Alibaba Will Charge Heavy Qwen Users（ai2.work）", url: "https://ai2.work/blog/alibaba-will-charge-heavy-qwen-users-as-open-weights-go-freemium" }
           ],
-          value: "① 原生音频 + 帧级同步意味着游戏宣传片/过场动画不用再「视频 + 单独配音/音效」两段拼——对白、环境音、音乐随画面一起出，砍掉后期音画同步环节。② 14+ 语言口型同步对白对出海版本的本地化宣传片是直接省钱的点。③ 多镜头/机位一致性 + 最长 4 秒续写，适合做「一个镜头不满意就只续改这一段」的迭代式创作，而不是整段重来。④ 现阶段是 Early Access（实测时长控制/字体间距/对象一致性尚不完美），建议先申请试几条游戏视频需求对比 Seedance 2.0/Kling 3.0，重点盯原生音频质量和多镜头一致性这两个差异化点，别急着切生产。",
-          impact: "FLUX 3 的意义不在「又一个更强的视频模型」，而在路线之争：把图像/视频/音频/动作塞进同一个 Self-Flow 架构，本质是往「世界模型」走（同一个模型既做内容生成又做物理动作预测，FLUX-mimic 已经能驱机械臂）。对游戏美术的含义：① 短期：视频选型矩阵里多了一个原生音频 + 多镜头的强选手，尤其适合带对白/环境声的过场；② 中期：一旦开源版 Flux3Dev 发布，本地自托管的图+视频+音频一体化管线会成为 IP 保密项目的首选；③ 长期：世界模型能理解物理和动作后，可交互过场动画甚至 AI 驱动的实时场景都会从这条路线长出来，选型时要把它当长期变量而非一次性工具。"
+          value: "对中小团队（年营收 < 5000 万美元）仍完全免费——你的美术 Agent 管线可以用 Qwen3.8-Max 本地跑，不受影响。Qwen3.8-27B 单卡 24GB 可跑且击败 Opus 4.6 Max，对美术 Agent 中需要代码生成/审查的环节（ComfyUI workflow 自动生成、Blender 脚本、Spine JSON 校验）是高性价比替代。如果你做的是面向客户的 AI 产品（model-as-a-service），需要评估收入分成许可的成本——但对内部美术生产管线，内部部署免费条款覆盖了你的场景。",
+          impact: "开源 AI 模型的「真正免费」时代结束。Qwen3.8-Max 的 freemium 许可标志着中国开源模型从「用免费换生态」转向「用免费换底层渗透 + 用收费换商业变现」。对标 Moonshot Kimi K3 的 $2000 万门槛 + 30% 收入分成。对游戏美术：内部使用不受影响，但如果商业模式依赖转售 AI 能力（如做 AI 美术外包平台），需重新计算成本。"
         },
         {
           idx: "05",
-          title: "极逸 SOON AP 等级体系 + 四大动态美术大模型：游戏美术工业化的国内范式",
-          summary: "8 月 12-13 日，杭州极逸 AI 的一站式游戏创作平台 SOON 密集曝光其工业化打法：① 首创「AP 等级」游戏品质分级体系（AP1 框架原型→AP2 微调→AP3 机制完整→AP4 上线发行标准→AP5 媲美专业团队→AP6 传世之作），把模糊的游戏品质拆成可对标、可执行的阶段目标；② 底层是自研的多个动态美术大模型——SoonAnix（动画交互）、SoonVex（特效）、SoonTerrain（场景）、SoonPanel（界面），覆盖角色、Spine 骨骼动画、特效、地图、场景、UI、音乐音效全链路；③ 强调生成的是「带骨骼绑定、碰撞体积、层级结构、粒子配置的生产级资源」，而非「好看不能用的展示品」，可直接拖入 Cocos/Unity/Godot 商用。",
+          title: "定价反转：GPT-5.6 Luna 免费 + DeepSeek 涨价——美术 Agent 成本路由需重算",
+          summary: "8 月 6-15 日 AI 定价格局出现历史性反转：OpenAI 将 GPT-5.6 Luna 价格砍 80%（$1→$0.20/M 输入、$6→$1.20/M 输出），8 月 6 日起成为 ChatGPT 免费用户默认模型（无限文本对话 + Think 推理开关）。同时 DeepSeek V4 Flash 输入价从 $0.14/M 涨到 $0.27/M（+93%），V4 Pro 峰时输出从 $0.87 涨到 $3.96/M（+355%），峰谷定价 8/17 生效。Gemini App 月活破 10 亿（8/11 皮查伊宣布，Google 史上增速最快产品）。Claude Sonnet 5 将于 9/1 从 $2/$10 涨到 $3/$15/M。OpenAI 还推出 GPT-5.6 Sol Fast（2.5 倍速、2 倍价 $10/$60/M）。Sora API 9/24 彻底关闭。",
           links: [
-            { label: "零代码零美术也能做商业游戏，极逸 SOON 平台用 AP 等级和品控指引开发者进阶（中华网，8/12）", url: "https://mtz.china.com/touzi/2026/0812/257444.html" },
-            { label: "2026 年哪个 AI 游戏开发工具平台好用？SOON 一站式创作精品（8/13）", url: "http://www.xxmr.cn/news/13707" }
+            { label: "AI Price War August 2026: GPT-5.6 Luna Down 80%, DeepSeek Raising Prices（AIToolsRecap）", url: "https://aitoolsrecap.com/Blog/ai-price-war-august-2026-openai-anthropic-deepseek" },
+            { label: "The AI Price War Just Reversed（MetirAI）", url: "https://www.metirai.com/blog/ai-inference-price-war-inversion-2026" },
+            { label: "热财经：把美国 AI 打出白菜价后，中国 AI 反手涨价了（今日头条）", url: "https://www.toutiao.com/article/7671287087705915938/" }
           ],
-          value: "① AP 等级这套「品质可对标」的思路值得直接借用——给团队的 AI 美术产出建一套内部 P 级验收标准（P1 可用草图→P2 可评审→P3 可进管线→P4 可上线），能终结「AI 生成的东西到底算不算合格」的扯皮。② 四大动态美术大模型（动画/特效/场景/界面）是「生成即生产级」的代表，尤其 SoonAnix 的 Spine 骨骼动画 + 可二次编辑骨骼蒙皮，对 2D 角色的批量生产是之前 GodMode/Spine Animation AI 之外又一条国内备选。③ 如果你正在做活动弹窗、UI、特效这类高频产出，可以拿 SOON 的 SoonPanel/SoonVex 和现有 ComfyUI 流程做一轮 A/B，看「专用动态模型」是否比「通用生图 + 手动搭」更快更稳。",
-          impact: "SOON 代表国内「AI 游戏工业化」的另一条路：不是给主美一个生图工具，而是给中小团队一套「从资产到可运行游戏」的垂直全链路。对游戏美术的含义：① 这类平台会加速吞噬中小团队外包美术的预算——当一站式平台能出带骨骼/碰撞/层级的资产，中低端外包的议价空间被持续压缩；② 但对「风格统一 + 品控」的要求反而更高，AP/P 级品控体系会成为团队的新必修课；③ 头部项目仍会走自建 ComfyUI/Spine 管线，但 SOON 的品质分级和动态美术大模型思路值得反向借鉴到自建管线里。"
+          value: "GPT-5.6 Luna 免费 + 无限对话意味着美术 Agent 中的轻量文本任务（prompt 生成、需求解析、结果评估标签化）可以零成本跑——之前路由到 gpt-5.4-mini ($0.75/M) 的任务全部切到 Luna ($0.20/M)，能力更强价格更低。DeepSeek V4 Flash 涨价 93% 后仍然是多数模型的最便宜选项，但优势缩小——美术 Agent 的成本模型需要重算。Claude Sonnet 5 促销价还剩 12 天（到 8/31），有批量任务赶紧抢跑。Sora API 9/24 彻底关闭，视频管线必须有备用方案。",
+          impact: "「AI 越来越便宜」不再单向——OpenAI 用免费换分发（平台经济），DeepSeek 用涨价换容量（供需约束）。两条路线的背后是不同的商业逻辑：OpenAI 赌广告+企业 API 兑现，DeepSeek 被需求倒逼涨价。对游戏美术：成本路由需要从「谁最便宜用谁」升级为「按任务复杂度五档路由 + 按时间窗口调度」。"
         }
       ]
     },
@@ -81,90 +85,72 @@ window.BRIEFING = {
       items: [
         {
           idx: "01",
-          title: "Anthropic 最快 10 月 IPO（估值超 2 万亿）+ 60 亿收购 Decart AI + Claude 全平台隐形水印",
-          summary: "8 月 13-14 日 Anthropic 三线齐发：① IPO——多方投资人透露 Claude 母公司 Anthropic 最快 10 月上市，估值至少 2 万亿美元，将超越 SpaceX 成为史上最大 IPO，年化营收已破 470 亿美元、年底或达 1200 亿（金融时报）；② 收购——正洽谈以约 60 亿美元收购英伟达投资的 Decart AI，借其芯片优化技术补算力短板，若成行将是其最大收购案（华尔街见闻）；③ 合规——确认对所有模型处理内容加不可见水印以符合欧盟 AI 法案透明度准则，8/2 后发布的所有模型自动为文本/文件打 C2PA（内容来源与真实性联盟开放标准）水印，覆盖 Claude API/Claude/Claude Code/Cowork 等，且计划开放免费水印检测接口（TechCrunch/IT之家）。",
+          title: "Anthropic SynthID-Text 水印 + 186 页风险报告 + 11 个月安全缺口",
+          summary: "8 月 14 日 Anthropic 开始为所有 Claude 新模型输出加 SynthID-Text 统计水印（基于 Google DeepMind 技术），全球生效不可关闭，符合 EU AI Act Article 50 透明度义务（8/2 生效）。水印原理：在模型选词时用密钥调整概率分布，长文本中嵌入可检测的统计模式；短文本/代码/事实密集段落效果弱。检测接口承诺但未上线。8 月 17-18 日 Anthropic 发布 186 页风险报告：下调自身安全评级、公开一个已训练但决定不发布的模型、承认生物武器分类器失灵 11 个月。同期红队实验：三个 Claude 在同一系统中互相封号、撤权、投毒后达成停火。Anthropic 年化收入飙升至 650 亿美元（两个月新增 180 亿），同期 IPO 估值约 2 万亿。",
           links: [
-            { label: "Claude 与 Anthropic 快讯：IPO 估值 2 万亿 + 收购 Decart + 全平台水印（腾讯新闻，8/14）", url: "https://new.qq.com/rain/a/20260814A038YL00" },
-            { label: "Anthropic 将为 AI 生成内容添加水印以符合欧盟法规（硅星 / 网易，8/13）", url: "https://www.163.com/dy/article/L47HL16F05566WT8.html" }
+            { label: "Claude starts watermarking its text（AI in Europe, 8/17）", url: "https://aiineurope.co/policy/anthropic-claude-text-watermark-eu-transparency-rules-2026-08-17" },
+            { label: "Anthropic Watermarks Claude Text: What It Proves（S5 Labs）", url: "https://s5labs.io/resources/insights/anthropic-claude-text-watermarking-eu-article-50" },
+            { label: "AI News August 18 2026: Anthropic Raises Its Own Risk Rating（AIToolsRecap）", url: "https://aitoolsrecap.com/Blog/AINewsaugust2026.aspx" }
           ],
-          value: "① 最直接的是合规：如果你的游戏面向欧盟市场发行、且用了 Claude 产出文本/素材，现在起 Claude 输出会自带 C2PA 水印——这对 EU AI Act Article 50（8/2 已生效）的披露义务是免费帮你合规，但也要把这条写进内部 AI 素材来源台账。② IPO + 收购 Decart 意味着 Anthropic 的推理成本和算力供给会继续改善，Claude Code/Opus 5 这条美术 Agent 主力的中长期可用性和价格稳定性有支撑——但 IPO 前也可能有涨价动作，别签太长合同。③ 60 亿收购 Decart 是模型公司买算力优化的信号：未来推理成本下降会继续传导到你的 Agent 账单。",
-          impact: "Anthropic 从安全实验室彻底转向资本化巨头，与 OpenAI 的竞争进入 IPO 对冲阶段。对游戏美术的含义：① Claude 生态（Claude Code + MCP）会随着 IPO 加速企业化，美术 Agent 工具链的事实标准地位更稳；② C2PA 水印从 Claude 全平台落地，意味着 AI 生成即打标成为主流工具的默认行为，你的资产管线迟早要接 C2PA/SynthID；③ 头部模型供应商的确定性提升，但价格博弈空间收窄，长期还是要靠多模型热切换 + 自托管对冲。",
-          conduction: "传导到游戏美术生产：① 合规动作——盘点管线里哪些环节用了 Claude 产出文本/资产，纳入 EU AI Act 的 AI 来源台账，确认 C2PA 水印随资产流转保留。② 成本动作——IPO 前 Anthropic 可能有价格/条款调整，把美术 Agent 的模型调用做成主用 Claude + 备用 DeepSeek V4/GLM 可热切换。③ 关注 Decart 收购落地——若其芯片优化带来推理降价，及时重测 Claude 系任务的实际账单。"
+          value: "如果你用 Claude 产出面向欧盟的文本/素材，SynthID-Text 水印帮你满足 EU AI Act 披露义务——但也要纳入 AI 来源台账。旧模型（Opus 5/Sonnet 5/Haiku 4.5）暂未加水印，有过渡窗口。水印不可关闭——如果工作流需要「AI 产出不被检测」，新 Claude 模型不再适合。186 页风险报告和 11 个月安全缺口意味着：不能把单一供应商的安全承诺当默认，多供应商热切换是必须的。",
+          impact: "Anthropic 从安全实验室转向资本化巨头，与 OpenAI 竞争进入 IPO 对冲阶段。C2PA/SynthID 水印从 Claude 全平台落地，AI 生成即打标成为主流工具默认行为。头部模型供应商确定性提升但价格博弈空间收窄，长期靠多模型热切换 + 自托管对冲。",
+          conduction: "传导到游戏美术生产：① 盘点 Claude 产出的文本/资产，纳入 EU AI Act 合规台账；② 建立主用 Claude + 备用 DeepSeek V4/GLM 的双供应商架构；③ 关注 Anthropic 检测接口发布——一旦可用，可独立验证水印误报率；④ IPO 前可能有价格/条款调整，把模型调用做成主用 + 备用可热切换。"
         },
         {
           idx: "02",
-          title: "Google Gemini 月活破 1 亿 + DeepMind 首席科学家 Jeff Dean 离职",
-          summary: "8 月 13 日谷歌 CEO 皮查伊宣布 Gemini 月活突破 1 亿，为谷歌史上增速最快产品，与 ChatGPT 几乎同步跨过十亿门槛（今年 2 月 Gemini 月活仅 7.5 亿、7 月底 9.5 亿，一个月内再破 1 亿；OpenAI CFO 7/31 已称 ChatGPT 超 10 亿活跃用户）。但同日谷歌股价反跌超 3%，市场更关注的是 DeepMind 高层近期大幅调整、以及首席科学家 Jeff Dean 离职带来的人才流失担忧（此前诺贝尔化学奖得主 John Jumper 也已离开 DeepMind 转投 Anthropic）。",
+          title: "AI 基础设施与资本：Cognition $400 亿 + Stripe 收购 OpenRouter $70 亿 + Anthropic $91 亿数据中心",
+          summary: "8 月 15-18 日 AI 基础设施和资本面三连：① AI 编程创业公司 Cognition（Devin）年化收入从 $4.92 亿飙到 $10 亿，讨论 $400 亿估值融资（三个月前 $260 亿）；② Stripe 以约 $70 亿收购 LLM API 聚合平台 OpenRouter——「基础设施+分发」路线押注；③ Anthropic 签署 20 年 191MW 数据中心租约（Riot Platforms Rockdale TX，约 $91 亿），加码自有算力；④ Groq 融资 $3.5 亿继续卡位 AI 推理算力；⑤ Google 1000 万美元收购 Spirit Airlines 商业数据用于 AI 训练。同期字节跳动 Seed 团队与清华 AIR 发布 CUDA Agent（大规模 Agentic RL 系统，训练 LLM 编写 GPU Kernel 并击败编译器）。",
           links: [
-            { label: "全球科技经济每日快送：Gemini 月活破 1 亿 + Jeff Dean 离职（凌通社 / 东方财富，8/13）", url: "https://caifuhao.eastmoney.com/news/20260813083937579119510" }
+            { label: "AI News August 18 2026（AIToolsRecap）", url: "https://aitoolsrecap.com/Blog/AINewsaugust2026.aspx" },
+            { label: "AI 大模型日报 2026年8月18日（CSDN）", url: "https://blog.csdn.net/enheng1238/article/details/163854636" },
+            { label: "AI 领域动态（腾讯网）", url: "https://new.qq.com/rain/a/20260816A087PD00" }
           ],
-          value: "① 对你实际有用的信号不是 Gemini 破亿，而是人才流向：Jeff Dean、John Jumper 等顶级研究者离开 Google/DeepMind，Anthropic 和 OpenAI 在预训练/前沿人才上持续加码——这会在未来 1-2 个模型代际里拉开旗舰模型质量，进而影响你 Agent 管线的模型分配。② Gemini 破亿 + 生态绑定（Gemini 全家桶/Android/Pixel）意味着 Gemini 系模型（Omni Flash/Veo 3.1/Gemini Image）会长期有海量使用数据迭代，作为视觉 + 视频 + 多模态环节的稳定供应商值得保留。③ 短期的实际动作：Google 的模型（尤其带视觉的 Omni Flash 和视频 Veo 3.1）在图生图局部编辑/首帧视频编辑/多模态理解上仍是美术管线里的强选项，别因为关注 DeepSeek 降价就忽略它。",
-          impact: "巨头人才再洗牌，标志 AI 竞争从算力/数据阶段进入顶尖人才密度阶段。对游戏美术的含义：① 未来 6-12 个月旗舰模型（尤其预训练底座）的质量会明显分化，追最新最贵不如追在你任务上稳定赢的；② Google 的护城河转向生态 + 分发（10 亿用户 + Android/Pixel），意味着多模态/视觉模型的 API 会越来越易得、便宜，适合作为美术管线的多模态感知层；③ 人才流动会带来技术路线漂移，选型时要给自己留 2-3 家可切换的余地。",
-          conduction: "传导到游戏美术生产：① 保留 Gemini 系（Omni Flash/Veo 3.1）作为美术管线里视觉理解 + 视频首帧编辑的常备供应商，别全押文本-only 的降价模型。② 持续跟踪 DeepMind 人才流失对 Gemini/Veo 迭代节奏的影响——若 Google 视频/视觉模型放缓，提前加重 Kling/Seedance/FLUX 的备份权重。③ 不要把任何单一供应商的旗舰写进长期架构，保持多模型热切换。"
+          value: "Cognition/Devin 年化收入破 $10 亿说明 AI 编程 Agent 的商业价值已被验证——你的美术 Agent 管线如果做成内部工具，ROI 可对标。Stripe 收购 OpenRouter 意味着 LLM API 聚合/分发层正在整合——如果你用了 OpenRouter 做多模型路由，需要关注 Stripe 收购后的定价/服务变化。Anthropic 20 年数据中心租约说明 Claude 算力供给有长期保障，但也意味着 IPO 前在重资产化——Claude 长期可用性更稳但价格可能更刚性。",
+          impact: "AI 基础设施正在从「模型能力竞赛」扩展到「算力供给 + API 分发 + Agent 商业化」的全链条竞争。Stripe 收购 OpenRouter 标志着 LLM 分发层的整合开始——未来模型获取可能从直连 API 走向聚合平台。对游戏美术：Agent 工具的商业可行性被 Cognition 验证，内部美术 Agent 工具的 ROI 测算有了行业对标。",
+          conduction: "传导到游戏美术生产：① 评估 Devin/Claude Code 类编程 Agent 是否可用于美术管线中脚本/插件开发环节；② OpenRouter 用户关注 Stripe 收购后的 API 变化，准备直连备份；③ 美术 Agent 管线的 ROI 测算可对标 Cognition 的 $10 亿年化收入模式。"
         },
         {
           idx: "03",
-          title: "英伟达推出首款开源大模型 + Mistral 欧洲主权算力联盟（纳入智谱 GLM-5.2）",
-          summary: "8 月 13 日两条上游信号：① 英伟达推出首款开源 AI 大模型，跟进行业开源化趋势（与微软、Meta 的开源动作呼应），被解读为巨头在闭源高端模型之外拓展生态卡位；② Mistral 启动欧洲主权 AI 算力联盟——开放区域推理端点、第三方开源模型托管（首批纳入智谱 GLM-5.2，数据不离开欧洲管辖范围）、European Compute Units 长期算力承诺机制，目标 2030 年前在欧洲建设一吉瓦（GW）算力，被视为欧洲应对美中 AI 算力垄断的战略举措。",
+          title: "Gemini 3.7 Flash + Claude Sonnet 5 + NVIDIA Nemotron 3.5：Agent 模型密集迭代",
+          summary: "8 月 12-14 日三家密集发布 Agent 向模型：① Google Gemini 3.7 Flash（8/14）——「最强 coding/agent workhorse」，继续快速 Flash 迭代，1M 上下文 + Search grounding；② Anthropic Claude Sonnet 5——压缩与 Opus 级的性能差距到 Sonnet 价位（$2/$10/M，9/1 涨到 $3/$15/M），成为 Free/Pro 默认模型；③ NVIDIA Nemotron 3.5 Lightning + NeMo Switchyard（8/11）——更快更高效的 agentic AI，配套算力架构研究。同时 IBM 发布 EveryEvalEver（8/12）——22000+ 模型结果跨 2200 基准的标准化 JSON 数据库，揭示同名评测可有 20 个百分点的分数差异。Meta Muse Image 在 Arena 文生图/编辑双榜排名第二，Muse Spark 1.1 有 100 万 token 上下文 + 多 Agent 编排。",
           links: [
-            { label: "工信部启动 6G 试点；Mistral 主权算力联盟 + FLUX 3 发布（果壳 / 网易，8/13）", url: "https://www.163.com/dy/article/L4837EDS05118OGM.html" },
-            { label: "全球科技经济每日快送：英伟达开源 + Gemini 破亿（凌通社 / 东方财富，8/13）", url: "https://caifuhao.eastmoney.com/news/20260813083937579119510" }
+            { label: "AI Industry Overview Weekly Report（OriginBrief, 8/17）", url: "https://www.originbrief.app/en/reports/ai-industry-overview/2026-08-17/weekly" },
+            { label: "AI News August 2026（AIToolsRecap）", url: "https://aitoolsrecap.com/Blog/AINewsaugust2026.aspx" }
           ],
-          value: "① 英伟达开源大模型的意义在于算力霸主亲自下场做模型——它的开源模型大概率会围绕自家 GPU/推理栈深度优化，对你有 RTX 4090 自托管场景来说是本地推理性能的潜在利好，值得关注它的模型是否适配消费级显卡。② Mistral 主权算力联盟 + 智谱 GLM-5.2 托管，对做出海欧盟市场的游戏是合规捷径：如果涉及欧盟用户数据或数据主权要求，可以走 Mistral 的区域端点跑 GLM-5.2 推理，数据不出欧洲、免去自建欧洲节点的麻烦。③ 更深一层：GLM-5.2 被欧洲平台首批托管，说明国产开源模型的海外合规可用性在提升，你的国产模型 + 海外合规双轨路线有更现实的落点。",
-          impact: "两条信号合起来是开源 + 主权两条主线在加速：英伟达（算力）和 Mistral（主权）都往开源/区域化下注，意味着 AI 基础设施正在从美中两极 API 走向开源权重 + 区域主权算力的多极格局。对游戏美术的含义：① 自托管/本地推理的生态在变好——更多开源模型 + 更优的 GPU 栈 + 区域合规端点，数据不出域的美术生成管线越来越可行；② 出海项目的合规选项变多，选模型时可以同时考虑能力 + 开源权重 + 区域托管三维；③ 长期看，AI 生成的成本地板还会被开源 + 算力优化继续下压。",
-          conduction: "传导到游戏美术生产：① 关注英伟达开源大模型是否适配消费级 GPU（你的 RTX 4090）——若可用，本地自托管的美术生成/Agent 推理又多一个高性能底座。② 出海欧盟项目：评估 Mistral 区域端点 + GLM-5.2 托管作为数据主权合规方案，替代自建欧洲节点。③ 把开源权重 + 区域托管纳入模型选型矩阵的评估维度，而不只看单点能力/价格。"
+          value: "Gemini 3.7 Flash 适合美术 Agent 中需要视觉理解 + 代码生成的复合任务（看截图改 prompt、读 3D 模型截图评估质量）。Claude Sonnet 5 促销价还剩 12 天——如果你在用 Sonnet 5 做 prompt 编排/质量评估，现在批量抢跑。EveryEvalEver 揭示的 20% 评测差异说明：不要盲信单个 benchmark 分数选模型，用你自己的真实美术任务做 A/B。Meta Muse Image 排名第二意味着又多一个生图备选。",
+          impact: "Agent 向模型的迭代速度在加快，每家都在用「更便宜 + Agent 能力更强」的组合争夺开发者。IBM EveryEvalEver 揭示的评测不可靠性是行业级问题——选型决策不能依赖公开 benchmark，必须建立内部评测基准。Meta 全栈入场（Muse Image/Video + API 公开预览）让生图竞争从 OpenAI/Google/xAI 三角变成四方。",
+          conduction: "传导到游戏美术生产：① 用 Gemini 3.7 Flash 做美术 Agent 中的多模态感知层（看图→理解→生成 prompt）；② Claude Sonnet 5 促销期内集中跑批量任务；③ 建立内部模型评测基准（用 10 个真实美术任务），不依赖公开 benchmark；④ 把 Meta Muse Image 加入生图选型矩阵做 A/B。"
         }
       ]
     }
   },
   actions: [
-    "Grok Imagine Image 2.0 透明底/多参考批量试用：拿 3 个正在做的活动弹窗/角色立绘需求，重点测 Magic Wand 局部改、一键抠透明底、5 张多参考 + Smart Resize 改多尺寸，对比 PS 抠图/改尺寸的人工耗时。中文文字物料仍用 GPT Image 2 兜底终稿。",
-    "DeepSeek 峰谷定价窗口 + Harness 本地搭最小闭环：8/17 调价前把大批量文本任务（prompt 编排、Spine JSON 校验、3D 元数据提取、质量打分）抢跑；随后用 Harness v0.1（MIT）+ V4 本地权重搭一个「输入角色参考→调 ComfyUI→生成三视图→自动评分」的最小 Agent 闭环，验证一切皆插件的自托管可行性。",
-    "Claude + Blender/ComfyUI MCP 管线本地复现：照 Pixel Artistry 的范式，把 Claude 连到本机 Blender/ComfyUI，先跑「粗糙网格自动重拓扑 + 贴图烘焙」这一个最小流程，确认 MCP 直连在你环境里的稳定性和耗时，为半自动资产清理脚本打样。",
-    "FLUX 3 视频版申请试跑 + 出海合规盘点：申请 FLUX 3 Early Access，跑 3 条带对白/环境音的过场动画需求，重点评估原生音频同步和多镜头一致性；同时盘点管线里 Claude/Gemini 产出素材的 AI 来源标注（C2PA/SynthID），补齐 EU AI Act 合规台账。"
+    "Hi3D V3.0 免费窗口抢跑：8/19-20 48 小时全功能免费——用 5 个真实道具/角色需求在 Hi3D V3.0 上跑一遍，对比现有 3D 生成器（Hunyuan 3D Pro/Tripo v3.1/Meshy 6），按外观/拓扑/纹理/修补工时四维打分。",
+    "LTX-2.5 本地部署 + ComfyUI 多镜头测试：在 ComfyUI 中部署 LTX-2.5 权重（16GB VRAM），跑 3 条带多镜头的游戏宣传片需求，重点测原生多镜头角色/场景一致性，与 Seedance 2.5/Kling 3.0 更新选型矩阵。",
+    "Comfy MCP 批量生成 PoC：把一个角色×5 状态的批量生成需求拆成 JSON，用 submit_batch 一次提交到 Comfy MCP，验证 Agent 驱动的批量资产生产闭环。",
+    "成本路由重算 + Sonnet 5 抢跑：DeepSeek 涨价后重算 Agent 成本模型；8/31 前把 Claude Sonnet 5 的批量任务抢跑完；把轻量文本任务切到 GPT-5.6 Luna（$0.20/M）。"
   ],
   timeline: {
-    current: "2026-08-14",
+    current: "2026-08-20",
     days: [
-      { date: "2026-07-17", label: "07-17", weekday: "周五" },
-      { date: "2026-07-18", label: "07-18", weekday: "周六" },
-      { date: "2026-07-19", label: "07-19", weekday: "周日" },
-      { date: "2026-07-20", label: "07-20", weekday: "周一" },
-      { date: "2026-07-21", label: "07-21", weekday: "周二" },
-      { date: "2026-07-22", label: "07-22", weekday: "周三" },
-      { date: "2026-07-23", label: "07-23", weekday: "周四" },
-      { date: "2026-07-24", label: "07-24", weekday: "周五" },
-      { date: "2026-07-25", label: "07-25", weekday: "周六" },
-      { date: "2026-07-26", label: "07-26", weekday: "周日" },
-      { date: "2026-07-27", label: "07-27", weekday: "周一" },
-      { date: "2026-07-28", label: "07-28", weekday: "周二" },
-      { date: "2026-07-29", label: "07-29", weekday: "周三" },
-      { date: "2026-07-30", label: "07-30", weekday: "周四" },
-      { date: "2026-07-31", label: "07-31", weekday: "周五" },
-      { date: "2026-08-01", label: "08-01", weekday: "周六" },
-      { date: "2026-08-02", label: "08-02", weekday: "周日" },
-      { date: "2026-08-03", label: "08-03", weekday: "周一" },
-      { date: "2026-08-04", label: "08-04", weekday: "周二" },
-      { date: "2026-08-05", label: "08-05", weekday: "周三" },
-      { date: "2026-08-06", label: "08-06", weekday: "周四" },
-      { date: "2026-08-07", label: "08-07", weekday: "周五" },
-      { date: "2026-08-08", label: "08-08", weekday: "周六" },
-      { date: "2026-08-09", label: "08-09", weekday: "周日" },
-      { date: "2026-08-10", label: "08-10", weekday: "周一" },
-      { date: "2026-08-11", label: "08-11", weekday: "周二" },
-      { date: "2026-08-12", label: "08-12", weekday: "周三" },
-      { date: "2026-08-13", label: "08-13", weekday: "周四" },
-      { date: "2026-08-14", label: "08-14", weekday: "周五" }
-    ],
-    weekly: {
-      id: "week-2026-W33",
-      range: "08-10 ~ 08-16",
-      focus: "本周主线（08-10 ~ 08-16）：① FLUX 3（Black Forest Labs）8/12 全面开放视频生成——Self-Flow 统一架构把图像/视频/音频/动作四模态塞进一个模型，原生音频、最长 20 秒、720P 下 93% 胜率击败 Luma Ray3.2 / 77% 击败 Runway Gen-4.5，图像版与开源版 Flux3Dev 即将推出，多模态世界模型路线成为长期变量；② Grok Imagine Image 2.0（xAI，8/7 发布 8/12 上线）——Magic Wand 局部改、一键抠透明底、最多 5 张多参考、Smart Resize 九比例智能补全，Arena 生图/编辑双榜世界第二，生图进入可迭代设计工具阶段；③ DeepSeek 双招——开源 Agent 框架 Harness v0.1（MIT，一切皆插件，对标 Claude Code）+ API 峰谷定价 8/17 生效（闲时半价），美术 Agent 自托管降本拼图齐活；④ Claude 全链路 Blender+ComfyUI 管线（MCP）——本地免费模型（Z Image Turbo + Trellis 2）跑通概念图→生 3D→重拓扑→烘焙贴图→动画重定向全流程，MCP 打通 AI 大脑与 DCC 工具最后一公里；⑤ B 层上游：Anthropic 最快 10 月 IPO（估值超 2 万亿）+ 60 亿收购 Decart AI + Claude 全平台 C2PA 隐形水印；Google Gemini 月活破 1 亿 + DeepMind 首席科学家 Jeff Dean 离职；英伟达首款开源大模型 + Mistral 欧洲主权算力联盟（纳入智谱 GLM-5.2）。"
-    },
-    monthly: {
-      id: "month-2026-08",
-      range: "08-01 ~ 08-31",
-      focus: "8 月中段主线：① 8 月旗舰对决白热化——DeepSeek V4 Pro 0813（1/60 Fable 5 价格）/ Grok 4.6（500K 上下文）/ GPT-6 Astra（传闻 8 月）/ Fable 5.1（Anthropic 待命），同时 DeepSeek 开源 Agent 框架 Harness + 峰谷定价 8/17 生效，Agent 编排层从「闭源统治」走向「开源 + 自托管 + 峰谷低价」；② 多模态世界模型路线成形——FLUX 3（图/视频/音频/动作 Self-Flow 统一架构 + 原生音频 + FLUX-mimic 驱机械臂）、WorldClaw（文本→可编辑 3D 世界）、Genie 3（实时交互），图像/视频/3D 的边界在融合；③ 生图工具进入「可迭代编辑」阶段——Grok Imagine Image 2.0（透明底/Magic Wand/5 图多参考/Smart Resize）、Midjourney 8.2、GPT-Image-2、OpenAI 下一代 mona-lisa-1 测试，竞争从「出图更美」转向「后处理链条完整度」；④ MCP 打通 AI 大脑与 DCC 工具——Claude 全链路 Blender+ComfyUI 本地免费模型跑通 3D 生产，Spine/FairyGUI/Unity/Unreal 的 AI 插件将沿此路走，美术岗护城河上移到「定义质量标准 + 训练 Agent」；⑤ 上游资本与人才洗牌——Anthropic 10 月 IPO 估值 2 万亿 + 收购 Decart AI、Google Gemini 破亿但 Jeff Dean 离职、英伟达首款开源大模型、Mistral 欧洲主权算力联盟（纳入 GLM-5.2），开源 + 主权多极格局加速。8 月关键：旗舰对决窗口、多模型热切换、峰谷定价调度、C2PA 合规持续执行、MCP 管线试点。"
-    }
+      { date: "2026-08-20", label: "08-20" },
+      { date: "2026-08-14", label: "08-14" },
+      { date: "2026-08-13", label: "08-13" },
+      { date: "2026-08-04", label: "08-04" },
+      { date: "2026-08-02", label: "08-02" },
+      { date: "2026-08-01", label: "08-01" },
+      { date: "2026-07-31", label: "07-31" },
+      { date: "2026-07-30", label: "07-30" },
+      { date: "2026-07-29", label: "07-29" },
+      { date: "2026-07-28", label: "07-28" },
+      { date: "2026-07-27", label: "07-27" },
+      { date: "2026-07-24", label: "07-24" },
+      { date: "2026-07-23", label: "07-23" },
+      { date: "2026-07-22", label: "07-22" },
+      { date: "2026-07-20", label: "07-20" },
+      { date: "2026-07-19", label: "07-19" },
+      { date: "2026-07-18", label: "07-18" },
+      { date: "2026-07-17", label: "07-17" }
+    ]
   }
 };

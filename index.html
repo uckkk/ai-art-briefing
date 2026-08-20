@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="skins.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -24,10 +25,22 @@
     <header class="masthead">
       <div class="masthead__top">
         <span class="kicker" id="kicker">DAILY AI ART INTELLIGENCE</span>
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换浅色 / 深色主题">
-          <span class="theme-toggle__icon" aria-hidden="true">◐</span>
-          <span class="theme-toggle__label">主题</span>
-        </button>
+        <div class="skin-switcher" id="skinSwitcher">
+          <button class="skin-btn" id="skinBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span class="skin-btn__dot" id="skinDot" aria-hidden="true"></span>
+            <span class="skin-btn__label" id="skinLabel">默认 · 深色</span>
+            <span class="skin-btn__arrow" aria-hidden="true">▾</span>
+          </button>
+          <ul class="skin-menu" id="skinMenu" role="listbox" aria-hidden="true">
+            <li role="option" data-skin="default-dark"><button type="button">默认 · 深色</button></li>
+            <li role="option" data-skin="default-light"><button type="button">默认 · 浅色</button></li>
+            <li role="option" data-skin="beautiful"><button type="button">Beautiful AI</button></li>
+            <li role="option" data-skin="matrix"><button type="button">Matrix Rain</button></li>
+            <li role="option" data-skin="glass"><button type="button">Liquid Glass</button></li>
+            <li role="option" data-skin="aurora"><button type="button">Aurora Flow</button></li>
+            <li role="option" data-skin="vhs"><button type="button">Retro VHS</button></li>
+          </ul>
+        </div>
       </div>
       <h1 class="masthead__title" id="title">每日 AI 美术情报</h1>
       <div class="masthead__meta">
@@ -91,6 +104,7 @@
 
   <script src="archive.js"></script>
   <script src="data.js"></script>
+  <script src="skin-effects.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

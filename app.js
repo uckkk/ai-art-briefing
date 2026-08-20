@@ -6,16 +6,108 @@
   var archive = window.ARCHIVE || {};
   var current = (B && B.meta && B.meta.date) || "2026-07-15";
 
-  /* —— 主题 —— */
-  var saved = null;
-  try { saved = localStorage.getItem("briefing-theme"); } catch (e) {}
-  if (saved) html.setAttribute("data-theme", saved);
-  var toggle = document.getElementById("themeToggle");
-  if (toggle) {
-    toggle.addEventListener("click", function () {
-      var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      html.setAttribute("data-theme", next);
-      try { localStorage.setItem("briefing-theme", next); } catch (e) {}
+  /* —— 皮肤系统 —— */
+  var SKIN_LABELS = {
+    "default-dark":  "默认 · 深色",
+    "default-light": "默认 · 浅色",
+    "beautiful":     "Beautiful AI",
+    "matrix":        "Matrix Rain",
+    "glass":         "Liquid Glass",
+    "aurora":        "Aurora Flow",
+    "vhs":           "Retro VHS"
+  };
+
+  function parseSkin(val) {
+    /* "default-dark" -> skin="default", theme="dark" */
+    if (val === "default-dark" || val === "default-light") {
+      return { skin: "default", theme: val.split("-")[1], effect: "default" };
+    }
+    return { skin: val, theme: "dark", effect: val };
+  }
+
+  function applySkin(val) {
+    var parsed = parseSkin(val);
+    html.setAttribute("data-skin", parsed.skin);
+    html.setAttribute("data-theme", parsed.theme);
+    try { localStorage.setItem("briefing-skin", val); } catch (e) {}
+
+    /* 更新按钮标签 */
+    var labelEl = document.getElementById("skinLabel");
+    if (labelEl) labelEl.textContent = SKIN_LABELS[val] || val;
+
+    /* 高亮菜单当前项 */
+    var menuItems = document.querySelectorAll("#skinMenu li");
+    menuItems.forEach(function (li) {
+      if (li.getAttribute("data-skin") === val) li.setAttribute("data-active", "");
+      else li.removeAttribute("data-active");
+    });
+
+    /* 启动/停止 Canvas 效果 */
+    if (window.SkinEffects && window.SkinEffects.setSkin) {
+      window.SkinEffects.setSkin(parsed.effect);
+    }
+  }
+
+  /* 读取已保存的皮肤 */
+  var savedSkin = null;
+  try { savedSkin = localStorage.getItem("briefing-skin"); } catch (e) {}
+  /* 向后兼容：旧版只存了 briefing-theme */
+  if (!savedSkin) {
+    try {
+      var oldTheme = localStorage.getItem("briefing-theme");
+      if (oldTheme) savedSkin = "default-" + oldTheme;
+    } catch (e) {}
+  }
+  if (!savedSkin) savedSkin = "default-dark";
+  applySkin(savedSkin);
+
+  /* 皮肤切换器交互 */
+  var skinBtn = document.getElementById("skinBtn");
+  var skinMenu = document.getElementById("skinMenu");
+
+  if (skinBtn && skinMenu) {
+    skinBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = skinMenu.classList.contains("skin-menu--open");
+      if (open) {
+        skinMenu.classList.remove("skin-menu--open");
+        skinBtn.setAttribute("aria-expanded", "false");
+        skinMenu.setAttribute("aria-hidden", "true");
+      } else {
+        skinMenu.classList.add("skin-menu--open");
+        skinBtn.setAttribute("aria-expanded", "true");
+        skinMenu.setAttribute("aria-hidden", "false");
+      }
+    });
+
+    /* 菜单项点击 */
+    skinMenu.addEventListener("click", function (e) {
+      var li = e.target.closest("li");
+      if (!li) return;
+      var val = li.getAttribute("data-skin");
+      if (!val) return;
+      applySkin(val);
+      skinMenu.classList.remove("skin-menu--open");
+      skinBtn.setAttribute("aria-expanded", "false");
+      skinMenu.setAttribute("aria-hidden", "true");
+    });
+
+    /* 点击外部关闭菜单 */
+    document.addEventListener("click", function (e) {
+      if (!skinMenu.contains(e.target) && !skinBtn.contains(e.target)) {
+        skinMenu.classList.remove("skin-menu--open");
+        skinBtn.setAttribute("aria-expanded", "false");
+        skinMenu.setAttribute("aria-hidden", "true");
+      }
+    });
+
+    /* ESC 关闭 */
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && skinMenu.classList.contains("skin-menu--open")) {
+        skinMenu.classList.remove("skin-menu--open");
+        skinBtn.setAttribute("aria-expanded", "false");
+        skinMenu.setAttribute("aria-hidden", "true");
+      }
     });
   }
 
@@ -279,55 +371,18 @@
     setTimeout(function () { toast.classList.remove("copy-toast--show"); }, 2000);
   }
 
-  /* —— 时间轴 —— */
+  /* —— 时间轴（极简：只显示日期，倒序，可点击切换） —— */
   function renderTimeline(timeline) {
     var host = document.getElementById("timelineNodes");
     if (!host || !timeline) return;
     host.innerHTML = "";
 
-    var nodes = [];
-
-    // 月总结
-    if (timeline.monthly) {
-      nodes.push({
-        type: "month",
-        date: timeline.monthly.id,
-        label: "月",
-        sub: timeline.monthly.range,
-        data: timeline.monthly
-      });
-    }
-
-    // 周总结
-    if (timeline.weekly) {
-      nodes.push({
-        type: "week",
-        date: timeline.weekly.id,
-        label: "周",
-        sub: timeline.weekly.range,
-        data: timeline.weekly
-      });
-    }
-
-    // 日报
     (timeline.days || []).forEach(function (d) {
-      nodes.push({
-        type: "day",
-        date: d.date,
-        label: d.label,
-        sub: d.weekday,
-        active: d.date === current
-      });
-    });
-
-    nodes.forEach(function (n) {
       var node = document.createElement("button");
       node.className = "timeline__node";
       node.type = "button";
-      if (n.type === "week") node.classList.add("timeline__node--week");
-      if (n.type === "month") node.classList.add("timeline__node--month");
-      if (n.type === "day" && n.active) node.classList.add("timeline__node--active");
-      node.setAttribute("aria-label", (n.type === "day" ? "日报 " : "总结 ") + n.date);
+      if (d.date === current) node.classList.add("timeline__node--active");
+      node.setAttribute("aria-label", "日报 " + d.date);
 
       var dot = document.createElement("span");
       dot.className = "timeline__dot";
@@ -335,17 +390,11 @@
 
       var lab = document.createElement("span");
       lab.className = "timeline__label";
-      lab.textContent = n.label;
+      lab.textContent = d.label || d.date;
       node.appendChild(lab);
 
-      var sub = document.createElement("span");
-      sub.className = "timeline__sub";
-      sub.textContent = n.sub || "";
-      node.appendChild(sub);
-
       node.addEventListener("click", function () {
-        if (n.type === "day") loadDay(n.date);
-        else openSummary(n.data, n.type === "week" ? "周总结" : "月总结");
+        loadDay(d.date);
       });
 
       host.appendChild(node);
@@ -393,7 +442,14 @@
   /* —— 切换日期 —— */
   function loadDay(date) {
     var data = archive[date];
-    if (!data) return;
+    if (!data) {
+      /* 当前日期不在 archive 中，从原始 BRIEFING 加载 */
+      if (window.BRIEFING && window.BRIEFING.meta && window.BRIEFING.meta.date === date) {
+        data = window.BRIEFING;
+      } else {
+        return;
+      }
+    }
     current = date;
     B = data;
     renderAll(data);

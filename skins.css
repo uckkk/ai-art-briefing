@@ -1,0 +1,582 @@
+/* =========================================================
+   皮肤系统 · 6 套皮肤（默认 + 5 新增）
+   灵感来源：beautifului.dev / canvasui.dev / 21st.dev
+   每套皮肤有独特的色彩 + 动态效果
+   ========================================================= */
+
+/* —— Canvas 背景层（由 skin-effects.js 动态创建） —— */
+#skin-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 非默认皮肤：内容层提升 z-index 到 canvas 之上 */
+[data-skin="beautiful"] .page,
+[data-skin="matrix"] .page,
+[data-skin="glass"] .page,
+[data-skin="aurora"] .page,
+[data-skin="vhs"] .page {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================
+   皮肤切换器 UI
+   ========================================================= */
+.skin-switcher { position: relative; }
+
+.skin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: var(--s-2) var(--s-3);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--fs-sm);
+  transition: color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+}
+.skin-btn:hover { color: var(--text); border-color: var(--accent); }
+
+.skin-btn__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  transition: background var(--dur) var(--ease-out);
+  box-shadow: 0 0 8px currentColor;
+  color: var(--accent);
+}
+
+.skin-btn__arrow { font-size: 0.8em; opacity: 0.5; }
+
+.skin-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 190px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  list-style: none;
+  margin: 0;
+  padding: var(--s-1);
+  z-index: 200;
+  display: none;
+}
+.skin-menu--open {
+  display: block;
+  animation: skin-pop var(--dur) var(--ease-out);
+}
+@keyframes skin-pop {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.skin-menu li { margin: 0; }
+.skin-menu button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--fs-sm);
+  transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+}
+.skin-menu button:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.skin-menu button::before {
+  content: "";
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.skin-menu li[data-skin="default-dark"] button::before { background: oklch(80% 0.135 68); }
+.skin-menu li[data-skin="default-light"] button::before { background: oklch(58% 0.15 62); }
+.skin-menu li[data-skin="beautiful"] button::before { background: oklch(62% 0.16 135); }
+.skin-menu li[data-skin="matrix"] button::before { background: #00ff41; box-shadow: 0 0 6px #00ff41; }
+.skin-menu li[data-skin="glass"] button::before { background: oklch(78% 0.13 200); }
+.skin-menu li[data-skin="aurora"] button::before { background: oklch(72% 0.14 190); box-shadow: 0 0 6px oklch(72% 0.14 190); }
+.skin-menu li[data-skin="vhs"] button::before { background: oklch(62% 0.18 30); }
+
+.skin-menu li[data-active] button {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* =========================================================
+   皮肤 1 · Beautiful AI（beautifului.dev 风格）
+   干净 / 极简 / AI 原生 / shimmer 扫光 / 流式入场
+   ========================================================= */
+[data-skin="beautiful"] {
+  --bg: oklch(97% 0.006 120);
+  --surface-1: oklch(99% 0.003 120);
+  --surface-2: oklch(94% 0.008 120);
+  --border: oklch(90% 0.006 120);
+  --text: oklch(22% 0.008 120);
+  --text-dim: oklch(45% 0.01 120);
+  --text-faint: oklch(60% 0.008 120);
+  --accent: oklch(62% 0.16 135);
+  --accent-ink: oklch(98% 0.01 135);
+  --accent-2: oklch(55% 0.12 250);
+  --accent-2-ink: oklch(98% 0.01 250);
+  --shadow: 0 1px 3px oklch(0% 0 0 / 0.06), 0 8px 24px -12px oklch(0% 0 0 / 0.12);
+  --backdrop: oklch(30% 0.02 120 / 0.28);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+[data-skin="beautiful"] body {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+[data-skin="beautiful"] .masthead__title,
+[data-skin="beautiful"] .layer__title,
+[data-skin="beautiful"] .actions__title,
+[data-skin="beautiful"] .d-title,
+[data-skin="beautiful"] .summary__title,
+[data-skin="beautiful"] .frame__list li::before,
+[data-skin="beautiful"] .actions__list > li::before,
+[data-skin="beautiful"] .layer__tag,
+[data-skin="beautiful"] .item__idx {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-weight: 700;
+}
+
+/* 点阵网格背景 */
+[data-skin="beautiful"] body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: radial-gradient(oklch(80% 0.01 120 / 0.35) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* kicker 前脉动圆点 */
+[data-skin="beautiful"] .kicker::before {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  vertical-align: middle;
+  animation: beautiful-pulse 2s ease-in-out infinite;
+}
+@keyframes beautiful-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+
+/* 卡片 hover 扫光 */
+[data-skin="beautiful"] .item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+}
+[data-skin="beautiful"] .item::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, oklch(62% 0.16 135 / 0.08), transparent);
+  transition: left 0.6s var(--ease-out);
+  pointer-events: none;
+}
+[data-skin="beautiful"] .item:hover::after { left: 130%; }
+
+/* 今日三句话流式入场 */
+[data-skin="beautiful"] .frame__list li {
+  overflow: hidden;
+  animation: beautiful-stream 0.5s var(--ease-out) backwards;
+}
+[data-skin="beautiful"] .frame__list li:nth-child(1) { animation-delay: 0.1s; }
+[data-skin="beautiful"] .frame__list li:nth-child(2) { animation-delay: 0.35s; }
+[data-skin="beautiful"] .frame__list li:nth-child(3) { animation-delay: 0.6s; }
+@keyframes beautiful-stream {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* 层级标题渐变底线 */
+[data-skin="beautiful"] .layer__head {
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, var(--accent), var(--accent-2), transparent) 1;
+}
+
+/* =========================================================
+   皮肤 2 · Matrix Rain（canvasui.dev Glyph Rain 风格）
+   纯黑 / 矩阵绿 / 降雨字符 / 终端美学
+   ========================================================= */
+[data-skin="matrix"] {
+  --bg: #000000;
+  --surface-1: oklch(6% 0.015 140 / 0.88);
+  --surface-2: oklch(10% 0.02 140);
+  --border: oklch(22% 0.04 140);
+  --text: oklch(88% 0.08 140);
+  --text-dim: oklch(58% 0.06 140);
+  --text-faint: oklch(42% 0.04 140);
+  --accent: #00ff41;
+  --accent-ink: #000000;
+  --accent-2: oklch(65% 0.1 200);
+  --accent-2-ink: oklch(8% 0.02 200);
+  --shadow: 0 0 20px oklch(62% 0.16 140 / 0.12), 0 0 40px oklch(62% 0.16 140 / 0.06);
+  --backdrop: oklch(0% 0 0 / 0.85);
+  --radius: 4px;
+  --radius-sm: 2px;
+}
+
+[data-skin="matrix"] body {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  text-shadow: 0 0 6px oklch(62% 0.16 140 / 0.25);
+}
+
+[data-skin="matrix"] .masthead__title,
+[data-skin="matrix"] .layer__title,
+[data-skin="matrix"] .actions__title,
+[data-skin="matrix"] .d-title,
+[data-skin="matrix"] .summary__title,
+[data-skin="matrix"] .layer__tag,
+[data-skin="matrix"] .item__idx,
+[data-skin="matrix"] .frame__list li::before,
+[data-skin="matrix"] .actions__list > li::before {
+  font-family: ui-monospace, "SF Mono", monospace;
+  font-weight: 700;
+  text-shadow: 0 0 12px oklch(62% 0.16 140 / 0.4);
+}
+
+[data-skin="matrix"] .item {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius);
+  backdrop-filter: blur(2px);
+}
+[data-skin="matrix"] .item:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px oklch(62% 0.16 140 / 0.2), inset 0 0 15px oklch(62% 0.16 140 / 0.04);
+}
+
+[data-skin="matrix"] .kicker {
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent);
+  letter-spacing: 0.4em;
+}
+
+/* 标题后闪烁光标 */
+[data-skin="matrix"] .masthead__title::after {
+  content: "_";
+  color: var(--accent);
+  animation: matrix-blink 1s step-end infinite;
+  font-weight: 400;
+}
+@keyframes matrix-blink { 50% { opacity: 0; } }
+
+/* =========================================================
+   皮肤 3 · Liquid Glass（canvasui.dev Glass/Bubble + 21st.dev Liquid）
+   半透明 / 毛玻璃 / 渐变 blob / 折射光
+   ========================================================= */
+[data-skin="glass"] {
+  --bg: oklch(14% 0.04 290);
+  --surface-1: oklch(18% 0.035 290 / 0.6);
+  --surface-2: oklch(22% 0.04 290 / 0.5);
+  --border: oklch(100% 0 0 / 0.1);
+  --text: oklch(92% 0.012 290);
+  --text-dim: oklch(75% 0.015 290);
+  --text-faint: oklch(58% 0.012 290);
+  --accent: oklch(78% 0.13 200);
+  --accent-ink: oklch(15% 0.03 200);
+  --accent-2: oklch(73% 0.11 330);
+  --accent-2-ink: oklch(15% 0.03 330);
+  --shadow: 0 8px 32px oklch(0% 0 0 / 0.3), inset 0 1px 0 oklch(100% 0 0 / 0.08);
+  --backdrop: oklch(10% 0.03 290 / 0.6);
+  --radius: 20px;
+  --radius-sm: 14px;
+}
+
+[data-skin="glass"] .item {
+  background: var(--surface-1);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid oklch(100% 0 0 / 0.12);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+[data-skin="glass"] .item::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, oklch(100% 0 0 / 0.35), transparent);
+  pointer-events: none;
+}
+[data-skin="glass"] .item:hover {
+  border-color: oklch(78% 0.13 200 / 0.35);
+  background: oklch(20% 0.04 290 / 0.65);
+  box-shadow: 0 0 30px oklch(78% 0.13 200 / 0.12), inset 0 1px 0 oklch(100% 0 0 / 0.12);
+}
+
+[data-skin="glass"] .frame {
+  background: oklch(18% 0.035 290 / 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid oklch(100% 0 0 / 0.08);
+  border-left: none;
+  border-radius: var(--radius);
+  padding: var(--s-4) var(--s-5);
+}
+
+[data-skin="glass"] .masthead__title {
+  text-shadow: 0 0 40px oklch(78% 0.13 200 / 0.25);
+}
+
+[data-skin="glass"] .layer__head {
+  border-bottom: 1px solid oklch(100% 0 0 / 0.08);
+}
+
+[data-skin="glass"] .detail,
+[data-skin="glass"] .summary {
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  background: oklch(18% 0.035 290 / 0.85);
+}
+
+/* =========================================================
+   皮肤 4 · Aurora Flow（21st.dev Futuristic Hero / Sphere / Ethereal）
+   深邃靛蓝 / 极光渐变流 / 发光边缘 / 粒子尘
+   ========================================================= */
+[data-skin="aurora"] {
+  --bg: oklch(11% 0.035 275);
+  --surface-1: oklch(15% 0.03 275 / 0.82);
+  --surface-2: oklch(19% 0.035 275);
+  --border: oklch(28% 0.04 275);
+  --text: oklch(92% 0.012 275);
+  --text-dim: oklch(72% 0.015 275);
+  --text-faint: oklch(55% 0.012 275);
+  --accent: oklch(72% 0.14 190);
+  --accent-ink: oklch(12% 0.03 190);
+  --accent-2: oklch(68% 0.13 330);
+  --accent-2-ink: oklch(12% 0.03 330);
+  --shadow: 0 0 24px oklch(72% 0.14 190 / 0.1), 0 12px 36px -20px oklch(0% 0 0 / 0.5);
+  --backdrop: oklch(8% 0.03 275 / 0.7);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+[data-skin="aurora"] .item {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 1px oklch(72% 0.14 190 / 0.04), var(--shadow);
+  transition: box-shadow var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+}
+[data-skin="aurora"] .item:hover {
+  border-color: oklch(72% 0.14 190 / 0.28);
+  box-shadow: 0 0 24px oklch(72% 0.14 190 / 0.15), 0 0 48px oklch(68% 0.13 330 / 0.06), var(--shadow);
+  transform: translateY(-2px);
+}
+
+[data-skin="aurora"] .masthead__title {
+  text-shadow: 0 0 30px oklch(72% 0.14 190 / 0.25), 0 0 60px oklch(68% 0.13 330 / 0.12);
+}
+
+[data-skin="aurora"] .kicker {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-skin="aurora"] .layer__tag {
+  box-shadow: 0 0 16px oklch(72% 0.14 190 / 0.2);
+}
+
+/* frame 左侧极光流动条 */
+[data-skin="aurora"] .frame {
+  border-left: 2px solid var(--accent);
+  position: relative;
+}
+[data-skin="aurora"] .frame::after {
+  content: "";
+  position: absolute;
+  left: -2px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2), var(--accent));
+  background-size: 100% 200%;
+  animation: aurora-flow 3s linear infinite;
+  border-radius: 2px;
+}
+@keyframes aurora-flow {
+  from { background-position: 0% 0%; }
+  to   { background-position: 0% 200%; }
+}
+
+/* =========================================================
+   皮肤 5 · Retro VHS（canvasui.dev VHS / Glitch 风格）
+   暖色暗调 / 扫描线 / 故障 RGB 分裂 / 色度渗色
+   ========================================================= */
+[data-skin="vhs"] {
+  --bg: oklch(13% 0.018 40);
+  --surface-1: oklch(17% 0.016 40);
+  --surface-2: oklch(21% 0.02 40);
+  --border: oklch(28% 0.022 40);
+  --text: oklch(88% 0.012 40);
+  --text-dim: oklch(68% 0.015 40);
+  --text-faint: oklch(52% 0.012 40);
+  --accent: oklch(62% 0.18 30);
+  --accent-ink: oklch(10% 0.02 30);
+  --accent-2: oklch(58% 0.14 200);
+  --accent-2-ink: oklch(10% 0.02 200);
+  --shadow: 0 2px 0 oklch(0% 0 0 / 0.3), 0 12px 32px -16px oklch(0% 0 0 / 0.6);
+  --backdrop: oklch(8% 0.02 40 / 0.7);
+  --radius: 6px;
+  --radius-sm: 3px;
+}
+
+[data-skin="vhs"] body {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+}
+
+[data-skin="vhs"] .masthead__title,
+[data-skin="vhs"] .layer__title,
+[data-skin="vhs"] .actions__title,
+[data-skin="vhs"] .d-title,
+[data-skin="vhs"] .summary__title,
+[data-skin="vhs"] .layer__tag,
+[data-skin="vhs"] .item__idx,
+[data-skin="vhs"] .frame__list li::before,
+[data-skin="vhs"] .actions__list > li::before {
+  font-family: ui-monospace, "SF Mono", monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* VHS 扫描线叠加 */
+[data-skin="vhs"] body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    oklch(0% 0 0 / 0.1) 0px,
+    oklch(0% 0 0 / 0.1) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 999;
+  animation: vhs-scan 8s linear infinite;
+}
+@keyframes vhs-scan {
+  from { background-position: 0 0; }
+  to   { background-position: 0 100px; }
+}
+
+/* VHS 噪点闪烁 */
+[data-skin="vhs"] body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: oklch(50% 0 0 / 0.025);
+  pointer-events: none;
+  z-index: 998;
+  animation: vhs-flicker 0.15s steps(2) infinite;
+}
+@keyframes vhs-flicker {
+  0% { opacity: 0.2; }
+  50% { opacity: 0.08; }
+  100% { opacity: 0.35; }
+}
+
+/* 标题色度渗色 */
+[data-skin="vhs"] .masthead__title {
+  text-shadow:
+    2px 0 oklch(62% 0.18 30 / 0.35),
+    -2px 0 oklch(58% 0.14 200 / 0.35);
+}
+
+/* 卡片 hover 故障抖动 */
+[data-skin="vhs"] .item {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-1);
+}
+[data-skin="vhs"] .item:hover {
+  animation: vhs-glitch 0.3s steps(2) infinite;
+}
+@keyframes vhs-glitch {
+  0%   { transform: translate(0); }
+  25%  { transform: translate(-1px, 1px); }
+  50%  { transform: translate(1px, -1px); }
+  75%  { transform: translate(-1px, 0); }
+  100% { transform: translate(0); }
+}
+
+/* 卡片标题 RGB 分裂 */
+[data-skin="vhs"] .item:hover .item__title {
+  text-shadow:
+    2px 0 oklch(62% 0.18 30 / 0.5),
+    -2px 0 oklch(58% 0.14 200 / 0.5);
+}
+
+[data-skin="vhs"] .kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  color: var(--accent-2);
+}
+
+/* =========================================================
+   宽屏适配：非默认皮肤也保留双列卡片
+   ========================================================= */
+@media (min-width: 1400px) {
+  [data-skin="beautiful"] .feed,
+  [data-skin="matrix"] .feed,
+  [data-skin="glass"] .feed,
+  [data-skin="aurora"] .feed,
+  [data-skin="vhs"] .feed {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-4);
+  }
+  [data-skin="beautiful"] .item,
+  [data-skin="matrix"] .item,
+  [data-skin="glass"] .item,
+  [data-skin="aurora"] .item,
+  [data-skin="vhs"] .item {
+    padding: var(--s-5);
+    margin-bottom: 0;
+  }
+}
+
+/* 减弱动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  [data-skin] body::after,
+  [data-skin] body::before,
+  [data-skin] .frame::after { animation: none !important; }
+  [data-skin] .item:hover { animation: none !important; }
+}
