@@ -371,30 +371,34 @@
     setTimeout(function () { toast.classList.remove("copy-toast--show"); }, 2000);
   }
 
-  /* —— 时间轴（极简：只显示日期，倒序，可点击切换） —— */
+  /* —— 时间轴（极简：日期无圆点，周/月总结用不同标签样式） —— */
   function renderTimeline(timeline) {
     var host = document.getElementById("timelineNodes");
     if (!host || !timeline) return;
     host.innerHTML = "";
 
-    (timeline.days || []).forEach(function (d) {
-      var node = document.createElement("button");
-      node.className = "timeline__node";
-      node.type = "button";
-      if (d.date === current) node.classList.add("timeline__node--active");
-      node.setAttribute("aria-label", "日报 " + d.date);
+    var nodes = timeline.nodes || timeline.days || [];
 
-      var dot = document.createElement("span");
-      dot.className = "timeline__dot";
-      node.appendChild(dot);
+    nodes.forEach(function (n) {
+      var type = n.type || "day";
+      var node = document.createElement("button");
+      node.className = "timeline__node timeline__node--" + type;
+      node.type = "button";
+      if (type === "day" && n.date === current) node.classList.add("timeline__node--active");
+      node.setAttribute("aria-label",
+        type === "day" ? "日报 " + n.date :
+        type === "week" ? "周总结 " + n.label :
+        "月总结 " + n.label
+      );
 
       var lab = document.createElement("span");
       lab.className = "timeline__label";
-      lab.textContent = d.label || d.date;
+      lab.textContent = n.label || n.date;
       node.appendChild(lab);
 
       node.addEventListener("click", function () {
-        loadDay(d.date);
+        if (type === "day") loadDay(n.date);
+        else openSummary(n, type === "week" ? "周总结" : "月总结");
       });
 
       host.appendChild(node);
@@ -464,7 +468,7 @@
     }
     renderActions(data.actions, data.actionPaths);
     if (data.timeline) renderTimeline(data.timeline);
-    else renderTimeline(window.BRIEFING && window.BRIEFING.timeline);
+    else if (window.BRIEFING && window.BRIEFING.timeline) renderTimeline(window.BRIEFING.timeline);
   }
 
   /* —— 初始化 —— */
