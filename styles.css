@@ -443,7 +443,7 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
   line-height: 1.2; margin: 0 0 var(--s-2); letter-spacing: -0.01em;
 }
 .summary-view__sub {
-  font-size: var(--fs-sm); font-weight: 700; color: var(--text-faint);
+  font-size: var(--fs-sm); font-weight: 400; color: var(--text-faint);
   letter-spacing: 0.06em; margin-bottom: var(--s-4);
 }
 .summary-view__list {
