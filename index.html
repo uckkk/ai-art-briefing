@@ -11,8 +11,8 @@
   <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="skins.css" />
+  <link rel="stylesheet" href="styles.css?v=20260820d" />
+  <link rel="stylesheet" href="skins.css?v=20260820d" />
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -27,7 +27,6 @@
   <div class="page">
     <header class="masthead">
       <div class="masthead__top">
-        <span class="kicker" id="kicker">DAILY AI ART INTELLIGENCE</span>
         <div class="skin-switcher" id="skinSwitcher">
           <button class="skin-btn" id="skinBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
             <span class="skin-btn__dot" id="skinDot" aria-hidden="true"></span>
@@ -57,6 +56,15 @@
     <section class="frame" aria-labelledby="frameTitle">
       <h2 class="frame__title" id="frameTitle">今日三句话</h2>
       <ol class="frame__list" id="editorFrame"></ol>
+    </section>
+
+    <!-- 周/月总结视图：与日报同一主界面切换，非弹窗 -->
+    <section class="summary-view" id="summaryView" hidden>
+      <div class="summary-view__tag" id="svTag">周总结</div>
+      <h2 class="summary-view__title" id="svTitle"></h2>
+      <p class="summary-view__range" id="svRange"></p>
+      <div class="summary-view__sub">这个周期最值得去验证和跑通的事</div>
+      <ol class="summary-view__list" id="svFocus"></ol>
     </section>
 
     <main id="main">
@@ -96,18 +104,12 @@
     <div class="detail__body" id="detailBody"></div>
   </dialog>
 
-  <!-- 二级浮层：周/月总结 -->
-  <dialog class="summary" id="summary" aria-labelledby="summaryTitle">
-    <button class="summary__close" id="summaryClose" type="button" aria-label="关闭">✕</button>
-    <div class="summary__body" id="summaryBody"></div>
-  </dialog>
-
   <!-- 提示词复制成功提示 -->
   <div class="copy-toast" id="copyToast" role="status" aria-live="polite">已复制到剪贴板</div>
 
-  <script src="archive.js"></script>
-  <script src="data.js"></script>
-  <script src="skin-effects.js"></script>
-  <script src="app.js"></script>
+  <script src="archive.js?v=20260820d"></script>
+  <script src="data.js?v=20260820d"></script>
+  <script src="skin-effects.js?v=20260820d"></script>
+  <script src="app.js?v=20260820d"></script>
 </body>
 </html>

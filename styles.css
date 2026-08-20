@@ -32,7 +32,7 @@
   --timeline-month: #b76100;  /* 指定月总结色 */
 }
 
-/* —— 深色（默认） —— */
+/* —— 深色（默认）：单色，无彩色点缀 —— */
 :root[data-theme="dark"] {
   --bg:        oklch(15% 0.012 60);
   --surface-1: oklch(19% 0.014 60);
@@ -41,10 +41,10 @@
   --text:      oklch(95% 0.008 70);
   --text-dim:  oklch(74% 0.014 70);
   --text-faint:oklch(58% 0.012 70);
-  --accent:    oklch(80% 0.135 68);   /* 暖琥珀 — A 层 游戏美术 */
-  --accent-ink:oklch(22% 0.05 68);
-  --accent-2:  oklch(74% 0.10 232);   /* 静蓝 — B 层 上游 */
-  --accent-2-ink: oklch(18% 0.04 232);
+  --accent:    oklch(85% 0 0);            /* 单色：亮白 —— A 层 */
+  --accent-ink:oklch(18% 0 0);
+  --accent-2:  oklch(66% 0 0);            /* 单色：中灰 —— B 层（仅亮度区分层级） */
+  --accent-2-ink: oklch(98% 0 0);
   --shadow: 0 1px 0 oklch(100% 0 0 / 0.04), 0 18px 40px -24px oklch(0% 0 0 / 0.7);
   --backdrop: oklch(10% 0.01 60 / 0.62);
 }
@@ -88,7 +88,7 @@ body {
 
 /* —— 标题排平：不孤行、不寡字 —— */
 h1, h2, h3, .masthead__title, .layer__title, .actions__title,
-.d-title, .summary__title, .item__title {
+.d-title, .item__title {
   text-wrap: balance;
 }
 
@@ -204,6 +204,18 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
   opacity: 1;
 }
 
+/* 激活态：周（描边高亮）/ 月（反色实心） */
+.timeline__node--week.timeline__node--active {
+  color: var(--text);
+  border-color: var(--text-dim);
+  opacity: 1;
+}
+.timeline__node--month.timeline__node--active {
+  background: var(--text);
+  color: var(--bg);
+  opacity: 1;
+}
+
 .timeline__label {
   font-size: inherit; font-weight: inherit;
   color: inherit;
@@ -221,12 +233,8 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 /* —— 报头 —— */
 .masthead { margin-bottom: var(--s-7); }
 .masthead__top {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: flex-end;
   gap: var(--s-4); margin-bottom: var(--s-4);
-}
-.kicker {
-  font-size: var(--fs-xs); letter-spacing: 0.32em; text-transform: uppercase;
-  color: var(--text-faint); font-weight: 600;
 }
 .theme-toggle {
   display: inline-flex; align-items: center; gap: var(--s-2);
@@ -433,9 +441,45 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 .foot p { margin: 0 0 var(--s-2); }
 .foot__sub { color: var(--text-faint); opacity: 0.8; }
 
-/* —— 二级浮层（dialog） —— */
-.detail,
-.summary {
+/* —— 周/月总结视图（主界面内联切换，非弹窗） —— */
+.summary-view { margin-bottom: var(--s-8); }
+.summary-view[hidden] { display: none; }
+.summary-view__tag {
+  display: inline-block; font-size: var(--fs-xs); letter-spacing: 0.16em;
+  text-transform: uppercase; font-weight: 700; color: var(--accent);
+  margin-bottom: var(--s-3);
+}
+.summary-view__title {
+  font-family: "Fraunces", serif; font-weight: 600; font-size: var(--fs-xl);
+  line-height: 1.2; margin: 0 0 var(--s-2); letter-spacing: -0.01em;
+}
+.summary-view__range {
+  margin: 0 0 var(--s-5); color: var(--text-dim); font-size: var(--fs-sm); font-weight: 500;
+}
+.summary-view__sub {
+  font-size: var(--fs-sm); font-weight: 700; color: var(--text-faint);
+  letter-spacing: 0.06em; margin-bottom: var(--s-4);
+}
+.summary-view__list {
+  margin: 0; padding: 0; list-style: none; counter-reset: sv;
+  display: flex; flex-direction: column; gap: var(--s-4);
+  border-left: 2px solid var(--accent);
+  padding-left: var(--s-5);
+}
+.summary-view__list > li {
+  counter-increment: sv; position: relative;
+  color: var(--text); font-size: var(--fs-lg); line-height: 1.55;
+  padding-left: var(--s-5);
+}
+.summary-view__list > li::before {
+  content: counter(sv, decimal-leading-zero);
+  position: absolute; left: 0; top: 0.12em;
+  font-family: "Fraunces", serif; font-weight: 600;
+  font-size: var(--fs-sm); color: var(--text-faint);
+}
+
+/* —— 二级浮层（dialog）：详情 —— */
+.detail {
   width: min(620px, 92vw); max-height: 86vh; overflow: auto;
   padding: clamp(var(--s-5), 4vw, var(--s-7));
   background: var(--surface-1); color: var(--text);
@@ -443,48 +487,30 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
   box-shadow: var(--shadow);
   margin: auto;
 }
-.detail::backdrop,
-.summary::backdrop { background: var(--backdrop); backdrop-filter: blur(6px); }
-.detail[open],
-.summary[open] { animation: pop var(--dur) var(--ease-out); }
+.detail::backdrop { background: var(--backdrop); backdrop-filter: blur(6px); }
+.detail[open] { animation: pop var(--dur) var(--ease-out); }
 @keyframes pop {
   from { opacity: 0; transform: translateY(14px) scale(0.98); }
   to   { opacity: 1; transform: none; }
 }
-.detail__close,
-.summary__close {
+.detail__close {
   position: sticky; top: 0; float: right;
   width: 36px; height: 36px; display: grid; place-items: center;
   background: var(--surface-2); border: 1px solid var(--border);
   color: var(--text-dim); border-radius: 50%; cursor: pointer; font-size: 1rem;
   transition: color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
 }
-.detail__close:hover,
-.summary__close:hover { color: var(--text); border-color: var(--accent); }
-.detail__body,
-.summary__body { clear: both; }
+.detail__close:hover { color: var(--text); border-color: var(--accent); }
+.detail__body { clear: both; }
 
 .d-tag {
   display: inline-block; font-size: var(--fs-xs); letter-spacing: 0.16em;
   text-transform: uppercase; font-weight: 700; color: var(--accent);
   margin-bottom: var(--s-3);
 }
-.d-title,
-.summary__title {
+.d-title {
   font-family: "Fraunces", serif; font-weight: 600; font-size: var(--fs-xl);
   line-height: 1.2; margin: 0 0 var(--s-4); letter-spacing: -0.01em;
-}
-.summary__tag {
-  display: inline-block; font-size: var(--fs-xs); letter-spacing: 0.14em;
-  text-transform: uppercase; font-weight: 700; color: var(--text-faint);
-  margin-bottom: var(--s-2);
-}
-.summary__sub {
-  font-size: var(--fs-sm); font-weight: 700; color: var(--accent);
-  margin-bottom: var(--s-2);
-}
-.summary__focus {
-  margin: 0; color: var(--text); line-height: 1.66;
 }
 .d-block { margin-bottom: var(--s-5); }
 .d-block__h {
@@ -595,8 +621,8 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 
 /* —— 滚动入场：纯合成器线程，零 JS —— */
 @supports (animation-timeline: view()) {
-  /* 标题/层头：淡入 + 上滑 */
-  .layer > .layer__head, .actions__title {
+  /* 标题/层头/总结视图：淡入 + 上滑 */
+  .layer > .layer__head, .actions__title, .summary-view__list > li {
     animation: fadeSlideIn var(--dur) var(--ease-out) both;
     animation-timeline: view();
     animation-range: entry 0% cover 30%;

@@ -132,7 +132,6 @@
   /* —— 报头 —— */
   function renderMeta(meta) {
     if (!meta) return;
-    setText("kicker", meta.kicker);
     setText("title", meta.title);
     setText("date", meta.date);
     setText("tagline", meta.tagline);
@@ -372,6 +371,8 @@
   }
 
   /* —— 时间轴（极简：日期无圆点，周/月总结用不同标签样式） —— */
+  var currentView = { type: "day", key: current };
+
   function renderTimeline(timeline) {
     var host = document.getElementById("timelineNodes");
     if (!host || !timeline) return;
@@ -381,10 +382,14 @@
 
     nodes.forEach(function (n) {
       var type = n.type || "day";
+      var key = type === "day" ? n.date : n.id;
       var node = document.createElement("button");
       node.className = "timeline__node timeline__node--" + type;
       node.type = "button";
-      if (type === "day" && n.date === current) node.classList.add("timeline__node--active");
+      node.setAttribute("data-key", key || "");
+      if (type === currentView.type && key === currentView.key) {
+        node.classList.add("timeline__node--active");
+      }
       node.setAttribute("aria-label",
         type === "day" ? "日报 " + n.date :
         type === "week" ? "周总结 " + n.label :
@@ -398,49 +403,65 @@
 
       node.addEventListener("click", function () {
         if (type === "day") loadDay(n.date);
-        else openSummary(n, type === "week" ? "周总结" : "月总结");
+        else loadSummary(n, type);
       });
 
       host.appendChild(node);
     });
   }
 
-  /* —— 总结弹窗 —— */
-  var summaryDialog = document.getElementById("summary");
-  var summaryBody = document.getElementById("summaryBody");
-  var summaryClose = document.getElementById("summaryClose");
+  /* —— 周/月总结：切换主界面（与切换日期同一逻辑，非弹窗） —— */
+  function loadSummary(node, type) {
+    if (!node) return;
+    currentView = { type: type, key: node.id };
 
-  function openSummary(data, title) {
-    if (!summaryBody || !data) return;
-    summaryBody.innerHTML = "";
+    setText("svTag", type === "week" ? "WEEKLY SUMMARY · 周总结" : "MONTHLY SUMMARY · 月总结");
+    setText("svTitle", node.label + " · " + (type === "week" ? "周总结" : "月总结"));
+    setText("svRange", node.range || "");
+    setText("date", node.range || "");
 
-    var tag = document.createElement("div");
-    tag.className = "summary__tag";
-    tag.textContent = data.range || "";
-    summaryBody.appendChild(tag);
+    /* focus 按分号拆成编号列表 */
+    var list = clear("svFocus");
+    if (list) {
+      var parts = String(node.focus || "").split(/；|;/).filter(function (s) {
+        return s.trim().length > 0;
+      });
+      if (!parts.length) parts = ["本期没有特别值得立即验证的事。"];
+      parts.forEach(function (text) {
+        var li = document.createElement("li");
+        li.textContent = text.trim();
+        list.appendChild(li);
+      });
+    }
 
-    var h = document.createElement("h3");
-    h.className = "summary__title";
-    h.id = "summaryTitle";
-    h.textContent = title;
-    summaryBody.appendChild(h);
+    /* 隐藏日报区块，显示总结视图 */
+    var frame = document.querySelector(".frame");
+    var main = document.getElementById("main");
+    var foot = document.querySelector(".foot");
+    var sv = document.getElementById("summaryView");
+    if (frame) frame.hidden = true;
+    if (main) main.hidden = true;
+    if (foot) foot.hidden = true;
+    if (sv) sv.hidden = false;
 
-    var h2 = document.createElement("div");
-    h2.className = "summary__sub";
-    h2.textContent = "这个周期最值得去验证和跑通的事";
-    summaryBody.appendChild(h2);
+    document.title = node.label + " · " + (type === "week" ? "周总结" : "月总结");
 
-    var p = document.createElement("p");
-    p.className = "summary__focus";
-    p.textContent = data.focus || "本期没有特别值得立即验证的事。";
-    summaryBody.appendChild(p);
+    /* 刷新时间轴激活态 */
+    if (window.BRIEFING && window.BRIEFING.timeline) renderTimeline(window.BRIEFING.timeline);
 
-    if (typeof summaryDialog.showModal === "function") summaryDialog.showModal();
-    else summaryDialog.setAttribute("open", "");
+    window.scrollTo({ top: 0, behavior: "auto" });
   }
 
-  if (summaryClose) {
-    summaryClose.addEventListener("click", function () { summaryDialog.close(); });
+  /* —— 恢复日报视图 —— */
+  function showDailyView() {
+    var frame = document.querySelector(".frame");
+    var main = document.getElementById("main");
+    var foot = document.querySelector(".foot");
+    var sv = document.getElementById("summaryView");
+    if (sv) sv.hidden = true;
+    if (frame) frame.hidden = false;
+    if (main) main.hidden = false;
+    if (foot) foot.hidden = false;
   }
 
   /* —— 切换日期 —— */
@@ -455,7 +476,9 @@
       }
     }
     current = date;
+    currentView = { type: "day", key: date };
     B = data;
+    showDailyView();
     renderAll(data);
   }
 
