@@ -80,7 +80,16 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* 中文标点挤压：句首不孤行、段尾不寡字 */
+  text-spacing-trim: trim-auto;
+  text-wrap: pretty;
   transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+}
+
+/* —— 标题排平：不孤行、不寡字 —— */
+h1, h2, h3, .masthead__title, .layer__title, .actions__title,
+.d-title, .summary__title, .item__title {
+  text-wrap: balance;
 }
 
 ::selection { background: var(--accent); color: var(--accent-ink); }
@@ -272,7 +281,11 @@ body {
 .frame__list { counter-reset: frame-counter; }
 
 /* —— 层级 —— */
-.layer { margin-bottom: var(--s-8); }
+.layer {
+  margin-bottom: var(--s-8);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
 .layer__head {
   display: flex; align-items: baseline; gap: var(--s-3);
   flex-wrap: wrap; margin-bottom: var(--s-5);
@@ -302,6 +315,8 @@ body {
   text-align: left; width: 100%; background: none; border-left: 0; border-right: 0; border-top: 0;
   cursor: pointer; font: inherit; color: inherit;
   transition: padding-left var(--dur) var(--ease-out);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 140px;
 }
 .item:hover { padding-left: var(--s-3); }
 .item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: var(--radius-sm); }
@@ -334,7 +349,11 @@ body {
 }
 
 /* —— 本周行动 —— */
-.actions { margin-top: var(--s-7); }
+.actions {
+  margin-top: var(--s-7);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 400px;
+}
 .actions__title {
   font-family: "Fraunces", serif; font-weight: 600; font-size: var(--fs-xl);
   margin: 0 0 var(--s-4); letter-spacing: -0.01em;
@@ -574,6 +593,19 @@ body {
   .masthead__meta { flex-wrap: wrap; }
   .actions__list > li { padding-left: var(--s-5); }
   .actions__list > li::before { width: 1.4em; height: 1.4em; }
+}
+
+/* —— 滚动入场：纯合成器线程，零 JS —— */
+@supports (animation-timeline: view()) {
+  .item, .layer > .layer__head, .actions__title {
+    animation: fadeSlideIn var(--dur) var(--ease-out) both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
