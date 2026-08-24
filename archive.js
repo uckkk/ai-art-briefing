@@ -1802,4 +1802,41 @@ window.ARCHIVE = {
       "Sora 2 停服迁移：9/24 前完成视频管线迁移（Sora → Kling 3.0 / Veo 3.1 / Seedance 2.5 三选一或双轨），并建立「统一提示词层 + 季度重评」的视频供应商抽象。"
     ]
   }
+,
+  "2026-08-24": {
+    meta: { date: "2026-08-24", kicker: "DAILY AI ART INTELLIGENCE", title: "每日 AI 美术情报", tagline: "面向全栈游戏美术负责人 / AI 降本增效研究" },
+    editorFrame: [
+      "MiniMax H3 从「出片」走进可复用生产：绿幕假人两步角色替换、精灵动画连续帧、12GB 卡拆三镜拼 30 秒——周末社区把 H3 走成了 ComfyUI 配方，而不是又一个 demo 模型。",
+      "Seedance 2.5 坐进 CapCut 剪辑台：R2V（参考驱动视频）吃白模/绿幕运镜，Intelligent Edit 按时间戳局部返工——AI 视频第一次真正嵌进「生成 → 精修 → 出片」一条工作区。",
+      "算力涨价碰上开源用量搬家：NVIDIA 通知大客户 AI 服务器涨价超 15%（2027 年初出货）；Vercel AI Gateway 开源权重 token 份额两月从 28% 到 62%。美术 Agent 必须分层：开源扛量，旗舰拍板。"
+    ],
+    layers: {
+      A: {
+        tag: "A 层", title: "游戏美术应用层", hint: "点卡片展开价值与行业判断 →",
+        items: [
+          { idx: "01", title: "MiniMax H3：绿幕假人替换 + 精灵动画 + 12GB 本地成片，视频模型进入「配方期」", summary: "7 月 31 日 MiniMax 发布 H3（消费端名 Hailuo 3.0）：原生 2K、最长 15 秒、同pass 立体声音频。真正新的是周末到周一的生产配方：① 绿幕假人两步角色替换——先换成绿幕 dummy 再换目标角色，避开相似面孔融合；② Ref2Va 一张参考图 + 场景表即可出片，六格分镜约 90% 跟图；③ 精灵动画连续帧可接游戏管线；④ 12GB 卡拆三镜拼 30 秒约 14 分钟出片。局限：0.6MP 中远人脸糊/扭，提示词过强会省掉微动。", links: [{ label: "MiniMax 官方：MiniMax H3", url: "https://www.minimax.io/blog/minimax-h3" }, { label: "AGI HUNT 日报 8/24：H3 工作流", url: "https://agihunt.info/daily/latest" }, { label: "Hailuo 3 vs Seedance 2.5 vs Veo / Kling", url: "https://aicreatorhub.net/news/hailuo-3-seedance-2-5-vs-veo-kling-sora-video-ai-2026" }], value: "H3 不再是再测一个视频模型，而是能进买量/角色替换/2D 精灵批产的配方。绿幕假人两步对「同一角色换皮、同一口播换背景」是直接生产力。精灵连续帧当 2D 动作草稿，别当最终交付。", impact: "视频赛道分水岭已不是谁画面更漂亮，而是谁先沉淀成可复制的 ComfyUI 节点。模型能力开始让位于工作流所有权。" },
+          { idx: "02", title: "Seedance 2.5 进 CapCut：R2V 白模/绿幕 + Intelligent Edit，AI 视频第一次坐上剪辑台", summary: "CapCut 官方页确认 Seedance 2.5 已在剪辑器里可选（App AI Lab / Web Video Studio / 桌面 AI Video）。① R2V 吃绿幕或白模参考，按运动路径调度场面；② Intelligent Edit 按时间戳/角色/区域改，不整条重生成；③ 原生 30 秒 4K，beta 延到 180 秒；④ 最多 50 个全模态参考；⑤ 原生立体声音频同pass。", links: [{ label: "CapCut 官方：Seedance 2.5 for Video Editor", url: "https://www.capcut.com/features/seedance-2-5-for-video-editor" }, { label: "DailyTopAI：CapCut Web 一条工作流做短片", url: "https://dailytopai.com/article/i-made-an-ai-short-film-with-seedance-25-in-a-single-workflow-759.html" }], value: "进 CapCut 意味着预演白模、生成、局部返工、导出可以待在同一个工作区。R2V 吃白模，正好对上 Blender 里已经会搭的东西。先测一条：白模轨迹 → CapCut 生成 → Intelligent Edit 改一个道具。", impact: "AI 视频的编辑器化比模型升级更值钱。独立 Sora 应用已退场、API 9/24 停服，CapCut 是国内团队最不需要换工具习惯的迁移选项。" },
+          { idx: "03", title: "Block3D：文生 3D 端到端 4.99 秒，块扩散比自回归快 5.15 倍", summary: "8 月 19 日（arXiv 21 日上新）浙大 ZIP Lab 放出 Block3D：shape token 切成连续块，块间自回归、块内联合去噪，置信度引导块内纠错。TRELLIS-500K 留出集上端到端从 25.71 秒降到 4.99 秒，5.15×，几何保真度不掉。", links: [{ label: "arXiv 2608.19567：Block3D", url: "https://arxiv.org/abs/2608.19567" }, { label: "Block3D 项目页", url: "https://alexandertsui.github.io/block3d/" }], value: "5 秒文生 3D 把策划一句话出白模看形推进到交互速度。研究框架不是生产 API，先当预演/选型加速器。", impact: "3D 生成瓶颈从像不像切到够不够快、错了能不能改。块扩散是自回归和全局扩散之间的第三条路。" },
+          { idx: "04", title: "Meshy T2：6 秒原生网格，面数预算 + 多部件一次出", summary: "Meshy 8 月 12 日发博、18 日上 Hugging Face：T2 用流匹配直接出顶点和连通性，中位图生网格 6 秒。顶点预算带 500–4000，多部件一次生成自然分件。论文 arXiv 2607.28675，权重大概即将开源。", links: [{ label: "Meshy 官方博：Meshy T2", url: "https://www.meshy.ai/blog/meshy-t2-native-3d-mesh-generation" }, { label: "Hugging Face：Meshy T2", url: "https://huggingface.co/blog/meshy-ai-team/meshy-t2-native-3d-mesh-generation" }], value: "上周五写的是 Meshy 7 的 30 秒绑骨。T2 解决更前面一截：网格能不能在交互速度下、按面数预算、带着分件出来。先拿 10 个硬表面道具测面数带和分件。", impact: "Meshy 7 打网格+绑骨，T2 打原生拓扑+速度。谁把两段接成一条 API，谁拿走中低模批产。" },
+          { idx: "05", title: "VideoCoCo：可执行 Blender 代码当思维链，物理合理的视频有了可检查中间层", summary: "VideoCoCo（Code-as-CoT）：编码 Agent 写 Blender 程序，沙盒跑出白模草稿，再交给视频编辑模型换皮成片。PhyGenBench 0.475→0.558，VBench-2.0 52.18→77.88。教师编辑器是 Seedance 2.0。AGI HUNT 8/24 放进研究头条。", links: [{ label: "arXiv 2607.27380：VideoCoCo", url: "https://arxiv.org/abs/2607.27380" }, { label: "AGI HUNT 日报 8/24", url: "https://agihunt.info/daily/latest" }], value: "和 Seedance 2.5 的 3D 白模控制是同一条路两边。现在就能手搓：Blender 出白模运动，Seedance/H3 做外观精修。", impact: "视频控制权从提示词退回到 DCC 中间层。专业管线会慢慢只认能检查、能改、能回放的结构化中间层。" }
+        ]
+      },
+      B: {
+        tag: "B 层", title: "AI 上游信息", hint: "模型 / Agent / 开源 / 机器人 / 安全 / 产品化",
+        items: [
+          { idx: "01", title: "NVIDIA 通知大客户：AI 服务器涨价超 15%，2027 年初出货", summary: "8 月 22 日彭博社：NVIDIA 已通知部分最大客户，搭载其 AI 芯片的服务器（含 Vera Rubin、Grace Blackwell）多数情况下涨价超过 15%，2027 年初出货生效。主因是存储涨价。CNBC、路透同日跟进。", links: [{ label: "CNBC：Nvidia AI-related price hikes", url: "https://www.cnbc.com/2026/08/22/nvidia-customers-reportedly-warned-about-ai-related-price-hikes-.html" }, { label: "Reuters：price hikes above 15%", url: "https://www.reuters.com/business/nvidia-customers-notified-about-ai-related-price-hikes-above-15-bloomberg-news-2026-08-22/" }], value: "2027 算力预算按至少 +15% 重做。现在能锁定的本地卡不要再等明年更便宜。专业卡买的是显存，不是速度。", impact: "存储墙已经强过 GPU 墙。美术生产要少依赖单家云 GPU，多准备可迁的本地/开源备胎。", conduction: "算力涨价 → 云端按秒计费的视频/3D 会跟涨 → 锁 2026 Q4–2027 渲染/生成预算，把能过夜的批量任务迁到本地卡或开源权重；下一批工作站按显存优先选型。" },
+          { idx: "02", title: "Vercel：开源权重 token 份额两月从 28% 到 62%，但钱还在闭源旗舰", summary: "8 月 22 日 Vercel CEO 公开：当天 AI Gateway 开源权重 token 占比 62%，两个月前 28.4%。开源吃走了量，却只拿走不到 9% 的花费；七月 Anthropic 用约 30% 的量拿走约 65% 的支出。62% 是单日纪录，当领先指标。", links: [{ label: "CryptoBriefing：Vercel open-weight 62%", url: "https://cryptobriefing.com/vercel-open-weight-models-62-percent-august/" }, { label: "FourWeekMBA：开源吃量、Anthropic 吃钱", url: "https://fourweekmba.com/ai-vercel-ai-gateway-open-weight-volume-spend-barbell/" }], value: "美术 Agent 里 80% 的调用不需要旗舰。开源/本地扛量，Claude/GPT 只留拍板的 20%。", impact: "模型层杠铃化。还把所有美术 Agent 绑在一个旗舰上的团队，会先被账单教训。", conduction: "立刻盘点美术 Agent 调用：看图打分/改 prompt/写 JSON 下沉开源，风格终审/复杂分镜留旗舰；本周做「开源扛量 + 旗舰拍板」路由，旗舰 token 压到总调用 20% 以下。" },
+          { idx: "03", title: "DeepSeek：周末全天低谷价（8/23 生效）+ V4-Flash-Vision-Exp 能看图", summary: "官方价目：高峰只在周一到周五 UTC 01:00–04:00、06:00–10:00，其余含整个周末都是低谷价（约一半）。8/23 0 点北京时间起周末不再分峰谷。V4-Flash-Vision-Exp 低谷输出 $0.66/百万 token，按尺寸把图折成输入 token。", links: [{ label: "DeepSeek 官方价目", url: "https://api-docs.deepseek.com/quick_start/pricing" }, { label: "机器之心：周末全天低谷价 8/23 生效", url: "https://eu.36kr.com/en/p/3951308056099972" }], value: "不赶白天的质检、改 prompt、元数据抽取，周六日全天按半价跑。Vision-Exp 补上 V4 最缺的看图，配 dsh 可过夜闭环。", impact: "API 在学电网。会排期的团队，账单能差一倍。", conduction: "本周六日起把不赶点的美术 Agent 批处理切到 DeepSeek 低谷价；用 20 张图测 Vision-Exp + dsh 看图打分，能过线就把白天旗舰质检挪走一半。" }
+        ]
+      }
+    },
+    actions: [
+      "H3 绿幕假人角色替换 PoC：挑 1 个买量角色，按「原角色 → 绿幕 dummy → 目标角色」两步在 ComfyUI 跑通，记录融合失败率和可用率；顺手测一版精灵连续帧能不能当 2D 动作草稿。",
+      "Seedance 2.5 × CapCut 真需求：用 Blender 白模 + 运动轨迹，在 CapCut Web/桌面跑一条游戏 CG/买量片，重点测 R2V 空间稳定性和 Intelligent Edit「只改一个道具」的返工成本。",
+      "3D 交互速度摸底：同一批 10 个硬表面道具，对比 Block3D（文生，研究向）概念速度 和 Meshy T2/现有 Meshy 图生网格（6 秒级、面数预算、分件），输出「概念预演用谁、进引擎草稿用谁」。",
+      "Blender 白模预演 + AI 换皮：手工走一遍 VideoCoCo 的生产版——Blender 出物理正确的白模运动，Seedance/H3 做外观精修，沉淀成预演标准步骤。",
+      "账单分层 + 周末低谷：盘点美术 Agent 调用，开源/V4 扛量、旗舰拍板；本周末把质检/打标/元数据批处理切到 DeepSeek 低谷价，并测 Vision-Exp 看图打分。"
+    ]
+  }
+
 };

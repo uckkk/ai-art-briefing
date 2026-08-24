@@ -1,14 +1,14 @@
 window.BRIEFING = {
   meta: {
-    date: "2026-08-21",
+    date: "2026-08-24",
     kicker: "DAILY AI ART INTELLIGENCE",
     title: "每日 AI 美术情报",
     tagline: "面向全栈游戏美术负责人 / AI 降本增效研究"
   },
   editorFrame: [
-    "即梦 Seedance 2.5 全球首发专业 3D 工作流：3D 白模控制 + Maya/Blender 插件、50 个全模态参考（30 图+10 视频+10 音频）、30 秒直出、最长 3 分钟、帧级/区域级局部修改——AI 视频从「盲盒抽卡」正式跨入「工业化生产」。",
-    "Spline v2 重构 3D 编辑器：WebGPU 渲染器 + 内置 AI Agent（读场景/跑工具/截图自检）+ MCP server——Claude Code/Cursor 可编程驱动 3D 编辑器，MCP 标准接口继 ComfyUI 后再落一城。",
-    "DeepSeek Harness rc.8 补齐多模态（14 项更新）：原生图片请求 + 图文混合输入 + Claude Code/Codex 子代理接入 + 工具层视觉（OCR/颜色统计/像素扫描）——纯文本模型也能「看图」。"
+    "MiniMax H3 从「出片」走进可复用生产：绿幕假人两步角色替换、精灵动画连续帧、12GB 卡拆三镜拼 30 秒——周末社区把 H3 走成了 ComfyUI 配方，而不是又一个 demo 模型。",
+    "Seedance 2.5 坐进 CapCut 剪辑台：R2V（参考驱动视频）吃白模/绿幕运镜，Intelligent Edit 按时间戳局部返工——AI 视频第一次真正嵌进「生成 → 精修 → 出片」一条工作区。",
+    "算力涨价碰上开源用量搬家：NVIDIA 通知大客户 AI 服务器涨价超 15%（2027 年初出货）；Vercel AI Gateway 开源权重 token 份额两月从 28% 到 62%。美术 Agent 必须分层：开源扛量，旗舰拍板。"
   ],
   layers: {
     A: {
@@ -18,55 +18,59 @@ window.BRIEFING = {
       items: [
         {
           idx: "01",
-          title: "Seedance 2.5：全球首款支持专业 3D 工作流的 AI 视频工具（3D 白模 + Maya/Blender 插件）",
-          summary: "8 月 20 日即梦（Dreamina）预热全球首发满血版 Seedance 2.5——AI 视频从「抽卡」迈向「工业化生产」。核心杀手锏是首次兼容专业 3D 工作流：① 3D 白模控制——精准调度镜头走向、分镜逻辑、人物站位和运动轨迹，解决长镜头「空间透视崩坏」；② 独家支持 Maya 和 Blender 插件——传统 3D 软件搭好白模和骨架，材质渲染/光影氛围/细节填充交给 AI；③ 50 个全模态素材参考（30 图 + 10 视频 + 10 音频），基本告别提示词门槛；④ 单段 30 秒原生直出（2.0 的 15 秒翻倍），支持延长最高 3 分钟，长视频人物/场景/声音一致性提升；⑤ 帧级/区域级局部修改——框选画面精修不推倒重来；⑥ 原生 10+ 语言生成 + 口型精准对齐。",
+          title: "MiniMax H3：绿幕假人替换 + 精灵动画 + 12GB 本地成片，视频模型进入「配方期」",
+          summary: "7 月 31 日 MiniMax 发布 H3（消费端名 Hailuo 3.0）：原生 2K、最长 15 秒、同pass 立体声音频，2K 单价号称不到主流三分之一。真正新的是周末到周一的生产配方：① 绿幕假人两步角色替换——先把原角色换成绿幕 crash-test dummy，再换目标角色，避开相似面孔特征融合（ComfyUI 建议 Balance 模式，第一步预览没有覆盖层基本会失败）；② Ref2Va（参考驱动音视频）一张参考图 + 场景表即可出片，六格分镜约五格跟图、遵循度约 90%；③ 精灵动画连续帧可直接接游戏/动画管线；④ 12GB 卡把 30 秒带音频拆成三镜再拼接，约 14 分钟出片；⑤ 低分先出再放大到 2560×1440。局限：0.6MP 中远人脸糊/扭，提示词服从过高会省掉微动、画面发僵。",
           links: [
-            { label: "全球首创！Seedance 2.5 首款能做 3D 动画的 AI 视频工具（评测）", url: "http://www.hqwc.cn/a/1548950.html" },
-            { label: "AGI HUNT 日报 8/20：Seedance 2.5 展示 30 秒 1080p 全场一致性", url: "https://agihunt.info/daily/latest" }
+            { label: "MiniMax 官方：MiniMax H3", url: "https://www.minimax.io/blog/minimax-h3" },
+            { label: "AGI HUNT 日报 8/24：H3 工作流 / 绿幕假人 / 精灵动画", url: "https://agihunt.info/daily/latest" },
+            { label: "Hailuo 3 vs Seedance 2.5 vs Veo / Kling（选型对照）", url: "https://aicreatorhub.net/news/hailuo-3-seedance-2-5-vs-veo-kling-sora-video-ai-2026" }
           ],
-          value: "3D 白模控制 + Maya/Blender 插件直接命中游戏 CG 宣传片最痛点——过去 AI 视频镜头一推拉，透视和空间关系就崩。现在可以在 Blender 里搭好场景白模/骨架/运动轨迹，让 AI 补材质、光影和细节，把渲染农场成本砍掉一大截。50 全模态参考对买量素材批量生产是革命性的：一次喂 30 图 + 10 视频 + 10 音频，AI 理解镜头语言、情绪和节奏，批量产出多版本。帧级修改意味着电商/买量素材「改个元素」不用整条重生成。",
-          impact: "AI 视频赛道已结束「比谁画面漂亮」的炫技期，进入「比谁能稳定进入生产流程」的深水区。3D 白模控制是 AI 视频与 DCC 工具链第一次真正的握手——方向一旦被验证，Blender/Maya 会成为 AI 视频的事实输入标准，传统 Pre-viz 和动态预演岗位的工作方式将被重写。"
+          value: "H3 不再是「再测一个视频模型」，而是能进买量/角色替换/2D 精灵批产的配方。绿幕假人两步对「同一角色换皮、同一口播换背景」是直接生产力——以前相似脸一换就融，现在有可复现的规避路径。精灵连续帧对 2D 游戏是现成的动作草稿，别当最终交付，当「原画→动画」的中间层。12GB 笔记本能跑，外包/远程美术不用抢专业卡。",
+          impact: "视频赛道的分水岭已经不是「谁画面更漂亮」，而是「谁先沉淀成可复制的 ComfyUI 节点」。H3 这一周被社区走成配方，Seedance 2.5 被嵌进剪辑台——模型能力开始让位于工作流所有权。"
         },
         {
           idx: "02",
-          title: "Spline v2：WebGPU 重构 + AI Agent + MCP，3D 编辑器进入「Agent 可编程」时代",
-          summary: "8 月 20 日 Spline 发布 v2——为 Agent 时代重建的 3D 编辑器：① AI Agent 内置——侧边栏 Agent 标签可读场景、跑编辑器工具、截图自检，能操控对象/材质/灯光/相机/布尔/粒子/克隆器/变量，甚至响应交互事件；② MCP server——Claude Code、Cursor、ChatGPT 等通过 MCP 驱动编辑器，与内置 Agent 同一套工具；③ WebGPU 渲染器成为默认（WebGL 回退）——绘制开销大幅下降、首帧更快、更多对象同屏；④ 先进材质——完整 PBR 管线 + IBL + HDR 色彩管线、屏幕空间反射、Physical Sky/HDRi Sky、高度雾、Dust 灰尘累积层；⑤ 新建模工具——Bevel/Chamfer 圆角、圆柱/球面纹理投影、雕刻笔刷对称、全新 Hair System 毛发系统（光照/阴影/风/结块）；⑥ 性能——Booleans 重写快 4 倍，导出体积自适应变小。",
+          title: "Seedance 2.5 进 CapCut：R2V 白模/绿幕 + Intelligent Edit，AI 视频第一次坐上剪辑台",
+          summary: "上周五写过即梦预热 Seedance 2.5 的 3D 白模控制。这一窗新信号是产品化：CapCut 官方页确认 Seedance 2.5 已在剪辑器里可选——App AI Lab / Web Video Studio / 桌面 AI Video。关键能力不再是「再出一条 30 秒」：① R2V 吃绿幕或白模（clay render）参考，按运动路径调度角色站位和场面，而不是纯靠提示词赌镜头；② Intelligent Edit 按时间戳/角色/物体/区域改，不整条重生成；③ 标准模式原生 30 秒 4K 一镜，beta 长视频多轮延到 180 秒；④ 最多 50 个全模态参考；⑤ 原生立体声音频同pass。社区已有人用 CapCut Web 一条工作流做完整短片。",
           links: [
-            { label: "Spline Blog: Introducing Spline v2", url: "https://blog.spline.design/spline-v2" }
+            { label: "CapCut 官方：Seedance 2.5 for Video Editor", url: "https://www.capcut.com/features/seedance-2-5-for-video-editor" },
+            { label: "DailyTopAI：用 Seedance 2.5 在 CapCut Web 一条工作流做短片", url: "https://dailytopai.com/article/i-made-an-ai-short-film-with-seedance-25-in-a-single-workflow-759.html" }
           ],
-          value: "Spline v2 是继 ComfyUI 之后 MCP 在 DCC 工具的又一次落地——「Agent 可编程」开始从生图工作流扩散到 3D 编辑器。游戏美术团队可以用 Claude Code/Cursor 直接驱动 Spline 生成场景、UI 状态、交互原型，Agent 自己读场景、检查、迭代。对做游戏 UI/概念场景的团队，Spline v2 的 Agent + 代码模式（HTML/JS 覆盖层）意味着「3D 交互原型」可以代码生成，不用手工摆节点。Hair System 对角色头发/毛发资产也是新增可选管线。",
-          impact: "Spline 判断「3D 编辑器的主用户正在从设计师变成 Agent」——与 ComfyUI、Blender 的 AI 插件方向一致。MCP 正在成为 DCC 工具与 AI 大脑之间的事实标准接口：ComfyUI 走通、Spline 跟进，Blender/Spine/FairyGUI 的 Agent 化只是时间问题。游戏美术团队的资产工具链会从「人用软件」变成「Agent 驱动软件 + 人做判断」。"
+          value: "3D 白模控制如果只停在即梦独立产品里，美术还要「生成完再导出再剪」。进 CapCut 意味着预演白模、生成、局部返工、字幕调色导出可以待在同一个工作区——买量素材和 CG 预告的返工成本会掉一截。R2V 吃白模，正好对上你们 Blender 里已经会搭的东西。先测一条真实需求：白模运动轨迹 → CapCut 生成 → Intelligent Edit 改一个道具。",
+          impact: "AI 视频的「编辑器化」比「模型升级」更值钱。谁先把生成嵌进剪辑时间线，谁就拿走制作链路。独立 Sora 应用已经退场、API 9/24 停服，CapCut 这条路是国内团队最不需要换工具习惯的迁移选项。"
         },
         {
           idx: "03",
-          title: "Meshy 7：30 秒自动绑骨，AI 3D 角色直接进引擎（Unity/Godot 实测）",
-          summary: "8 月 10 日 Meshy 7 发布，8 月 12 日 REST API 上线。头条功能是 auto-rigging 自动绑骨：上传人形网格、开启 enable_rigging，30 秒内得到可形变骨骼；单视图 3D 几何对齐基准得分 81.0%，领先 Tripo 3.1 和 Rodin 2.5。但实测暴露三个坑：① 导出格式是 FBX 不是 GLB——开启绑骨后静态网格 GLB 变成 FBX，glTF 端到端管线要规划格式切换；② Unity Humanoid 手指骨经常塌缩成单掌关节——Avatar 配置里 Hand 未映射，绿勾不代表手部没问题；③ Godot 肩部无 twist 骨——90° 抬臂时三角肌几何被挤压，需在 Blender 补手动 twist 骨。",
+          title: "Block3D：文生 3D 端到端 4.99 秒，块扩散比自回归快 5.15 倍",
+          summary: "8 月 19 日（arXiv 21 日上新）浙大 ZIP Lab 放出 Block3D：把离散 shape token 切成连续块，块与块之间自回归、块内联合去噪，再加置信度引导的块内纠错——低置信 token 在块封板前可改，缓解自回归「错了不能回头」。在 TRELLIS-500K 留出集上，端到端从 25.71 秒降到 4.99 秒，相对微调后的自回归基线 5.15×，几何保真度不掉（F-score@1% 0.309，法线一致性 0.668）。项目页有可交互 3D 结果。",
           links: [
-            { label: "Meshy 7's 30-second auto-rig, tested in Unity and Godot", url: "https://bitsoulhosting.com/marketplace/blog/meshy-7-auto-rig-tested-unity-godot" }
+            { label: "arXiv 2608.19567：Block3D", url: "https://arxiv.org/abs/2608.19567" },
+            { label: "Block3D 项目页", url: "https://alexandertsui.github.io/block3d/" }
           ],
-          value: "30 秒绑骨把「AI 出角色 → 进引擎能跑」的路径压缩到小时级（实测 prompt 到 Unreal 里跑起来的角色约 $0.60/个、1 小时内）。但「能跑」和「动得对」是两回事——手部骨骼和肩部 twist 仍需人工修。对游戏美术管线的现实用法：中低模 NPC/配角用 Meshy 7 绑骨 + 人工修正手指/肩膀，hero 角色仍走人工绑骨；quad 拓扑 + 8000 面左右是最优配比。",
-          impact: "auto-rig 从「demo 功能」走向「API 生产级」只用了半年。AI 3D 的下一步不是更精致的网格，而是「网格 + 拓扑 + 绑骨 + 动画」的完整资产链——谁能把 auto-rig 的精度拉到 Mixamo 级，谁就拿到中低模角色批产的市场。目前 Meshy 7 是「生产可接近」而非「生产可交付」。"
+          value: "5 秒文生 3D 把「策划一句话出白模看形」推进到交互速度——关卡会、武器脑暴、道具选型可以当场出十几套，不用等分钟级排队。注意这是研究框架，不是即开即用的生产 API；先当预演/选型加速器，别当进引擎资产。和 Meshy T2 的 6 秒图生网格是同一周信号：3D 生成正在从「等一杯咖啡」变成「刷新一下」。",
+          impact: "3D 生成的瓶颈从「像不像」切到「够不够快、错了能不能改」。块扩散是自回归和全局扩散之间的第三条路——有局部纠错，又不把整坨表征反复算一遍。谁先把这个速度做成 API，谁拿走概念阶段的 3D 脑暴市场。"
         },
         {
           idx: "04",
-          title: "Grok Imagine 2.0：区域编辑 + 5 图参考融合 + 模板工作流，生图从「出图」走向「编辑」",
-          summary: "8 月 10 日 xAI 发布 Imagine Image 2.0（Grok 的 Quality Mode），基于 Aurora 引擎（自回归 MoE transformer，逐 patch 生成），核心是控制而非分辨率：① 区域编辑（Magic Wand）——只改目标区域，其余不动，配分割工具精确选区；② 多参考融合——单次生成接受最多 5 张参考图，复杂构图无需手动拼接；③ Smart Resize——不是粗暴裁剪，而是重构图面适配 9 种比例（1:2 到 2:1）；④ 模板工作流——照片编辑/产品换色/电商图/专业头像/图标/角色精灵/表情/商品设计，视频策划场景可分别生成角色/场景/道具并保持统一风格。Arena 文生图全球第二（Elo 1320，第一 GPT-Image-2 1380）、图像编辑第二（1439 vs 1463）。",
+          title: "Meshy T2：6 秒原生网格，面数预算 + 多部件一次出，网格生成进入交互时代",
+          summary: "Meshy 8 月 12 日发博、18 日上 Hugging Face：T2 用流匹配直接出顶点和连通性，不走 Marching Cubes，也不走 MeshGPT 式逐 token 自回归。中位图生网格 6 秒，比自回归基线快一个数量级；重拓扑 3 秒。每个顶点一个连续 token，不量化、不焊接，艺术家拓扑和开放边界能保住。用户给一个顶点预算带（500–4000），闭三角网格大约 F≈2V。多部件（桌椅背包机械）一次生成自然分件，不用再拆再缝。论文 arXiv 2607.28675，代码和权重大概即将开源；生产图生 3D 仍走 Meshy 现有产品，T2 是下一代管线的研究底座。",
           links: [
-            { label: "xAI releases Grok Imagine 2.0（Wortins）", url: "https://www.wortins.com/story/xai-releases-grok-imagine-2-0-with-region-editing-and-multi--4f8a1c5d" },
-            { label: "xAI 发布 Imagine Image 2.0 中文解读", url: "https://marcinkossakowski.com?live-blog-21016793-2026-08-10-xai-fa-buimagine-image2-0-zuo-weigrok-qi-xiaweb-duanimagine-fu-wu-jiios-android-/" }
+            { label: "Meshy 官方博：Meshy T2 Native 3D Mesh Generation", url: "https://www.meshy.ai/blog/meshy-t2-native-3d-mesh-generation" },
+            { label: "Hugging Face：Meshy T2", url: "https://huggingface.co/blog/meshy-ai-team/meshy-t2-native-3d-mesh-generation" }
           ],
-          value: "区域编辑是美术最需要的「改局部不重画」——活动弹窗改个按钮文案、角色换件衣服、商品换配色，都不再整张重抽。5 图参考融合对「角色 × 场景 × 道具」的视觉一致性工作流是直接生产力：一次生成保持统一风格，不用后期拼图。角色精灵模板对 2D 游戏是现成的批产路径。API 访问计划推进中但尚未开放——想接入 Agent 管线还需等 API。",
-          impact: "头部生图模型（OpenAI/Meta/xAI/Google）的竞争焦点已从「画得更像」转向「编辑更可控」——区域编辑、参考融合、模板化正在成为标配。生图工具从「生成器」变成「轻量编辑器」，美术的交互方式从「抽卡-筛选」变成「生成-定向修改」。"
+          value: "上周五写的是 Meshy 7 的 30 秒绑骨——「能跑」。T2 解决的是更前面一截：网格本身能不能在交互速度下、按面数预算、带着分件结构出来。对中低模道具/场景件，6 秒 + 面数带 + 天然分件，意味着「概念图 → 可进引擎的低模草稿」可以压到分钟级。Hero 角色别指望一次过；先拿 10 个硬表面道具测面数带和分件是否真能少一次手工拆件。",
+          impact: "AI 3D 正在同时打两场：Meshy 7 打「网格 + 绑骨」，T2 打「原生拓扑 + 速度」。谁能把这两段接成一条 API（图 → 预算网格 → 分件 → 绑骨），谁拿走中低模批产。现在还是两截，但方向已经清楚。"
         },
         {
           idx: "05",
-          title: "腾讯 ARC 开源 SCoPE：相机视线当坐标注入视频扩散模型，精准运镜控制",
-          summary: "8 月 20 日腾讯 ARC 开源 SCoPE（Spherical COordinate Position Embedding）——把相机视线当作位置坐标注入预训练视频扩散 Transformer，输入首帧、文本与轨迹即可跟指定运镜生成视频。仓库基于 Wan2.2-I2V-A14B 且自带完整推理，无需额外训练即可控制镜头移动。",
+          title: "VideoCoCo：可执行 Blender 代码当思维链，物理合理的视频终于有了可检查的中间层",
+          summary: "中科大 / 港中文等提出 VideoCoCo（Code-as-CoT，代码即思维链）：提示词先让编码 Agent 写出 Blender 程序，沙盒跑出确定性白模草稿，再交给视频编辑模型按草稿「换皮」成片。PhyGenBench 从 0.475 到 0.558，VBench-2.0 从 52.18 到 77.88。教师编辑器用的是 Seedance 2.0，数据集 VideoCoCo-3K 是草稿–指令–目标三元组。今天 AGI HUNT 把它放进研究头条，针对黄油不融化、瓶子不变形这类物理翻车。短板：推理更慢，复杂流体仍受 Blender 模拟器限制。",
           links: [
-            { label: "AGI HUNT 日报 8/20：腾讯 ARC 开源 SCoPE", url: "https://agihunt.info/daily/latest" }
+            { label: "arXiv 2607.27380：VideoCoCo", url: "https://arxiv.org/abs/2607.27380" },
+            { label: "AGI HUNT 日报 8/24：VideoCoCo / 可执行代码驱动视频", url: "https://agihunt.info/daily/latest" }
           ],
-          value: "运镜是游戏宣传片/过场动画的命门——SCoPE 用「轨迹驱动镜头」的路线，和传统「画关键帧」的工作流可以无缝衔接：首帧定构图、轨迹定运镜、文本定内容。开源 + 自包含推理意味着可以本地私有化部署，IP 项目数据不出域。配合当天社区里出现的 CrossView-Warp LoRA V2（V2V 改机位/运动轨迹，HuggingFace 权重），「改机位」这条以前只能重生成的路正在被打通。",
-          impact: "镜头控制是 2026 下半年视频模型的主战场——LTX 多镜头、Kling Omni 逐角色口型、腾讯 SCoPE 轨迹控制、CrossView-Warp 改机位，四路并进。AI 视频的「导演能力」正在从「提示词语言」走向「结构化控制」（3D 白模/相机轨迹/关键帧），这对专业团队是好消息：控制越结构化，越能嵌进生产管线。"
+          value: "这和 Seedance 2.5 的 3D 白模控制是同一条路的两边——一边是产品已经让你上传白模，一边是研究在自动写白模脚本。游戏 CG 最怕的不是画面假，是运动假。把「Blender 预演 → AI 换皮」写成标准预演步骤，宣传片和技能演示的物理翻车会少很多。现在就能手搓：Blender 出白模运动，Seedance/H3 做 draft-conditioned 精修。",
+          impact: "视频模型的控制权正在从提示词语言退回到 DCC 中间层。白模、相机轨迹、可执行代码，都是「导演能检查、能改、能回放」的东西。提示词抽卡会继续存在，但专业管线会慢慢只认结构化中间层。"
         }
       ]
     },
@@ -77,50 +81,55 @@ window.BRIEFING = {
       items: [
         {
           idx: "01",
-          title: "DeepSeek Harness v0.1.0-rc.8：14 项更新补齐多模态 + 子代理协作",
-          summary: "8 月 20 日凌晨 DeepSeek Harness 迎来公测后首次重要更新（v0.1.0-rc.8），14 项调整：① 多模态输入——支持原生图片请求和图文混合输入，/goal、/plan 等命令可直接接收图片；② 子代理协作——Claude Code、Codex 进一步接入其子代理体系；③ 工具层视觉——面对不支持图像输入的纯文本模型，可调用 OCR、颜色统计、像素扫描等工具，把图片拆成结构化信息再交给文本模型推理，相当于给纯文本模型拼出「视觉」；④ 终端体验修复——Windows 终端体验、图片请求、流式生成、自定义网关等问题修复。8 月 13 日 v0.1 公测并开源。",
+          title: "NVIDIA 通知大客户：AI 服务器涨价超 15%，2027 年初出货",
+          summary: "8 月 22 日彭博社：NVIDIA 已通知部分最大客户，搭载其 AI 芯片的服务器（含 Vera Rubin、Grace Blackwell）多数情况下涨价超过 15%，2027 年初出货系统生效。幅度看芯片代际和内存配置。合同代工厂已转告微软、Google、Oracle 等。主因是三星 / SK 海力士 / 美光的存储涨价，NVIDIA 自己也吞不下。CNBC、路透同日跟进。",
           links: [
-            { label: "DeepSeek Harness 首发新版本：14 项更新，多模态能力拉满（智东西）", url: "https://view.inews.qq.com/a/20260820A03U8O00?scene=news-skill" },
-            { label: "DeepSeek Harness GitHub Releases: dsh-v0.1.0-rc.8", url: "https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.8" }
+            { label: "CNBC：Nvidia customers warned about AI-related price hikes", url: "https://www.cnbc.com/2026/08/22/nvidia-customers-reportedly-warned-about-ai-related-price-hikes-.html" },
+            { label: "Reuters：price hikes above 15%", url: "https://www.reuters.com/business/nvidia-customers-notified-about-ai-related-price-hikes-above-15-bloomberg-news-2026-08-22/" }
           ],
-          value: "本地 dsh（npx @DeepSeek-ai/dsh，v0.1.0-rc.6，端口 4173）这次 rc.8 直接升级两个核心能力：① 图片输入——美术 Agent 最需要的「看图→理解→反馈」链路打通，xart MCP 验证时可以让 dsh 直接看图评估生成质量，不用再走外部视觉模型；② 子代理协作——Claude Code/Codex 接入子代理体系，多 Agent 协作的美术管线（一个 agent 看图、一个 agent 改 prompt、一个 agent 跑 ComfyUI）有了本地底座。建议尽快升级到 rc.8 并测试图片输入。",
-          impact: "DeepSeek 用「工具层视觉」绕过模型本身的视觉能力，是工程上非常务实的一招——纯文本模型 + OCR/像素扫描在多数结构化任务上够用，且成本远低于多模态旗舰。这预示着 Agent 框架的竞争从「模型能力」转向「工具编排能力」。"
+          value: "云端生图/生视频/3D 的单价不会立刻跳，但 2027 的算力预算要按「至少 +15%」重做。本地侧：现在能锁定的 4090/5090/专业卡不要再等「明年更便宜」；视频生成实测专业卡往往只比 5090 快 10–15%，租金却翻倍——买的是显存，不是速度。",
+          impact: "存储墙已经强过 GPU 墙。卖方定价权在内存厂，不在黄仁勋。美术生产的长期策略是「少依赖单家云 GPU，多准备可迁的本地/开源备胎」。",
+          conduction: "算力涨价 → 云端按秒计费的视频/3D 会跟涨 → 现在锁 2026 Q4–2027 的渲染/生成预算，把能过夜的批量任务（道具批产、买量多版本、质检）迁到本地卡或开源权重；采购下一批工作站按「显存优先、别为 10% 速度付一倍租金」选型。"
         },
         {
           idx: "02",
-          title: "视频格局重排：Sora 2 停服倒计时 + Kling 3.0 登顶 + Happy Horse 1.0 登顶 + 可灵营收 8.5 亿",
-          summary: "8 月 20 日视频模型格局重排信号密集：① Sora 2 退场倒计时——独立 Sora 应用 4/26 已停用，Sora 2 API 9/24 停服，ChatGPT Plus/Pro 内仍可用但已不适合作生产管线底座，行业共识 9 月前完成迁移；② Kling 3.0 登顶——LLM Stats Video Arena 文生图视频榜单 Elo 1934 第一（盲测 1392 票），随后 Happy Horse 1.0（1816）、Seedance 2.0 Fast（1747）；但 Artificial Analysis Video Arena 上阿里 Happy Horse 1.0 排名第一，超出 Seedance 2.0 一截；③ 快手 Q2 财报——可灵 AI 当季营收超 8.5 亿元（同比 +200%、环比 +30.8%），可灵 3.0 系列称推出原生 4K 直出，上线 3.0 Turbo、MCP 等；④ 新模型涌入——FLUX.3 Video（BFL 8 月）、MiniMax H3（Hailuo-03，2K + 首尾帧控制）、Grok Imagine Video 1.5、Wan 2.7 Video。",
+          title: "Vercel：开源权重 token 份额两月从 28% 到 62%，但钱还在闭源旗舰",
+          summary: "8 月 22 日 Vercel CEO Guillermo Rauch 公开：当天 AI Gateway 开源权重 token 占比 62%，闭源 38%；两个月前（6/24）开源 28.4%。四月还只有 11%。同一组数据更刺眼：开源吃走了量，却只拿走不到 9% 的花费；七月 Anthropic 用约 30% 的量拿走约 65% 的网关支出。62% 是单日纪录、周六流量偏实验，当领先指标，别当月度审计数。",
           links: [
-            { label: "Best AI for Video Generation in 2026（LLM Stats, 8/20 更新）", url: "https://www.llm-stats.com/leaderboards/best-ai-for-video-generation" },
-            { label: "Civitai 新视频模型：Happy Horse 1.0 / Seedance 2.0 / Wan 2.7", url: "https://releasebot.io/updates/civitai/civitai" },
-            { label: "AGI HUNT 日报 8/20：快手财报 + 可灵 3.0 原生 4K", url: "https://agihunt.info/daily/latest" }
+            { label: "CryptoBriefing：Vercel open-weight models hit 62%", url: "https://cryptobriefing.com/vercel-open-weight-models-62-percent-august/" },
+            { label: "FourWeekMBA：开源吃量、Anthropic 吃钱", url: "https://fourweekmba.com/ai-vercel-ai-gateway-open-weight-volume-spend-barbell/" }
           ],
-          value: "Sora 2 停服是 9/24 前的硬性迁移任务——凡依赖 Sora 的视频管线要在这 1-2 周完成迁移，行业共识迁移本身是 1-2 周的工程而非危机。Kling 3.0 以「最高 Elo + 最低单价 + 逐角色口型 + 中文/方言理解最强」成为性价比首选；Happy Horse 1.0 在 Artificial Analysis 登顶但价格贵。可灵营收 +200% 说明 AI 视频的商业化已被市场验证——视频管线选型可以更放心地押注头部工具，因为它们在持续投入。",
-          impact: "AI 视频已「商品化」——原生音频普及、1080p 成地板、单条可用片段跌破 1 美元。最聪明的做法是抽象掉供应商：统一提示词层对接多家，每季度重评一次——「9 月的冠军未必是 6 月的冠军」。"
+          value: "美术 Agent（看图质检、改 prompt、写 ComfyUI、抽 3D 元数据）里，80% 的调用不需要旗舰。开源/本地（Qwen 3.8 27B、DeepSeek V4 Flash）扛量，Claude/GPT 只留在「看不懂、要拍板」的 20%。这是唯一能同时扛住 NVIDIA 涨价和旗舰贵价的结构。",
+          impact: "模型层在杠铃化——左边海量便宜 token，右边少量贵决策。还把所有美术 Agent 绑在一个旗舰上的团队，会先被账单教训。",
+          conduction: "Agent 用量结构 → 立刻盘点现有美术 Agent 的调用：哪些是看图打分/改 prompt/写 JSON（可下沉开源），哪些是风格终审/复杂分镜（留旗舰）；本周内做一版「开源扛量 + 旗舰拍板」路由，目标把旗舰 token 压到总调用的 20% 以下。"
         },
         {
           idx: "03",
-          title: "Math Magic（Hi3D 母公司）Series A+ 近 $5000 万：AI 3D 从「生成」到「交付」全链闭环",
-          summary: "8 月 20 日 Math Magic 宣布完成 Series A+ 轮，6 个月两轮累计融资近 $5000 万（BAI Capital 与 HyT Capital 联合领投，V Fund 及 HSG/IDG 等跟投）。Math Magic 同时押注 AI 3D 模型技术（旗下 Hi3D 昨日发布 V3.0，2048³ 体素 + 8K 纹理）+ 物理供应链（智能拆件、多色打印、制造履约），走「生成到交付」模式：Builda 社区 + Builda Camera（拍照生成个性化手办并送货上门）。公司自述是「唯一同时具备高精度 AI 3D 模型技术与物理生产能力」的公司。",
+          title: "DeepSeek：周末全天低谷价（8/23 生效）+ V4-Flash-Vision-Exp 能看图",
+          summary: "DeepSeek 官方价目写明：高峰只在周一到周五 01:00–04:00、06:00–10:00 UTC（北京时间 09:00–12:00、14:00–18:00），其余时间含整个周末都是低谷价，约为高峰一半。8 月 23 日 0 点（北京时间）起周末不再分峰谷。V4-Pro 高峰输出约 $3.96/百万 token，低谷 $1.98；V4-Flash / V4-Flash-Vision-Exp 低谷输出 $0.66。Vision-Exp 按尺寸把图折成输入 token。社区已有人在 Codex 额度用尽后，把 Vision-Exp + DeepSeek Harness 拿来看图干活。",
           links: [
-            { label: "Math Magic Closes Series A+（PR Newswire, 8/20）", url: "https://www.prnewswire.com/news-releases/math-magic-closes-series-a-raising-nearly-50-million-across-two-rounds-in-six-months-302856530.html" }
+            { label: "DeepSeek 官方价目（峰谷 + Vision-Exp）", url: "https://api-docs.deepseek.com/quick_start/pricing" },
+            { label: "机器之心：周末全天低谷价 8/23 生效", url: "https://eu.36kr.com/en/p/3951308056099972" }
           ],
-          value: "对游戏美术，这轮融资的意义不在钱，而在验证「AI 3D 资产 = 可交付商品」的商业闭环——Hi3D 的 2048³ 精度 + 智能拆件 + 多色打印，直接把 AI 3D 从「数字资产」延伸到「物理商品」（潮玩/手办/周边）。如果你在做 IP 衍生周边、潮玩企划，这条链路值得跟踪：未来「角色 3D 模型 → 自动拆件 → 多色打印 → 交付」可以全自动，省掉建模师和供应链对接的人力。",
-          impact: "AI 3D 的资本叙事正在从「模型能力」转向「模型 + 供应链」的全链条——能落地的 3D 公司必须同时搞定生成端和生产端。对纯工具型 AI 3D 公司，这个门槛会越来越高；对游戏公司，这意味着 AI 3D 资产生态（资产库、打印服务、电商化）会加速成熟。"
+          value: "批量生图质检、提示词改写、3D 元数据抽取、Spine JSON 校验——这些不赶白天的活，周六日全天按半价跑。Vision-Exp 补上了 V4 家族最缺的「看图」，配上已经在跑的 dsh，周末可以真的把「看图→打分→改 prompt」闭环过夜。",
+          impact: "API 在学电网：高峰赶人，低谷填谷。会排期的团队，账单能差一倍。这不是小优惠，是生产排班要改的信号。",
+          conduction: "排班 → 本周六日起把不赶点的美术 Agent 批处理（质检、打标、多版本 prompt、元数据）切到 DeepSeek 低谷价；顺手用 20 张图测 V4-Flash-Vision-Exp + dsh 看图打分，能过线就把白天旗舰质检挪走一半。"
         }
       ]
     }
   },
   actions: [
-    "Seedance 2.5 上线即测 3D 白模工作流：用 Blender 搭 1 个角色/道具白模 + 运动轨迹，跑一条游戏 CG 宣传片需求，对比传统渲染农场成本与返工率——重点测 3D 白模控制下的空间稳定性和 Maya/Blender 插件体验。",
-    "Spline v2 + MCP PoC：接 Claude Code 驱动 Spline 搭一个游戏 UI 交互场景原型，验证「Agent 可编程 3D」在概念阶段的生产力；同时把 Spline v2 的 Hair System 加入角色毛发资产管线做 A/B。",
-    "Meshy 7 自动绑骨 A/B：用 3 个中低模角色对比 Meshy 7 自动绑骨 vs 人工绑骨工时，重点验证手指骨/肩部 twist 修复成本，输出「AI 绑骨 + 人工修正」的标准工时表。",
-    "DeepSeek Harness 升级 rc.8 + 图片输入测试：本地 dsh 升级，用 3 张生图结果做「看图评估」测试，验证纯文本模型 + 工具层视觉能否支撑美术 Agent 的质检环节。",
-    "Sora 2 停服迁移：9/24 前完成视频管线迁移（Sora → Kling 3.0 / Veo 3.1 / Seedance 2.5 三选一或双轨），并建立「统一提示词层 + 季度重评」的视频供应商抽象。"
+    "H3 绿幕假人角色替换 PoC：挑 1 个买量角色，按「原角色 → 绿幕 dummy → 目标角色」两步在 ComfyUI 跑通，记录融合失败率和可用率；顺手测一版精灵连续帧能不能当 2D 动作草稿。",
+    "Seedance 2.5 × CapCut 真需求：用 Blender 白模 + 运动轨迹，在 CapCut Web/桌面跑一条游戏 CG/买量片，重点测 R2V 空间稳定性和 Intelligent Edit「只改一个道具」的返工成本。",
+    "3D 交互速度摸底：同一批 10 个硬表面道具，对比 Block3D（文生，研究向）概念速度 和 Meshy T2/现有 Meshy 图生网格（6 秒级、面数预算、分件），输出「概念预演用谁、进引擎草稿用谁」。",
+    "Blender 白模预演 + AI 换皮：手工走一遍 VideoCoCo 的生产版——Blender 出物理正确的白模运动，Seedance/H3 做外观精修，沉淀成预演标准步骤。",
+    "账单分层 + 周末低谷：盘点美术 Agent 调用，开源/V4 扛量、旗舰拍板；本周末把质检/打标/元数据批处理切到 DeepSeek 低谷价，并测 Vision-Exp 看图打分。"
   ],
   timeline: {
-    current: "2026-08-21",
+    current: "2026-08-24",
     nodes: [
+      { type: "day",   date: "2026-08-24", label: "08-24" },
+      { type: "week",   id: "w35", label: "W35", range: "08-24 ~ 08-30", focus: "H3 被社区走成可复用生产配方（绿幕假人/精灵帧/12GB 成片）；Seedance 2.5 坐进 CapCut 剪辑台（R2V 白模 + 局部返工）；Block3D/Meshy T2 把 3D 生成推进到 5–6 秒交互速度；NVIDIA 涨价 15% 碰上 Vercel 开源用量 62%，美术 Agent 必须分层。" },
       { type: "day",   date: "2026-08-21", label: "08-21" },
       { type: "week",   id: "w34", label: "W34", range: "08-17 ~ 08-23", focus: "Seedance 2.5 全球首发 3D 白模控制 + Maya/Blender 插件，AI 视频跨入工业化生产；Spline v2 用 WebGPU + AI Agent + MCP 重构 3D 编辑器；DeepSeek Harness rc.8 补齐多模态；Sora 2 API 9/24 停服倒计时，Kling 3.0 登顶 LLM Stats 视频榜。" },
       { type: "day",   date: "2026-08-20", label: "08-20" },
@@ -131,7 +140,7 @@ window.BRIEFING = {
       { type: "week",   id: "w32", label: "W32", range: "08-03 ~ 08-09", focus: "AI Agent 商业化验证：Cognition/Devin 年化收入破 $10 亿；Stripe 收购 OpenRouter $70 亿标志 LLM 分发层整合；Anthropic 签 20 年数据中心租约加码自有算力。" },
       { type: "day",   date: "2026-08-02", label: "08-02" },
       { type: "day",   date: "2026-08-01", label: "08-01" },
-      { type: "month",  id: "m202608", label: "8月", range: "08-01 ~ 08-21", focus: "AI 3D 精度突破（Hi3D 2048³）+ Seedance 2.5 3D 白模视频工作流 + 开源视频世界模型（LTX-2.5 22B）+ Comfy MCP 批量生产 + Qwen freemium 许可 + 定价格局反转。AI 美术生产从单点工具进入工具链编排阶段。" },
+      { type: "month",  id: "m202608", label: "8月", range: "08-01 ~ 08-24", focus: "AI 3D 精度突破（Hi3D 2048³）+ Seedance 2.5 3D 白模视频工作流并坐进剪辑台 + 开源视频世界模型（LTX-2.5 22B）+ Comfy MCP 批量生产 + 3D 生成进入 5–6 秒交互速度 + 开源 token 用量过半。AI 美术生产从单点工具进入工具链编排与成本分层阶段。" },
       { type: "day",   date: "2026-07-31", label: "07-31" },
       { type: "day",   date: "2026-07-30", label: "07-30" },
       { type: "day",   date: "2026-07-29", label: "07-29" },
