@@ -8,7 +8,7 @@ window.BRIEFING = {
   editorFrame: [
     "MiniMax H3 从「出片」走进可复用生产：绿幕假人两步角色替换、精灵动画连续帧、12GB 卡拆三镜拼 30 秒——周末社区把 H3 走成了 ComfyUI 配方，而不是又一个 demo 模型。",
     "Seedance 2.5 坐进 CapCut 剪辑台：R2V（参考驱动视频）吃白模/绿幕运镜，Intelligent Edit 按时间戳局部返工——AI 视频第一次真正嵌进「生成 → 精修 → 出片」一条工作区。",
-    "算力涨价碰上开源用量搬家：NVIDIA 通知大客户 AI 服务器涨价超 15%（2027 年初出货）；Vercel AI Gateway 开源权重 token 份额两月从 28% 到 62%。美术 Agent 必须分层：开源扛量，旗舰拍板。"
+    "算力涨价碰上开源用量搬家：NVIDIA 通知大客户 AI 服务器涨价超 15%；Vercel 开源权重 token 份额两月从 28% 到 62%。Altman 亲口关停 Sora/Atlas 押注 Codex——视频不要再等 OpenAI，美术 Agent 必须分层：开源扛量，旗舰拍板。"
   ],
   layers: {
     A: {
@@ -114,6 +114,33 @@ window.BRIEFING = {
           value: "批量生图质检、提示词改写、3D 元数据抽取、Spine JSON 校验——这些不赶白天的活，周六日全天按半价跑。Vision-Exp 补上了 V4 家族最缺的「看图」，配上已经在跑的 dsh，周末可以真的把「看图→打分→改 prompt」闭环过夜。",
           impact: "API 在学电网：高峰赶人，低谷填谷。会排期的团队，账单能差一倍。这不是小优惠，是生产排班要改的信号。",
           conduction: "排班 → 本周六日起把不赶点的美术 Agent 批处理（质检、打标、多版本 prompt、元数据）切到 DeepSeek 低谷价；顺手用 20 张图测 V4-Flash-Vision-Exp + dsh 看图打分，能过线就把白天旗舰质检挪走一半。"
+        }        ,
+        {
+          idx: "04",
+          title: "Sam Altman：关停 Sora/Atlas 押注 Codex，并点名「反人类」末日营销",
+          summary: "8/23 David Senra 的 Founders 播客放出与 @sama 的长谈，X 切片同日刷屏。三句有选型价值：① 亲口说关掉 Sora 和 Atlas，把火力集中到 Codex——「好主意是伟大创始人的敌人」；② 承认 2023 年 GPT-4 后对软件业颠覆速度判断错了，经济惯性让落地比模型迭代慢，自己也还在复制粘贴；③ 不点名批评用「毁灭倒计时 / 一年内一半工作消失」做营销是反人类话术，舆论普遍读成针对 Anthropic / Dario。同日中文媒体转述第三方/Discord 露出 claude-mashmallow-eap（Marshmallow）与 claude-melon-eap（Melon），称未到 Fable 档、更像 Claude 5 系迭代——原帖未核到，当观察项。Astra 暂停是 8/18 旧闻，不纳入本窗。",
+          links: [
+            { label: "Senra X：Altman 关停 Sora/Atlas 押 Codex", url: "https://x.com/davidsenra/status/2091575832036724852" },
+            { label: "Senra X：Founders 访谈上线", url: "https://x.com/davidsenra/status/2091514583420686743" },
+            { label: "firesidealpha X：Altman 承认时间表误判", url: "https://x.com/firesidealpha/status/2091506987137896560" },
+            { label: "Founders 官方节目页 8/23", url: "https://www.davidsenra.com/episode/sam-altman" }
+          ],
+          value: "Sora 产品线被创始人自己定性为「该关的好主意」。买量/CG 视频不要再等 Sora 复活——独立应用已退、API 9/24 停。A 层的 H3 配方和 Seedance×CapCut 就是备胎。Codex vs Claude Code 才是编程 Agent 的主战场。Marshmallow/Melon 若属实，是下一代拍板模型的提前信号，别把 Q4 旗舰锁死在当前 Claude 5。",
+          impact: "OpenAI 在收缩产品面、押 Agent/代码；Anthropic 继续用安全叙事占位。选型上「视频看国内工作流、决策看 Claude、写代码看 Codex」比「等 GPT-6 Astra」更贴近这一窗。",
+          conduction: "视频产能不要押 Sora → 本周把买量/CG 预演默认栈写成 H3 配方 + Seedance×CapCut；编程/工作流 Agent 做一轮 Codex vs Claude Code 对照；Marshmallow/Melon 只当观察项，未到 Fable 不要提前换旗舰。"
+        },
+        {
+          idx: "05",
+          title: "swyx：模拟人类是 RSI 最后一公里，Karpathy 押注的 Smallville 已在 Fortune 100 找到 PMF",
+          summary: "8/21 @swyx 发长帖（CST 8/22 清晨）：承认自己晚了两年才理解 @karpathy 和李飞飞为什么投 Joon Sung Park 的 Simile（原 Smallville）。若认真看待递归自我改进，模型已经在自动化大块 ML 研究和 AI 工程，最后（或倒数第二）的障碍是模拟人类和人类反馈。配套 Latent Space 访谈同日上线：数字孪生复现真实态度/行为约 85%，行为基础模型，目标是测产品/政策，而不是再做一个更会考试的 LLM。Simile 称早期已在 Fortune 100 找到 PMF。",
+          links: [
+            { label: "swyx X：Simulation is a new scaling law", url: "https://x.com/swyx/status/2090948945753076141" },
+            { label: "Latent Space：Joon Sung Park / Simile 访谈 8/21", url: "https://www.latent.space/p/simile" },
+            { label: "Simile：Simulation as the next frontier", url: "https://www.simile.com/blog/simulation-next-frontier" }
+          ],
+          value: "这不是又一篇世界模型论文，而是「玩家 / 审核 / 买量受众」可以被模拟。关卡手感、买量前 3 秒、风格终审如果能用数字孪生先打一轮，返工会少。现在还早，先当观察：谁先把「模拟玩家看片/打关」做成 API，谁拿走预演市场的下一截。",
+          impact: "上游从「更大的模型」切到「更好的人类反馈模拟」。和已经在写的开源扛量 + 旗舰拍板是同一条线——拍板之前，用模拟把明显不行的版本滤掉。",
+          conduction: "先别上生产。本周只做一件：列 3 个高返工环节（买量前 3 秒、关卡手感、风格终审），看能不能用现有小模型 + 历史数据做「假玩家 / 假审核」过滤；等 Simile 类产品有 API 再测。"
         }
       ]
     }
@@ -123,7 +150,8 @@ window.BRIEFING = {
     "Seedance 2.5 × CapCut 真需求：用 Blender 白模 + 运动轨迹，在 CapCut Web/桌面跑一条游戏 CG/买量片，重点测 R2V 空间稳定性和 Intelligent Edit「只改一个道具」的返工成本。",
     "3D 交互速度摸底：同一批 10 个硬表面道具，对比 Block3D（文生，研究向）概念速度 和 Meshy T2/现有 Meshy 图生网格（6 秒级、面数预算、分件），输出「概念预演用谁、进引擎草稿用谁」。",
     "Blender 白模预演 + AI 换皮：手工走一遍 VideoCoCo 的生产版——Blender 出物理正确的白模运动，Seedance/H3 做外观精修，沉淀成预演标准步骤。",
-    "账单分层 + 周末低谷：盘点美术 Agent 调用，开源/V4 扛量、旗舰拍板；本周末把质检/打标/元数据批处理切到 DeepSeek 低谷价，并测 Vision-Exp 看图打分。"
+    "账单分层 + 周末低谷：盘点美术 Agent 调用，开源/V4 扛量、旗舰拍板；本周末把质检/打标/元数据批处理切到 DeepSeek 低谷价，并测 Vision-Exp 看图打分。",
+    "Sora 不要再等：独立应用已退、API 9/24 停、Altman 确认关停转押 Codex。本周把视频默认栈钉死在 H3 配方 + Seedance×CapCut；编程 Agent 做一轮 Codex vs Claude Code 对照，Q4 旗舰不要锁死单一家。"
   ],
   timeline: {
     current: "2026-08-24",
