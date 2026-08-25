@@ -1839,5 +1839,41 @@ window.ARCHIVE = {
       "Sora 不要再等：独立应用已退、API 9/24 停、Altman 确认关停转押 Codex。本周把视频默认栈钉死在 H3 配方 + Seedance×CapCut；编程 Agent 做一轮 Codex vs Claude Code 对照，Q4 旗舰不要锁死单一家。"
     ]
   }
+,
+  "2026-08-25": {
+    meta: { date: "2026-08-25", kicker: "DAILY AI ART INTELLIGENCE", title: "每日 AI 美术情报", tagline: "面向全栈游戏美术负责人 / AI 降本增效研究" },
+    editorFrame: [
+      "H3 从配方走进结构化控制：MiniMax-H3 Fun ControlNet Union 上了 Hugging Face——一条约 6.8GB 权重同时吃 Canny / Depth / Pose，还能做视频 inpainting。昨天写绿幕假人两步替换，今天是用控制视频钉运镜和姿态。",
+      "Wan 3.0 正式商用：快于实时 + 文档直转 30 秒。阿里 8/24 全网上线，单次原生 30 秒，首次吃 doc/xls/ppt/pdf；API 到 9/23 七折。视频从「能不能出片」切到「能不能按时交差」。",
+      "成片格式碰上 harness 比模型值钱：Runway Ruby 把 H3 / Seedance 接到 EXR / ProRes；NVIDIA AVO 用同一颗 Opus 5 把 ARC-AGI-3 从约 30% 拉到 100%。Claude 8/24 再宕约 3.4 小时——美术 Agent 必须双轨。"
+    ],
+    layers: {
+      A: {
+        tag: "A 层", title: "游戏美术应用层", hint: "点卡片展开价值与行业判断 →",
+        items: [
+          { idx: "01", title: "MiniMax H3 Fun ControlNet Union：一条权重钉 Canny/Depth/Pose，H3 进入「控场期」", summary: "阿里 PAI 把 MiniMax-H3-Fun-Controlnet-Union 放到 Hugging Face：约 6.8GB control 分支叠在 H3 基座上。一条权重同时吃 Canny、Depth、HED、MLSD、Pose，还能做视频 inpainting。guidance 只能 1.0。社区同期 lightx 四步 LoRA + Euler/Beta、768p 成片。", links: [ { label: "Hugging Face：MiniMax-H3-Fun-Controlnet-Union", url: "https://huggingface.co/alibaba-pai/MiniMax-H3-Fun-Controlnet-Union" }, { label: "Hugging Face：MiniMax-H3 基座", url: "https://huggingface.co/MiniMaxAI/MiniMax-H3" }, { label: "AGI HUNT 日报 8/25", url: "https://agihunt.info/daily/latest" } ], value: "昨天的配方解决能出、能换皮；ControlNet 解决镜头和姿态能不能按预演走。先拿 1 条买量镜头抽 Pose 做 V2V 换角色。", impact: "视频下一场是谁先把 ControlNet / 白模 / 时间线做成默认可复现节点。H3 一周连跳两级：配方 → 控场。" },
+          { idx: "02", title: "阿里 Wan 3.0 正式上线：快于实时 + 文档直转 30 秒", summary: "8/24 全网上线。单次原生 30 秒；首次吃 doc/xls/ppt/pdf/md；演示称生成时长短于播放时长。API 480P/720P/1080P 为 0.3/0.6/1.2 元/秒，8/24–9/23 七折。模型 ID wan3.0-video。", links: [ { label: "雷峰网：Wan 3.0 正式上线", url: "https://www.leiphone.com/category/industrynews/XGOehdmO7fBF2xnb.html" }, { label: "AIbase：定价 + 七折窗口", url: "https://news.aibase.com/zh/news/30562" }, { label: "万相官网", url: "https://tongyi.aliyun.com/wan/" } ], value: "文档直转对策划 PPT → 预告草稿是真降本。七折窗口只到 9/23，跟 Seedance×CapCut、H3 配方放同一张选型表。", impact: "国内视频三家按工作流分工：H3 控场和本地、Seedance 进剪辑台、Wan 吃文档和按时出片。" },
+          { idx: "03", title: "Runway Ruby：任意模型出片转 16-bit EXR / ProRes", summary: "8/21 对 Max/Enterprise 开放，8/24 官方 X 明确 Seedance 2.5 / Gen-4.5 / MiniMax H3 都能转 16-bit EXR 或 10/12-bit ProRes / HEVC，BT.2020 + PQ/HLG。上限约 30 秒。这不是生成模型，是成片端。", links: [ { label: "The AI Dude：Ruby SDR→HDR", url: "https://theaidude.net/blog/runway-ruby-sdr-to-hdr-prores-exr" }, { label: "OrcaRouter：Ruby 成片格式", url: "https://www.orcarouter.ai/blog/runway-ruby-hdr-launch" } ], value: "生成物一直卡在 8-bit mp4。先拿 5 秒测试片转 EXR 进 AE 看色带和高光余量。", impact: "分发层开始抢最后一公里格式。谁接到 DCC 成片规范，谁拿走专业团队预算。" },
+          { idx: "04", title: "4DAnyone：一段手机视频出可换视角 4D 数字人，已开源", summary: "浙大/蚂蚁 4DAnyone（arXiv 2608.20335，8/21）：单目视频不用标定，生成多视角再抬成 4DGS。RCP 压参考预算，TCR 轮换分组防结构漂。训练含游戏引擎 MVGameHuman。GitHub Apache 2.0 + HF 权重。", links: [ { label: "arXiv 2608.20335：4DAnyone", url: "https://arxiv.org/abs/2608.20335" }, { label: "项目页", url: "https://4danyone.github.io/" }, { label: "GitHub", url: "https://github.com/ant-research/4DAnyone" } ], value: "先当预览/过场，不是进引擎骨骼。拿 1 个角色表演视频试换视角漂不漂。", impact: "3D 人同时打重建速度和换视角一致性。开源权重值得本周摸。" },
+          { idx: "05", title: "DiGS-Avatar：单张图 0.71 秒出可 LBS 驱动的 3D 人", summary: "DiGS-Avatar（arXiv 2608.20759，8/21）：SMPL-X UV 潜空间补全再解码成 3DGS。端到端 0.71 秒，标准 LBS 直接驱动。短板：极松长裙、估姿失败糊脸。", links: [ { label: "arXiv 2608.20759：DiGS-Avatar", url: "https://arxiv.org/abs/2608.20759" }, { label: "GitHub", url: "https://github.com/KLMAV-CUC/DiGS-Avatar" } ], value: "概念图 → 0.71 秒可摆 pose 的高斯人。关卡会/皮肤评审够用。静帧用 DiGS，表演视频用 4DAnyone。", impact: "数字人从能不能重建切到能不能立刻动。0.71 秒把预演门槛打穿。" }
+        ]
+      },
+      B: {
+        tag: "B 层", title: "AI 上游信息", hint: "模型 / Agent / 开源 / 机器人 / 安全 / 产品化",
+        items: [
+          { idx: "01", title: "NVIDIA AVO：同一颗 Opus 5，harness 把 ARC-AGI-3 从约 30% 拉到 100%", summary: "AVO 在 ARC-AGI-3 公开集 100.00 RHAE，183 关、6624 步。裸模型 Opus 5 约 30%。不是新模型：持久记忆、监督器、失败恢复。壳最初给 GPU kernel 优化。公开集已被打满，半私有/私有集没测。", links: [ { label: "NVIDIA 技术博客：AVO 100%", url: "https://developer.nvidia.com/blog/nvidia-avo-reaches-100-on-arc-agi-3-demonstrating-a-frontier-level-general-purpose-architecture-for-long-horizon-autonomous-agents/" }, { label: "The New Stack：30% → 100%", url: "https://thenewstack.io/nvidia-avo-arcagi3-benchmark/" }, { label: "Gigazine 8/25", url: "https://gigazine.net/gsc_news/en/20260825-nvidia-avo/" } ], value: "美术 Agent 瓶颈是记忆和卡住重启，不是再换旗舰。失败样例 + 通过标准写成持久日志，比升 Opus 更值钱。", impact: "上游从更大的模型切到更好的壳。壳用开源跑，旗舰只在监督器拍板时出场。", conduction: "本周不要上新模型。给看图质检 Agent 加失败样例库、卡住换策略、可回放日志。用 20 张图对比裸旗舰 vs 小模型+壳。" },
+          { idx: "02", title: "Anthropic：8/24 多模型错误率再升高，8 月旗舰不是能单绑的生产依赖", summary: "官方状态页：8/24 04:50–07:36 UTC Claude Mythos 5 / Fable 5 / Opus 5 / Opus 4.8 错误率升高，约 3.4 小时，波及 claude.ai 和 API。同日还有两段登录故障。8/12 至 8/20 几乎隔天都有事故。90 天 claude.ai 约 99.35%。", links: [ { label: "Anthropic 官方状态页", url: "https://status.anthropic.com/" }, { label: "IsDown：8/24 事故时间线", url: "https://isdown.app/status/claude-ai/incidents/642920-elevated-errors-for-multiple-models" }, { label: "PCMag：称已修复", url: "https://uk.pcmag.com/ai/166872/is-claude-down-ai-chatbot-slowly-recovers-from-latest-outage" } ], value: "终审/分镜如果只走 Claude，一次午间事故就能停产。拍板模型也要有热备。", impact: "旗舰很强和旗舰经常挂同时成立。双轨从建议变成默认。", conduction: "今天下午把拍板路由写成：Claude 超时/5xx → 切 GPT-5.6 Sol 或 DeepSeek V4 Pro。列一份不能只绑 Claude 的任务清单。" },
+          { idx: "03", title: "@fchollet：时间线正在变成「回音的回音」——买量和社区内容先过反 slop 闸", summary: "8/22 @fchollet 发帖：越来越大比例的社交媒体是 slop 网红用 AI 发帖、机器人在下面回。回音的回音的回音。Digg 同日转述，原帖未核到 status ID。买量/社媒已经和同一套生成器抢注意力。", links: [ { label: "Digg 转述：Chollet 点名 AI slop 回音壁（8/22）", url: "https://digg.com/tech/xz86e0me" } ], value: "买量 A/B 如果全是同一套生成腔，CTR 会一起掉。终审加硬规则：能不能从时间线 slop 里一眼挑出来。", impact: "生成成本趋零之后，稀缺的是不像生成。", conduction: "本周只改一处质检表：买量前 3 秒、官方社媒主视觉，增加「不像时间线 slop」一票否决。抽 20 条已投素材标多少条会被滑走。" }
+        ]
+      }
+    },
+    actions: [
+      "H3 ControlNet 控场 PoC：挑 1 条已有买量/CG 镜头，抽 Pose 或 Depth 当控制视频，用 MiniMax-H3-Fun-Controlnet-Union 做 V2V 换角色，记录站位/运镜保持率和人脸糊的分辨率阈值（先 0.6MP 成片）。",
+      "Wan 3.0 文档直转：拿 1 份真实分镜 PPT 或策划案，在七折窗口内跑 480P 和 1080P 各一条 30 秒，跟 Seedance×CapCut、H3 配方放同一张成本/可用率表。",
+      "Ruby 成片格式摸底：用 H3 或 Seedance 出 5 秒 SDR，经 Runway Ruby 转 EXR 或 ProRes 422 HQ，丢进 AE/Nuke 看色带、高光余量和音频是否同步——过不了就别对客户承诺 HDR 交付。",
+      "数字人两条预演：静帧概念图走 DiGS-Avatar（0.71 秒、看 LBS 摆 pose）；角色表演视频走 4DAnyone（看换视角漂不漂）。各测 3 个角色，输出「预演用谁、什么场景绝对不用」。",
+      "拍板双轨 + 壳：今天下午给美术 Agent 加 Claude 5xx/超时热备（Sol 或 V4 Pro）；给看图质检加失败样例库和卡住换策略，用 20 张图对比裸旗舰 vs 小模型+壳。"
+    ]
+  }
 
 };
