@@ -1912,7 +1912,10 @@ window.ARCHIVE = {
               }
             ],
             value: "接昨天 H3 Fun ControlNet：实拍 → SAM 抽 Pose → H3 V2V 换角色。先测 1 条 5 秒镜头的站位保持与脚滑。",
-            impact: "抽姿态做成默认节点，ControlNet 工作流才能从研究图变成班组 SOP。"
+            impact: "抽姿态做成默认节点，ControlNet 工作流才能从研究图变成班组 SOP。",
+            tags: ["3D", "视频"],
+            action: "用 1 条 5 秒实拍走 SAM 抽 Pose → H3 V2V，记录站位保持与脚滑。",
+            sourceType: "一手"
           },
           {
             idx: "02",
@@ -1933,7 +1936,10 @@ window.ARCHIVE = {
               }
             ],
             value: "关卡预演可 Scene Builder → 视口调机位 → Seedance 草稿。先跑 1 个白模三种灯光，看能否省半天搭景。",
-            impact: "CapCut 是剪辑台，Blender 插件是 DCC 台。默认栈按环节拆。"
+            impact: "CapCut 是剪辑台，Blender 插件是 DCC 台。默认栈按环节拆。",
+            tags: ["3D", "视频"],
+            action: "对 1 个关卡白模跑 Scene Builder 三种灯光 + Seedance 草稿，看能否省半天搭景。",
+            sourceType: "一手"
           },
           {
             idx: "03",
@@ -1954,7 +1960,11 @@ window.ARCHIVE = {
               }
             ],
             value: "5090 上装 Sol-Attn + FirstBlockCache，同一 seed 对比库存 H3 的墙钟与口型/重影。",
-            impact: "权重同质化后差距在推理壳。加速做成 Comfy 节点就拿走本地产能。"
+            impact: "权重同质化后差距在推理壳。加速做成 Comfy 节点就拿走本地产能。",
+            tags: ["视频", "成本"],
+            action: "在 5090 上装 Sol-Attn + FirstBlockCache，同一 seed 对比库存 H3 的墙钟与口型/重影。",
+            sourceType: "一手",
+            cost: "5090 @768p 约 4.52×"
           },
           {
             idx: "04",
@@ -1975,7 +1985,11 @@ window.ARCHIVE = {
               }
             ],
             value: "先做 1 个室内「走开再回来」回访测试，别急着进宣发成片。",
-            impact: "生成好看 ≠ 可规划可回访。游戏两边都要，预算分开。"
+            impact: "生成好看 ≠ 可规划可回访。游戏两边都要，预算分开。",
+            tags: ["视频", "3D"],
+            action: "做 1 个室内「走开再回来」回访测试，先别进宣发成片。",
+            sourceType: "一手",
+            cost: "H200 约 1.5s / 2.11s"
           },
           {
             idx: "05",
@@ -1992,7 +2006,11 @@ window.ARCHIVE = {
               }
             ],
             value: "先算等额云 token；仅数据不出域/低延迟联调再下顶配。9 月可先摸 Max 128GB。",
-            impact: "云按秒计价、端侧按工位资本开支。出片走云、Agent 与敏感资产走本地。"
+            impact: "云按秒计价、端侧按工位资本开支。出片走云、Agent 与敏感资产走本地。",
+            tags: ["Agent", "成本"],
+            action: "先算等额云 token；仅数据不出域或低延迟联调再考虑顶配。",
+            sourceType: "一手",
+            cost: "Max $2,499 · Ultra $5,499"
           }
         ]
       },
@@ -2017,6 +2035,10 @@ window.ARCHIVE = {
             ],
             value: "短期别赌芯片降价，继续 Claude 热备 Sol/V4。采购表给 GPT 路线留「推理后端可能换硅」一行。",
             impact: "大厂训练买 Nvidia、推理自研。API 单价与限流会跟硅走。",
+            tags: ["成本"],
+            action: "采购表给 GPT 路线留「推理后端可能换硅」一行，继续 Claude 热备。",
+            sourceType: "一手",
+            cost: "每瓦约 1.5–1.9×",
             conduction: "本周只改采购表：勿把明年单价锁进年约；同步盯 OpenAI 状态页——芯片新闻 ≠ 本周更稳。"
           },
           {
@@ -2031,6 +2053,9 @@ window.ARCHIVE = {
             ],
             value: "买量/CG 看可控（ControlNet/Pose）；可走进场景看 Evoke。两套 KPI，两套验收。",
             impact: "上游掰开「生成好看」与「可规划可回访」。预算别糊成一笔。",
+            tags: ["视频"],
+            action: "买量/CG 看可控，可走进场景看 Evoke，两套 KPI 分开验收。",
+            sourceType: "转述",
             conduction: "工具雷达拆成生成/可控/可回访三列；评审禁止用「世界模型」替代 Pose 保持率、回访一致性等硬指标。"
           },
           {
@@ -2053,6 +2078,9 @@ window.ARCHIVE = {
             ],
             value: "对照你们质检 Agent：持久内核、跨轨迹记忆、子代理函数化缺哪补哪。",
             impact: "AVO 与 Prime Agent 同周强化：预算优先打 harness，不是再买旗舰席位。",
+            tags: ["Agent"],
+            action: "对照质检 Agent，按持久内核、跨轨迹记忆、子代理函数化列差距并补齐。",
+            sourceType: "一手",
             conduction: "延续昨天 20 张图对比实验，用 Prime Agent 三项设计列差距清单并排期补齐。"
           }
         ]

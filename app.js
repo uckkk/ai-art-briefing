@@ -129,6 +129,47 @@
     arr.forEach(function (x) { host.appendChild(make(x)); });
   }
 
+  function isTypingTarget(el) {
+    if (!el) return false;
+    var tag = (el.tagName || "").toUpperCase();
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return true;
+    if (el.isContentEditable) return true;
+    return false;
+  }
+
+  function firstSentence(text) {
+    if (!text) return "";
+    var s = String(text);
+    var yi = s.indexOf("。");
+    var dash = s.indexOf("—");
+    var cut = -1;
+    if (yi === -1) cut = dash;
+    else if (dash === -1) cut = yi;
+    else cut = Math.min(yi, dash);
+    if (cut === -1) return s;
+    if (s.charAt(cut) === "。") return s.slice(0, cut + 1);
+    return s.slice(0, cut).replace(/\s+$/, "");
+  }
+
+  function itemAction(item) {
+    if (!item) return "";
+    if (item.action) return item.action;
+    return firstSentence(item.value || "");
+  }
+
+  function appendChips(host, tags, className) {
+    if (!host || !tags || !tags.length) return;
+    var wrap = document.createElement("div");
+    wrap.className = className || "chips";
+    tags.slice(0, 2).forEach(function (tag) {
+      var c = document.createElement("span");
+      c.className = "chip";
+      c.textContent = tag;
+      wrap.appendChild(c);
+    });
+    host.appendChild(wrap);
+  }
+
   /* —— 报头 —— */
   function renderMeta(meta) {
     if (!meta) return;
@@ -153,11 +194,12 @@
   function renderLayer(key, layer) {
     var host = clear("layer" + key);
     if (!host || !layer || !layer.items) return;
-    layer.items.forEach(function (item) {
+    layer.items.forEach(function (item, i) {
       var btn = document.createElement("button");
       btn.className = "item";
       btn.type = "button";
       btn.setAttribute("data-layer", key);
+      btn.setAttribute("data-i", String(i));
 
       var idx = document.createElement("div");
       idx.className = "item__idx";
@@ -187,29 +229,95 @@
         a.className = "src";
         a.href = l.url; a.target = "_blank"; a.rel = "noopener noreferrer";
         a.textContent = l.label;
+        a.addEventListener("click", function (e) { e.stopPropagation(); });
         links.appendChild(a);
       });
       foot.appendChild(links);
+      appendChips(foot, item.tags, "item__chips");
 
       main.appendChild(foot);
       btn.appendChild(main);
 
-      btn.addEventListener("click", function () { openDetail(item, key); });
+      btn.addEventListener("click", function () { openDetail(item, key, i, btn); });
       host.appendChild(btn);
     });
   }
 
-  /* —— 二级浮层：详情 —— */
+  /* —— 二级浮层：详情抽屉 —— */
   var dialog = document.getElementById("detail");
   var detailBody = document.getElementById("detailBody");
   var detailClose = document.getElementById("detailClose");
+  var detailState = { layerKey: null, index: -1, opener: null };
 
-  function openDetail(item, layerKey) {
+  function layerLabel(layerKey) {
+    return layerKey === "B" ? "B AI 上游信息" : "A 游戏美术应用层";
+  }
+
+  function collectFlatItems() {
+    var list = [];
+    if (!B || !B.layers) return list;
+    ["A", "B"].forEach(function (key) {
+      var layer = B.layers[key];
+      if (!layer || !layer.items) return;
+      layer.items.forEach(function (item, i) {
+        list.push({ item: item, layerKey: key, index: i });
+      });
+    });
+    return list;
+  }
+
+  function findItemButton(layerKey, index) {
+    var host = document.getElementById("layer" + layerKey);
+    if (!host) return null;
+    var buttons = host.querySelectorAll(".item");
+    return buttons[index] || null;
+  }
+
+  function openDetail(item, layerKey, index, opener) {
+    if (!dialog || !detailBody || !item) return;
+    detailState.layerKey = layerKey;
+    detailState.index = typeof index === "number" ? index : 0;
+    if (opener) detailState.opener = opener;
+    else detailState.opener = findItemButton(layerKey, detailState.index);
+
+    dialog.setAttribute("data-layer", layerKey || "A");
+    renderDetail(item, layerKey);
+
+    if (!dialog.open) {
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+    }
+
+    var title = document.getElementById("detailTitle");
+    if (title) {
+      title.setAttribute("tabindex", "-1");
+      try { title.focus(); } catch (e) {}
+    }
+  }
+
+  function renderDetail(item, layerKey) {
     detailBody.innerHTML = "";
+
+    var meta = document.createElement("div");
+    meta.className = "d-meta";
+
     var tag = document.createElement("div");
     tag.className = "d-tag";
-    tag.textContent = (layerKey === "B" ? "AI 上游信息" : "游戏美术应用层");
-    detailBody.appendChild(tag);
+    tag.textContent = layerLabel(layerKey);
+    meta.appendChild(tag);
+
+    if (item.tags && item.tags.length) {
+      appendChips(meta, item.tags, "d-chips");
+    }
+
+    if (item.sourceType) {
+      var src = document.createElement("span");
+      src.className = "d-source";
+      src.textContent = item.sourceType;
+      meta.appendChild(src);
+    }
+
+    detailBody.appendChild(meta);
 
     var h = document.createElement("h3");
     h.className = "d-title";
@@ -220,44 +328,148 @@
     if (item.links && item.links.length) {
       var lk = document.createElement("div");
       lk.className = "d-links";
-      lk.style.marginBottom = "var(--s-5)";
       item.links.forEach(function (l) {
         var a = document.createElement("a");
         a.href = l.url; a.target = "_blank"; a.rel = "noopener noreferrer";
-        a.textContent = "↗ " + l.label;
+        a.textContent = l.label;
         lk.appendChild(a);
       });
       detailBody.appendChild(lk);
     }
 
-    detailBody.appendChild(block("value", "🎯", "对你的价值", item.value));
-    detailBody.appendChild(block("impact", "🌐", "行业影响判断", item.impact));
-    if (item.conduction) {
-      detailBody.appendChild(block("conduction", "↗", "传导到你的游戏美术生产", item.conduction));
+    appendBlock("summary", "发生了什么", item.summary);
+
+    var actionText = itemAction(item);
+    if (actionText) {
+      var actionWrap = document.createElement("div");
+      actionWrap.className = "d-block d-block--action";
+
+      var actionHead = document.createElement("div");
+      actionHead.className = "d-block__h";
+      var actionLabel = document.createElement("span");
+      actionLabel.textContent = "本周动作";
+      actionHead.appendChild(actionLabel);
+
+      var copy = document.createElement("button");
+      copy.className = "d-copy";
+      copy.type = "button";
+      copy.textContent = "复制动作";
+      copy.setAttribute("aria-label", "复制本周动作");
+      copy.addEventListener("click", function () {
+        copyText(actionText);
+        var prev = copy.textContent;
+        copy.textContent = "已复制";
+        setTimeout(function () { copy.textContent = prev; }, 2000);
+      });
+      actionHead.appendChild(copy);
+      actionWrap.appendChild(actionHead);
+
+      var actionP = document.createElement("p");
+      actionP.textContent = actionText;
+      actionWrap.appendChild(actionP);
+      detailBody.appendChild(actionWrap);
     }
 
-    if (typeof dialog.showModal === "function") dialog.showModal();
-    else dialog.setAttribute("open", "");
+    if (item.cost) {
+      var cost = document.createElement("div");
+      cost.className = "d-cost";
+      var costH = document.createElement("span");
+      costH.className = "d-cost__k";
+      costH.textContent = "成本";
+      var costV = document.createElement("span");
+      costV.textContent = item.cost;
+      cost.appendChild(costH);
+      cost.appendChild(costV);
+      detailBody.appendChild(cost);
+    }
+
+    appendBlock("value", "对你的价值", item.value);
+    appendBlock("impact", "行业影响判断", item.impact);
+    if (item.conduction) {
+      appendBlock("conduction", "传导到你的游戏美术生产", item.conduction);
+    }
   }
 
-  function block(kind, ic, label, text) {
+  function appendBlock(kind, label, text) {
+    var el = block(kind, label, text);
+    if (el) detailBody.appendChild(el);
+  }
+
+  function block(kind, label, text) {
+    if (text == null || text === "") return null;
     var wrap = document.createElement("div");
     wrap.className = "d-block d-block--" + kind;
     var hh = document.createElement("div");
     hh.className = "d-block__h";
-    var i = document.createElement("span");
-    i.className = "ic"; i.textContent = ic;
-    var s = document.createElement("span"); s.textContent = label;
-    hh.appendChild(i); hh.appendChild(s);
+    var s = document.createElement("span");
+    s.textContent = label;
+    hh.appendChild(s);
     var p = document.createElement("p");
     p.textContent = text;
-    wrap.appendChild(hh); wrap.appendChild(p);
+    wrap.appendChild(hh);
+    wrap.appendChild(p);
     return wrap;
   }
 
-  if (detailClose) {
-    detailClose.addEventListener("click", function () { dialog.close(); });
+  function navigateDetail(dir) {
+    var flat = collectFlatItems();
+    if (!flat.length) return;
+    var pos = -1;
+    var i;
+    for (i = 0; i < flat.length; i++) {
+      if (flat[i].layerKey === detailState.layerKey && flat[i].index === detailState.index) {
+        pos = i;
+        break;
+      }
+    }
+    if (pos === -1) pos = 0;
+    var next = (pos + dir + flat.length) % flat.length;
+    var entry = flat[next];
+    openDetail(entry.item, entry.layerKey, entry.index, findItemButton(entry.layerKey, entry.index));
   }
+
+  function closeDetail() {
+    if (!dialog) return;
+    if (typeof dialog.close === "function" && dialog.open) dialog.close();
+    else dialog.removeAttribute("open");
+  }
+
+  function restoreOpenerFocus() {
+    var opener = detailState.opener;
+    if (opener && typeof opener.focus === "function") {
+      try { opener.focus(); } catch (e) {}
+    }
+  }
+
+  if (detailClose) {
+    detailClose.addEventListener("click", function () { closeDetail(); });
+  }
+
+  if (dialog) {
+    dialog.addEventListener("click", function (e) {
+      var rect = dialog.getBoundingClientRect();
+      var inside =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
+      if (!inside) closeDetail();
+    });
+
+    dialog.addEventListener("close", function () {
+      restoreOpenerFocus();
+    });
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (!dialog || !dialog.open) return;
+    if (isTypingTarget(e.target)) return;
+    var down = e.key === "j" || e.key === "J" || e.key === "ArrowDown";
+    var up = e.key === "k" || e.key === "K" || e.key === "ArrowUp";
+    if (!down && !up) return;
+    e.preventDefault();
+    navigateDetail(down ? 1 : -1);
+  });
 
   /* —— 行动：展开路径 + 可复制提示词 —— */
   function renderActions(actions, paths) {
