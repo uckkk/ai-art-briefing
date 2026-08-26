@@ -284,9 +284,11 @@
     renderDetail(item, layerKey);
 
     if (!dialog.open) {
-      if (typeof dialog.showModal === "function") dialog.showModal();
+      if (typeof dialog.show === "function") dialog.show();
       else dialog.setAttribute("open", "");
     }
+    html.classList.add("detail-open");
+    dialog.setAttribute("aria-modal", "false");
 
     var title = document.getElementById("detailTitle");
     if (title) {
@@ -430,6 +432,7 @@
 
   function closeDetail() {
     if (!dialog) return;
+    html.classList.remove("detail-open");
     if (typeof dialog.close === "function" && dialog.open) dialog.close();
     else dialog.removeAttribute("open");
   }
@@ -457,6 +460,7 @@
     });
 
     dialog.addEventListener("close", function () {
+      html.classList.remove("detail-open");
       restoreOpenerFocus();
     });
   }
@@ -464,6 +468,11 @@
   document.addEventListener("keydown", function (e) {
     if (!dialog || !dialog.open) return;
     if (isTypingTarget(e.target)) return;
+    if (e.key === "Escape") {
+      e.preventDefault();
+      closeDetail();
+      return;
+    }
     var down = e.key === "j" || e.key === "J" || e.key === "ArrowDown";
     var up = e.key === "k" || e.key === "K" || e.key === "ArrowUp";
     if (!down && !up) return;

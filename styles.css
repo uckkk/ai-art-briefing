@@ -28,6 +28,7 @@
 
   /* 时间轴 */
   --timeline-w: 72px;
+  --detail-w: clamp(560px, 38vw, 640px);
 }
 
 /* —— 深色（默认）：单色，无彩色点缀 —— */
@@ -479,7 +480,9 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 
 /* —— 二级浮层（dialog）：桌面右侧抽屉 / 窄屏底栏 sheet —— */
 .detail {
-  width: clamp(560px, 38vw, 640px);
+  position: fixed;
+  z-index: 90;
+  width: var(--detail-w);
   height: 100vh;
   height: 100dvh;
   max-width: 640px;
@@ -495,8 +498,15 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
   inset: 0 0 0 auto;
 }
 .detail::backdrop {
-  background: var(--backdrop);
-  backdrop-filter: blur(8px);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+@media (min-width: 761px) {
+  html.detail-open .page {
+    padding-right: var(--detail-w);
+  }
 }
 .detail[open] { animation: drawerIn var(--dur) var(--ease-out); }
 @keyframes drawerIn {
@@ -669,6 +679,19 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
     margin: 0;
     border-radius: var(--radius) var(--radius) 0 0;
     padding: var(--s-5) var(--s-5) var(--s-7);
+  }
+  .detail::backdrop {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  html.detail-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 80;
+    pointer-events: none;
   }
   .detail[open] { animation: sheetIn var(--dur) var(--ease-out); }
   @keyframes sheetIn {
