@@ -1,14 +1,14 @@
 window.BRIEFING = {
   meta: {
-    date: "2026-08-26",
+    date: "2026-08-27",
     kicker: "DAILY AI ART INTELLIGENCE",
     title: "每日 AI 美术情报",
-    tagline: "面向全栈游戏美术负责人 / AI 降本增效研究"
+    tagline: "面向全栈游戏美术负责人 / AI 降本增效研究",
   },
   editorFrame: [
-    "控场链路补齐 Pose 源：SAM 3D Body 8/23 并入 ComfyUI 核心——全身网格、时序平滑、OpenPose/SCAIL 直出，还能 BVH/GLB 进 Blender。昨天 H3 ControlNet 要控制视频，今天实拍抽骨架不用再装自定义节点。",
-    "Blender 与生成同屏：Higgsfield 官方插件上线——Scene Builder 出可编辑 blockout，Video 喂 Seedance 2.5，MCP Bridge 让 Agent 改打开的场景。DCC 从「导出再上传」变成「视口里生成」。",
-    "本地 H3 加速 + 端侧内存：NVIDIA Sol Engine 在 5090 上把库存 H3 推到约 4.52×；苹果 M5 Ultra Mac Studio 统一内存最高 512GB。云出片、本地跑 Agent，两条产能要一起养。"
+    "H3 本地成片补齐「时长 × 分辨率」：Auto-Chain 把约 20 秒对口型自动切段、接 latent 上下文、拼成一条 MP4；Ultimate Upscale 时空分块把峰显存压到单 tile，社区已测到约 2550×1920 且音频不丢。接昨天 Sol Engine，本地 H3 从草稿走向可交付长片。",
+    "12GB 卡也能跑旗舰生图编辑：SenseNova-U1.5 ConvRot（INT8 约 17.6GB / 混合 W4A8 约 13.8GB）在 RTX 4070 12GB 上跑 2048²，同 seed 像素差约 0.43%。班组「每工位一块高端卡」假设可以松一松。",
+    "云端选型扩盘 + 旧 Kling 倒计时：PixVerse V6、Meshy-7 进 Comfy Partner；Kling V1.5/V1.6/V2.1 等 9/15 EOL。Hot Chips 上 @sama / OpenAI Jalapeño 与 Google TPUv8 同台——Agent 账单继续跟硅走。"
   ],
   layers: {
     A: {
@@ -18,124 +18,135 @@ window.BRIEFING = {
       items: [
         {
           idx: "01",
-          title: "SAM 3D Body 进 ComfyUI 核心：实拍 → Pose/BVH 不再靠自定义节点",
-          summary: "8/23 kijai PR（ComfyUI #14370）合并：Meta SAM 3D Body 做成核心节点（Loader/Predict/Render/Smooth/FaceExpression）。时序平滑、MediaPipe 表情、OpenPose/SCAIL-pose 渲染、GLB/BVH 导出（Blender 已测）。权重 bf16 与 INT8。注意长视频 GLB 可能脚滑。",
+          title: "H3 Motion Context Auto-Chain：一次跑完超长对口型",
+          summary: "8/24–25 Auto-Chain 插件：整段音频按约 20 秒切块，latent 上下文延续动作与声音，末帧作下一镜参考，自动拼一条 MP4。推荐 20s/24fps/22 context/`last_frame`。依赖原版 Motion Context，勿与实验 fork 混装。",
           links: [
             {
-              label: "ComfyUI Wiki：SAM 3D Body 原生接入",
-              url: "https://comfyui-wiki.com/en/news/2026-08-23-sam-3d-body-native-comfyui"
+              label: "ComfyUI Wiki：H3 Auto-Chain",
+              url: "https://comfyui-wiki.com/en/news/2026-08-25-h3-motion-context-auto-chain",
             },
             {
-              label: "GitHub PR #14370",
-              url: "https://github.com/Comfy-Org/ComfyUI/pull/14370"
+              label: "GitHub：Auto-Chain addon",
+              url: "https://github.com/Ltamann/ComfyUI-H3-Motion-Context-Auto-Chain-addon",
             },
             {
-              label: "HF：Comfy-Org/sam-3d-body",
-              url: "https://huggingface.co/Comfy-Org/sam-3d-body"
-            },
+              label: "原版 Motion Context",
+              url: "https://github.com/NikoDemon80/ComfyUI-H3-Motion-Context",
+            }
           ],
-          value: "接昨天 H3 Fun ControlNet：实拍 → SAM 抽 Pose → H3 V2V 换角色。先测 1 条 5 秒镜头的站位保持与脚滑。",
-          impact: "抽姿态做成默认节点，ControlNet 工作流才能从研究图变成班组 SOP。",
-            tags: ["3D", "视频"],
-            action: "用 1 条 5 秒实拍走 SAM 抽 Pose → H3 V2V，记录站位保持与脚滑。",
-            sourceType: "一手"
+          value: "角色预告/PV 旁白超 20 秒不再手工排队。本周用 1 条 40–60 秒旁白测接缝口型与身份漂。",
+          impact: "H3 上限从单段能力变成编排能力。切段 SOP 写进手册才能吃本地长片产能。",
+          tags: [
+            "视频"
+          ],
+          action: "装 Auto-Chain，用 1 条 40–60 秒旁白跑切段→拼片，记录接缝口型帧数。",
+          sourceType: "一手",
         },
         {
           idx: "02",
-          title: "Higgsfield 主 Blender：提示词搭 blockout，Seedance 在视口出片",
-          summary: "8/21 官方 Blender 插件（4.2–5.1）：Scene Builder 出可编辑几何、3D Model 四边面+PBR、Character Animation 带骨架、Video 走 Seedance 2.5。Blender Bridge（bridge.higgsfield.ai/mcp）让 Agent 改当前场景。生成走云端积分。",
+          title: "MMH3 Ultimate Upscale：有限 VRAM 分块放大 H3，音频原样带走",
+          summary: "8/25 节点：对已去噪 H3 嵌套 AV latent 做时间切块→latent 放大→空间 tile→缝合，峰显存绑定单 tile。社区：原流程约 4MP OOM，分块同机约 2550×1920/18s。实验性 LTX-2.5 变体音频仍不稳。",
           links: [
             {
-              label: "Higgsfield 博客：Blender 插件",
-              url: "https://higgsfield.ai/blog/higgsfield-blender-plugin"
+              label: "ComfyUI Wiki：MMH3 Ultimate Upscale",
+              url: "https://comfyui-wiki.com/en/news/2026-08-25-mmh3-ultimate-upscale",
             },
             {
-              label: "插件下载页",
-              url: "https://higgsfield.ai/plugins/blender"
-            },
-            {
-              label: "Changelog 8/21",
-              url: "https://higgsfield.ai/creator-hub/changelog"
-            },
+              label: "GitHub：MMH3 UltimateUpscale",
+              url: "https://github.com/bbaudio-2025/Comfyui-MMH3-UltimateUpscale",
+            }
           ],
-          value: "关卡预演可 Scene Builder → 视口调机位 → Seedance 草稿。先跑 1 个白模三种灯光，看能否省半天搭景。",
-          impact: "CapCut 是剪辑台，Blender 插件是 DCC 台。默认栈按环节拆。",
-            tags: ["3D", "视频"],
-            action: "对 1 个关卡白模跑 Scene Builder 三种灯光 + Seedance 草稿，看能否省半天搭景。",
-            sourceType: "一手"
+          value: "接 Auto-Chain：先低分出长片再分块抬分辨率。固定一条 seed 对比整段 OOM vs 分块墙钟与接缝。",
+          impact: "NestedTensor 挡住普通放大节点。懂 AV latent 的放大做成默认节点就拿走小卡成片权。",
+          tags: [
+            "视频",
+            "成本"
+          ],
+          action: "同一条低分 H3 成片接 Ultimate Upscale，目标 ≥2K，对比 OOM 与分块墙钟。",
+          sourceType: "一手",
+          cost: "约 2550×1920 / 18s",
         },
         {
           idx: "03",
-          title: "NVIDIA Sol Engine：库存 H3 在桌面卡约 4.52×，草稿+LTX 打穿交互时延",
-          summary: "Sol Engine 无蒸馏/LoRA/标定：RTX 5090 @768p 端到端约 4.52×，DGX Spark @480p 约 3.92×。柱子：kernel 融合、Cross-step cache、Sol-Attn。社区草稿+LTX 在 GB200 上可到二十倍量级墙钟（以复测为准）。",
+          title: "SenseNova-U1.5 ConvRot：50GB 模型塞进 12GB 卡",
+          summary: "8/25 ConvRot：INT8 约 17.58 GiB、混合 W4A8 约 13.80 GiB（层 18+ 真 W4A8）+ 官方 8 步 LoRA。RTX 4070 12GB @2048²；同 seed INT8 像素差约 0.43%。需 comfy-kitchen ≥0.2.31。",
           links: [
             {
-              label: "NVIDIA：Sol Engine × H3",
-              url: "https://nvlabs.github.io/Sana/Sol-Engine/H3-OnDevice/"
+              label: "ComfyUI Wiki：SenseNova ConvRot",
+              url: "https://comfyui-wiki.com/en/news/2026-08-25-sensenova-u1-5-convrot-quantization",
             },
             {
-              label: "arXiv 2606.23743",
-              url: "https://arxiv.org/abs/2606.23743"
-            },
-            {
-              label: "arXiv 2607.24027 Sol-Attn",
-              url: "https://arxiv.org/abs/2607.24027"
-            },
+              label: "GitHub：SenseNova ConvRot 节点",
+              url: "https://github.com/Milor123/ComfyUI-SenseNova-U1.5-ConvRot",
+            }
           ],
-          value: "5090 上装 Sol-Attn + FirstBlockCache，同一 seed 对比库存 H3 的墙钟与口型/重影。",
-          impact: "权重同质化后差距在推理壳。加速做成 Comfy 节点就拿走本地产能。",
-            tags: ["视频", "成本"],
-            action: "在 5090 上装 Sol-Attn + FirstBlockCache，同一 seed 对比库存 H3 的墙钟与口型/重影。",
-            sourceType: "一手",
-            cost: "5090 @768p 约 4.52×"
+          value: "概念迭代/多参考编辑可下放到普通工位。同 prompt 跑 bf16 对照机 vs INT8 12GB，记可接受差与墙钟。",
+          impact: "量化从能跑进入可进班组。采购可写：质检留 24GB+，日常 12GB + ConvRot。",
+          tags: [
+            "生图",
+            "成本"
+          ],
+          action: "12GB 工位装 INT8 + 8 步 LoRA，同 seed 对照 bf16 的像素差与可过审率。",
+          sourceType: "一手",
+          cost: "INT8 约 17.6GB · W4A8 约 13.8GB",
         },
         {
           idx: "04",
-          title: "Evoke：世界记忆搬出视频模型，开源权重冲长时一致性",
-          summary: "Alaya Lab Evoke（约 8/23）：14B，场景几何进相机索引的外部 world state bank。H200 上约 1.5s 视频/2.11s 算力，3 步零 CFG，可中途改提示。训练阶梯公开。Apache 2.0；ViGeo 深度后端许可证更严。",
+          title: "PixVerse V6 进 Comfy Partner：原生音频 + 多镜 + 延长/融合",
+          summary: "8/25 PR #15880 合并：T2V/I2V/首末帧/Extend/Fusion，原生同步音频，最长约 15s、最高约 1080p。Replicate 参考价：720p 有声约 $0.12/s，1080p 有声约 $0.23/s。",
           links: [
             {
-              label: "Ground Truth：Evoke",
-              url: "https://groundtruth.day/news/evoke-keeps-a-generated-worlds-memory-outside-the-video-model.html"
+              label: "GitHub PR #15880",
+              url: "https://github.com/Comfy-Org/ComfyUI/pull/15880",
             },
             {
-              label: "GitHub：AlayaLab/Evoke",
-              url: "https://github.com/AlayaLab/Evoke"
+              label: "PixVerse V6 产品页",
+              url: "https://pixverse.ai/en/model/pixverse-v6",
             },
             {
-              label: "HF：AlayaLab/Evoke",
-              url: "https://huggingface.co/AlayaLab/Evoke"
-            },
+              label: "Replicate：计费参考",
+              url: "https://replicate.com/pixverse/pixverse-v6/readme",
+            }
           ],
-          value: "先做 1 个室内「走开再回来」回访测试，别急着进宣发成片。",
-          impact: "生成好看 ≠ 可规划可回访。游戏两边都要，预算分开。",
-            tags: ["视频", "3D"],
-            action: "做 1 个室内「走开再回来」回访测试，先别进宣发成片。",
-            sourceType: "一手",
-            cost: "H200 约 1.5s / 2.11s"
+          value: "云端快速分镜多一条有声多镜选项。同一分镜脚本对比 V6 vs 默认云视频的口型与跳切。",
+          impact: "Partner 层把有声视频变成一等公民。选型表别只比无声画质。",
+          tags: [
+            "视频",
+            "成本"
+          ],
+          action: "用同一条分镜脚本对比 PixVerse V6 有声多镜 vs 默认云视频的口型与跳切。",
+          sourceType: "一手",
+          cost: "720p 有声约 $0.12/s",
         },
         {
           idx: "05",
-          title: "苹果 M5 Ultra Mac Studio：512GB 统一内存，本地美术 Agent 桌面预算",
-          summary: "8/25 发布。M5 Ultra 最高约 512GB 统一内存、1.2TB/s 带宽；M5 Max 起售 $2,499，Ultra 约 $5,499；512GB 顶配预计 10 月底。TB5 多机集群官方称分布式推理最高约 3×。",
+          title: "Meshy-7 进 Comfy Partner；Kling 旧版 9/15 EOL",
+          summary: "8/24 PR #15807：Meshy 文生/图生/多图节点支持 meshy-7 与 ultra mode（标准生成仍约 20 credits）。定价页确认 Kling V1.5/V1.6/V2.1/V2.1 Master 与 Kolors VTO 于 2026-09-15 退役，需迁 Kling 3.0/O3 或 Flux VTO。",
           links: [
             {
-              label: "Apple Newsroom：Mac Studio",
-              url: "https://www.apple.com/newsroom/2026/08/apple-introduces-new-mac-studio-with-m5-max-and-m5-ultra/"
+              label: "GitHub PR #15807 Meshy-7",
+              url: "https://github.com/Comfy-Org/ComfyUI/pull/15807",
             },
             {
-              label: "MacRumors：512GB 10 月到货",
-              url: "https://www.macrumors.com/2026/08/25/mac-studio-m5-ultra-512gb-ram-october/"
+              label: "Meshy 7 对齐基准",
+              url: "https://www.meshy.ai/blog/meshy-7-image-to-3d-geometry-alignment",
             },
+            {
+              label: "ComfyUI：Kling EOL 说明",
+              url: "https://docs.comfy.org/tutorials/partner-nodes/kling/kling-3-0",
+            }
           ],
-          value: "先算等额云 token；仅数据不出域/低延迟联调再下顶配。9 月可先摸 Max 128GB。",
-          impact: "云按秒计价、端侧按工位资本开支。出片走云、Agent 与敏感资产走本地。",
-            tags: ["Agent", "成本"],
-            action: "先算等额云 token；仅数据不出域或低延迟联调再考虑顶配。",
-            sourceType: "一手",
-            cost: "Max $2,499 · Ultra $5,499"
-        },
-      ]
+          value: "3D 概念可在 Comfy 直调 Meshy-7；扫工作流，把仍钉 Kling v2.x 的图在 9 月前迁完。",
+          impact: "云节点生命周期开始像引擎插件——不跟版本表就会在上线日突然断。",
+          tags: [
+            "3D",
+            "授权"
+          ],
+          action: "试 Meshy-7 一单图→GLB；把 Kling v2.x 节点标红并排期迁 3.0/O3（截止 9/15）。",
+          sourceType: "一手",
+          cost: "Meshy-7 标准约 20 credits",
+        }
+      ],
     },
     B: {
       tag: "B 层",
@@ -144,81 +155,95 @@ window.BRIEFING = {
       items: [
         {
           idx: "01",
-          title: "OpenAI Jalapeño 放出推理基准：每瓦吞吐约 1.5–1.9×，延迟约 1.7–3.6× 更低",
-          summary: "8/25 OpenAI 更新 Jalapeño（Broadcom）InferenceX 口径：相对 GB200/GB300 记录，在 GPT-OSS 120B / DeepSeek R1 / Kimi K2.5 上每瓦约 1.5–1.9×，端到端延迟约 1.7–3.6× 更低。年底小规模、2027 放量；不替代全部 Nvidia。SemiAnalysis 提醒数字来自官方且 Blackwell 非最新代。",
+          title: "@sama：「we made a chip and it is fast」——Jalapeño Hot Chips 细则",
+          summary: "8/25 @sama 发帖（权威媒体转述；原帖 status ID 未核到）。OpenAI 博客 InferenceX：每瓦约 1.5–1.9×、延迟约 1.7–3.6× 更低。8/26 Hot Chips：约 13.4 PFLOP/s mxfp4、216 GiB HBM4、700W，Gluon；内核称较专家手写约 1.5–1.8×。年底小规模、2027 放量。",
           links: [
             {
-              label: "The Verge：Jalapeño 基准 8/25",
-              url: "https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks"
+              label: "India Today 转述 @sama",
+              url: "https://www.indiatoday.in/technology/news/story/we-made-a-chip-and-it-is-fast-sam-altman-says-after-openai-takes-on-nvidia-with-first-ai-chip-2980067-2026-08-26",
             },
             {
-              label: "OpenAI 官方：Jalapeño",
-              url: "https://openai.com/index/openai-broadcom-jalapeno-inference-chip/"
+              label: "OpenAI：Jalapeño first results",
+              url: "https://openai.com/index/jalapeno-first-results/",
             },
+            {
+              label: "ServeTheHome：Hot Chips",
+              url: "https://www.servethehome.com/openai-jalapeno-asic-at-hot-chips-2026/",
+            }
           ],
-          value: "短期别赌芯片降价，继续 Claude 热备 Sol/V4。采购表给 GPT 路线留「推理后端可能换硅」一行。",
-          impact: "大厂训练买 Nvidia、推理自研。API 单价与限流会跟硅走。",
-            tags: ["成本"],
-            action: "采购表给 GPT 路线留「推理后端可能换硅」一行，继续 Claude 热备。",
-            sourceType: "一手",
-            cost: "每瓦约 1.5–1.9×",
-          conduction: "本周只改采购表：勿把明年单价锁进年约；同步盯 OpenAI 状态页——芯片新闻 ≠ 本周更稳。"
+          value: "延续昨天采购表「推理后端可能换硅」。本周盯延迟与限流，不赌单价下调写进年约。",
+          impact: "自研推理硅进入可复述工程细节阶段。API 延迟/限流会跟硅走，选型留多后端。",
+          tags: [
+            "成本"
+          ],
+          action: "SLA 给 GPT 路线加「同模型多后端」一行；对照状态页与自测 P95。",
+          sourceType: "转述",
+          cost: "每瓦约 1.5–1.9× · 700W",
+          conduction: "质检 Agent/看图批处理若走 GPT，本周只改 SLA 多后端列并盯状态页，不把明年单价锁进年约。",
         },
         {
           idx: "02",
-          title: "@ylecun：能写论文清不了房间——世界模型 ≠ 好看视频",
-          summary: "媒体转述 @ylecun 回复 Paul Graham：要搞清 LLM 为何能写论文却清不了卧室，并研究超越 LLM 的体能学习架构。同线程强调控制论世界模型不应与视频生成混淆。原帖 status ID 未核到，以上为 Times of India 等权威转述。",
+          title: "Google TPUv8：训练 8t / 推理 8i 同代双芯（Hot Chips）",
+          summary: "8/26 Hot Chips：TPU 8t（训练，6×HBM）与 8i（推理，8×HBM、更高 SRAM/带宽比）；8t superpod 约 9600 芯、2PB 共享 HBM、121 EFLOPS FP4，相对 Ironwood 约 2× perf/watt。8i 配 Axion、BoardFly。未核到 @GoogleDeepMind 原帖，以上为 ServeTheHome 会场转述。",
           links: [
             {
-              label: "TOI 转述：LeCun bedroom problem",
-              url: "https://timesofindia.indiatimes.com/technology/tech-news/godfather-of-ai-yann-lecun-wants-ai-models-to-upgrade-from-writing-his-essays-to-solving-this-big-bedroom-problem/articleshow/133449305.cms"
-            },
+              label: "ServeTheHome：TPUv8",
+              url: "https://www.servethehome.com/googles-tpuv8s-for-training-and-inference-at-hot-chips-2026/",
+            }
           ],
-          value: "买量/CG 看可控（ControlNet/Pose）；可走进场景看 Evoke。两套 KPI，两套验收。",
-          impact: "上游掰开「生成好看」与「可规划可回访」。预算别糊成一笔。",
-            tags: ["视频"],
-            action: "买量/CG 看可控，可走进场景看 Evoke，两套 KPI 分开验收。",
-            sourceType: "转述",
-          conduction: "工具雷达拆成生成/可控/可回访三列；评审禁止用「世界模型」替代 Pose 保持率、回访一致性等硬指标。"
+          value: "Gemini/Veo 类云端美术 Agent 成本曲线会跟 Google 自研硅走。预算保留同能力换后端弹性。",
+          impact: "大厂训练/推理硅拆开设计成常态。云视频价签要按能力档×后端拆。",
+          tags: [
+            "成本",
+            "Agent"
+          ],
+          action: "把 Google 云视频/Agent 价签改成「能力档 × 后端」两列表，本周只改表。",
+          sourceType: "转述",
+          cost: "相对 Ironwood 约 2× perf/watt",
+          conduction: "工具雷达给 Google 云加「后端未定」标记；评审禁止用芯片新闻直接改本周出片供应商。",
         },
         {
           idx: "03",
-          title: "Prime Agent：开源 harness 把 ARC 从约 30% 拉到 95.5%，与 AVO 同向",
-          summary: "Prime Intellect 开源 Prime Agent（MIT）：持久 IPython REPL + Continual Harness。报道称 Opus 5 其上 ARC-AGI-3 约 95.5% Best@1，对照裸模常见约 30%。公开回放与宣传最优跑可能有差，当方法论信号。",
+          title: "OpenAI 官方博客：Jalapeño first results（与 @sama 同主题补一手）",
+          summary: "8/25 openai.com/index/jalapeno-first-results/：跨 GPT-OSS 120B、DeepSeek R1、Kimi K2.5 1T，高交互负载约 2.1–4.1× 更高性能；强调吞吐与延迟同架构兼得。属 @OpenAI 官方一手，可与 Hot Chips 细节交叉验证。",
           links: [
             {
-              label: "GitHub：prime-agent",
-              url: "https://github.com/primeintellect-ai/prime-agent"
+              label: "OpenAI：Jalapeño first results",
+              url: "https://openai.com/index/jalapeno-first-results/",
             },
             {
-              label: "arXiv 2608.23552",
-              url: "https://arxiv.org/html/2608.23552v1"
-            },
-            {
-              label: "MarkTechPost 解读",
-              url: "https://www.marktechpost.com/2026/08/06/prime-intellect-releases-prime-agent/"
-            },
+              label: "OpenAI：full stack 旁注",
+              url: "https://openai.com/index/the-full-stack-behind-abundant-intelligence/",
+            }
           ],
-          value: "对照你们质检 Agent：持久内核、跨轨迹记忆、子代理函数化缺哪补哪。",
-          impact: "AVO 与 Prime Agent 同周强化：预算优先打 harness，不是再买旗舰席位。",
-            tags: ["Agent"],
-            action: "对照质检 Agent，按持久内核、跨轨迹记忆、子代理函数化列差距并补齐。",
-            sourceType: "一手",
-          conduction: "延续昨天 20 张图对比实验，用 Prime Agent 三项设计列差距清单并排期补齐。"
-        },
-      ]
-    }
+          value: "需要对外引用数字时优先用官方博客，不以媒体二手口径写进立项书。",
+          impact: "官方口径与会场细节并行，减少「芯片叙事」污染管线决策。",
+          tags: [
+            "成本"
+          ],
+          action: "立项/采购引用芯片数字时，只贴 OpenAI 官方页链接，不贴传闻帖。",
+          sourceType: "一手",
+          cost: "交互负载约 2.1–4.1×",
+          conduction: "本周资料库把 Jalapeño 条目的「可引用源」改成官方博客；媒体转述降为背景。",
+        }
+      ],
+    },
   },
   actions: [
-    "Pose → H3 ControlNet 闭环：升级 ComfyUI 拉 SAM 3D Body，用 1 条买量实拍抽 SCAIL/OpenPose，接 MiniMax-H3-Fun-Controlnet-Union 做 V2V，记录脚滑与站位保持率。",
-    "Higgsfield×Blender 预演会：装官方插件，对 1 个关卡白模跑 Scene Builder 三种灯光 + Seedance 视口出片，输出「能否替代半天搭景」结论。",
-    "Sol Engine 本地测速：5090 或 DGX Spark 启用 Sol-Attn + Cross-step cache，同一 seed 对比库存 H3 的墙钟与口型/重影回归。",
-    "世界模型验收表：Evoke 做 1 个室内「走开再回来」回访测试；工具雷达拆生成/可控/可回访三列，禁止空泛立项。",
-    "端侧 vs 云账单：按 M5 Ultra 顶配预期 vs 等额云 token 写分流一页；Agent 壳对照 Prime Agent 补持久记忆与子代理。"
+    "H3 长片闭环：装 Auto-Chain + 原版 Motion Context，用 1 条 40–60 秒旁白跑切段→拼片，记录接缝口型与身份漂。",
+    "分块放大验收：同一条低分 H3 成片接 MMH3 Ultimate Upscale，目标 ≥2K，对比整段 OOM vs 分块墙钟与接缝。",
+    "12GB 生图试点：装 SenseNova ConvRot INT8 + 8 步 LoRA，同 seed 对照 bf16 机的像素差与可过审率。",
+    "云端选型 + 版本扫雷：试 PixVerse V6 有声多镜；试 Meshy-7 一单图→GLB；把 Kling v2.x 节点标红并排期迁 3.0/O3（截止 9/15）。",
+    "采购/SLA 多后端：给 GPT 与 Google 云各加「能力档 × 后端」列；Jalapeño 数字只引用 OpenAI 官方页，本周只改表不改年约。"
   ],
   timeline: {
-    current: "2026-08-26",
+    current: "2026-08-27",
     nodes: [
+      {
+        type: "day",
+        date: "2026-08-27",
+        label: "08-27"
+      },
       {
         type: "day",
         date: "2026-08-26",
@@ -229,7 +254,7 @@ window.BRIEFING = {
         id: "w35",
         label: "W35",
         range: "08-24 ~ 08-30",
-        focus: "H3 控场闭环补齐 Pose 源（SAM 3D Body 进 ComfyUI）；Higgsfield 坐进 Blender 视口；Sol Engine 把本地 H3 推到约 4.5×；Evoke 外置世界记忆；苹果 M5 Ultra 512GB 抬端侧 Agent 预算；Jalapeño 推理基准与 Prime Agent 继续证明壳/硅比换旗舰更要紧。"
+        focus: "H3 本地成片补齐时长×分辨率（Auto-Chain + Ultimate Upscale）；SenseNova ConvRot 让 12GB 跑旗舰生图；PixVerse V6 / Meshy-7 进 Partner，Kling 旧版 9/15 EOL；Hot Chips 上 Jalapeño 与 TPUv8 同台，Agent 账单继续跟硅走；承接周初 Pose/ControlNet/Sol/端侧内存主线。"
       },
       {
         type: "day",
@@ -301,8 +326,8 @@ window.BRIEFING = {
         type: "month",
         id: "m202608",
         label: "8月",
-        range: "08-01 ~ 08-26",
-        focus: "AI 3D 精度突破（Hi3D 2048³）+ Seedance 2.5 白模进剪辑台 + H3 从配方→ControlNet 控场→Pose 源进 Comfy + Wan 3.0 文档直转商用 + Ruby EXR/ProRes + Higgsfield×Blender + Sol Engine 本地加速 + Evoke 外置记忆 + 端侧 512GB 内存。AI 美术从单点工具进入工具链编排、成片规范、推理壳与端云分流阶段。"
+        range: "08-01 ~ 08-27",
+        focus: "AI 3D 精度突破（Hi3D 2048³）+ Seedance 2.5 白模进剪辑台 + H3 从配方→ControlNet→Pose→Auto-Chain/分块放大成片 + Wan 3.0 + Ruby + Higgsfield×Blender + Sol Engine + Evoke + 端侧 512GB + SenseNova ConvRot 消费卡量化 + PixVerse V6/Meshy-7 Partner + Kling 旧版 EOL + Hot Chips 自研硅。AI 美术进入工具链编排、成片规范、推理壳与端云分流阶段。"
       },
       {
         type: "day",
