@@ -4,7 +4,7 @@
   var html = document.documentElement;
   var B = window.BRIEFING;
   var archive = window.ARCHIVE || {};
-  var current = (B && B.meta && B.meta.date) || "2026-07-15";
+  var current = (B && B.meta && B.meta.date) || "";
 
   /* —— 皮肤系统 —— */
   var SKIN_LABELS = {
@@ -678,17 +678,78 @@
     if (foot) foot.hidden = false;
   }
 
+  /* —— archive 延后加载：首屏不阻塞 —— */
+  var archiveReady = !!window.ARCHIVE;
+  var archiveLoading = false;
+  var pendingDay = null;
+
+  function archiveScriptSrc() {
+    var scripts = document.getElementsByTagName("script");
+    var i, src, q;
+    for (i = 0; i < scripts.length; i++) {
+      src = scripts[i].getAttribute("src") || "";
+      if (/archive\.js/.test(src)) return src;
+    }
+    q = "";
+    for (i = 0; i < scripts.length; i++) {
+      src = scripts[i].getAttribute("src") || "";
+      if (/(?:^|\/)(?:data|app)\.js(?:\?|$)/.test(src)) {
+        var qi = src.indexOf("?");
+        if (qi !== -1) {
+          q = src.slice(qi);
+          break;
+        }
+      }
+    }
+    return "archive.js" + q;
+  }
+
+  function loadArchiveIfNeeded() {
+    if (archiveReady) {
+      archive = window.ARCHIVE || archive;
+      return;
+    }
+    if (archiveLoading) return;
+    archiveLoading = true;
+    var s = document.createElement("script");
+    s.src = archiveScriptSrc();
+    s.async = true;
+    s.onload = function () {
+      archive = window.ARCHIVE || archive;
+      archiveReady = true;
+      archiveLoading = false;
+      if (pendingDay) {
+        var d = pendingDay;
+        pendingDay = null;
+        loadDay(d);
+      }
+    };
+    s.onerror = function () {
+      archiveLoading = false;
+      archiveReady = true;
+      pendingDay = null;
+    };
+    document.body.appendChild(s);
+  }
+
   /* —— 切换日期 —— */
   function loadDay(date) {
-    var data = archive[date];
-    if (!data) {
-      /* 当前日期不在 archive 中，从原始 BRIEFING 加载 */
-      if (window.BRIEFING && window.BRIEFING.meta && window.BRIEFING.meta.date === date) {
-        data = window.BRIEFING;
-      } else {
+    var today = (window.BRIEFING && window.BRIEFING.meta && window.BRIEFING.meta.date) || "";
+    var data = null;
+    if (date === today) {
+      data = window.BRIEFING;
+    } else {
+      data = archive[date];
+      if (!data) {
+        if (!archiveReady) {
+          pendingDay = date;
+          loadArchiveIfNeeded();
+          return;
+        }
         return;
       }
     }
+    if (!data) return;
     current = date;
     currentView = { type: "day", key: date };
     B = data;
@@ -709,5 +770,6 @@
   }
 
   /* —— 初始化 —— */
-  renderAll(B);
+  if (B) renderAll(B);
+  loadArchiveIfNeeded();
 })();
