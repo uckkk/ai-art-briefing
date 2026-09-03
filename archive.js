@@ -2490,4 +2490,864 @@ window.ARCHIVE = {
       "Agent 加闸：夜间批图加隔离 + 停机开关；共享目录改单任务沙箱；GPT 路线年底新能力不写进交付承诺。Kling v2.x 继续赶 9/15。"
     ]
   },
+  "2026-08-31": {
+    meta: {
+      date: "2026-08-31",
+      kicker: "DAILY AI ART INTELLIGENCE",
+      title: "每日 AI 美术情报",
+      tagline: "面向全栈游戏美术负责人 / AI 降本增效研究"
+    },
+    editorFrame: [
+      "本地 H3 加速分成两条栈：FastVideo × NVIDIA FastGen 开源 FastH3 Preview v1，4 步 + 90% 稀疏注意力，B200 上 15 秒有声片约 47 秒墙钟（官方称最高约 14×）。但只蒸了 T2VA，FL2VA/Ref2VA 没有，Comfy 也吃不进 VSA 后端——角色对口型生产继续走周五那条官方 Acc-8Step。",
+      "云视频周五的 Omni 1.1 今天进了 Comfy 图：Partner 节点可选 360p→4K、指令编辑、场景延长，每条带音轨。同一分镜可以在图里走草稿档再成片，不用切 Google 网页。",
+      "3D 拓扑开始抢「能进引擎的线」：Tripo 联合创始人 8/28 说 Smart Mesh（Nexus）单图约 5 秒出可控面数、可用边流；TripoSplat MIT 已进 Comfy。上游 @OpenAI 同日官宣拟 11/12 停 Cursor 里的 GPT——写节点/批处理脚本的人要留多后端。"
+    ],
+    layers: {
+      A: {
+        tag: "A 层",
+        title: "游戏美术应用层",
+        hint: "点卡片展开价值与行业判断 →",
+        items: [
+          {
+            idx: "01",
+            title: "FastH3 Preview v1：H3 蒸到 4 步，B200 上 15 秒片约 47 秒，但只覆盖 T2VA",
+            summary: "8/28 FastVideo 联合 Nuva Lab、NVIDIA FastGen 开源 FastH3 Preview v1：DMD2 把 Base H3 的 49 次 transformer 调用压到 4 次，VSA 稀疏注意力约 90%。推荐 VSA/Data-Free 权重；B200、1344×768、24fps 有声，15 秒片单卡约 47.2 秒（官方称约 14.38×），8 卡约 15.5 秒。HF lastModified 2026-08-28 19:27 UTC。Preview 只蒸 T2VA，FL2VA/Ref2VA 未蒸；难动作、细部和部分音频可能低于基座。VSA 适配器要 FastVideo 的 VSA-H3 后端和启动脚本，不是 Comfy 通用 LoRALoader。社区许可证继承 MiniMax H3 Community License。",
+            links: [
+              {
+                label: "FastVideo：FastH3 官方博客",
+                url: "https://haoailab.com/blogs/fasth3-preview/"
+              },
+              {
+                label: "Hugging Face：VSA/Data-Free 权重",
+                url: "https://huggingface.co/FastVideo/FastVideo-FastH3-4-step-Preview-v1-VSA-DataFree"
+              },
+              {
+                label: "ComfyUI Wiki：范围与 Comfy 可用性",
+                url: "https://comfyui-wiki.com/en/news/2026-08-28-fasth3-preview"
+              }
+            ],
+            value: "有 B200/H100 的实验机可以拿 T2VA 看墙钟上限；对口型、首帧/参考生视频别换栈。生产继续周五 Acc-8Step + Auto-Chain。",
+            impact: "H3 加速从「Comfy 可写进 SOP 的蒸馏 LoRA」分出「FastVideo 实验内核」。班组默认路径不能跟着 14× 海报走。",
+            tags: [
+              "视频",
+              "成本"
+            ],
+            action: "有 Blackwell/H100 的机器按官方 launcher 跑 1 条 10 秒 T2VA，对照 Acc-8Step 的墙钟与口型；没卡就只记「Comfy 未支持」，不改 SOP。",
+            sourceType: "一手",
+            cost: "4 步 · B200 15s 约 47s"
+          },
+          {
+            idx: "02",
+            title: "Gemini Omni 1.1 Flash 进 Comfy Partner：360p→4K、指令编辑、延长，一条节点",
+            summary: "8/28 Comfy 官方博客：Gemini Video Omni 节点下拉选 Omni Flash 1.1，覆盖 T2V / I2V / 参考生视频 / 编辑 / 延长；分辨率 360p、720p、1080p、4K；每条带生成音轨。编辑用短指令（换光、换风格、改招牌字）并写 keep everything else the same；延长会读前段运动和身份。首帧用 <FIRST_FRAME>，参考用 <IMAGE_REF_N>。没有独立负向词，排除写进 prompt。接周五 Google 官方 40 秒延长 + 360p 草稿价。",
+            links: [
+              {
+                label: "Comfy 博客：Omni 1.1 Flash",
+                url: "https://blog.comfy.org/p/gemini-omni-11-flash-in-comfyui-faster"
+              },
+              {
+                label: "Google：Omni 1.1 Flash",
+                url: "https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-omni-1-1-flash/"
+              },
+              {
+                label: "Comfy changelog",
+                url: "https://docs.comfy.org/changelog"
+              }
+            ],
+            value: "周五那条「360p 对戏再 720p 成片」可以直接丢进现有 Comfy 图，不用切 Flow / AI Studio。",
+            impact: "云视频能力开始按节点进班组图，而不是按官网入口。路由表可以写「草稿档 / 成片档 / 编辑档」。",
+            tags: [
+              "视频",
+              "成本"
+            ],
+            action: "更新 Comfy 后打开 Gemini Video Omni，同一分镜 360p 出 3 版再 720p 延长/首末帧，记接缝与身份漂。",
+            sourceType: "一手",
+            cost: "360p 官方约 1/3 价"
+          },
+          {
+            idx: "03",
+            title: "Tripo Smart Mesh：联合创始人说单图约 5 秒出可控拓扑，Nexus 进生产",
+            summary: "8/28 80 Level 访谈 Vast/Tripo 联合创始人曹炎培：高模路径仍可到百万面；Smart Mesh（SIGGRAPH Nexus）走「能用的边流 + 可控面数」，端到端约 5 秒，角色大约 2 万面，可进 Blender/Maya/Unity。输入支持文、单图、角色表多视图，路线图有包围盒和 3D→3D 翻新。TripoSplat MIT 开源，Comfy 当天可跑高斯。收费是 token。和周五 Motus（动画链）、Lux3D（20 秒出模）不是同一层——这条抢的是拓扑卫生。",
+            links: [
+              {
+                label: "80 Level：Tripo 拓扑访谈",
+                url: "https://80.lv/articles/how-tripo-is-tackling-clean-topology-for-its-3d-asset-pipeline"
+              },
+              {
+                label: "GitHub：TripoSplat（MIT）",
+                url: "https://github.com/VAST-AI-Research/TripoSplat"
+              }
+            ],
+            value: "道具/NPC 灰盒可以按「5 秒出线 → 选方向 → 高模或手修」试。同一 5 个道具对照 Lux3D Turbo / Meshy-7 的边流和进引擎返工。",
+            impact: "3D 生成的卖点从「像不像」挪到「线能不能直接绑/减面」。拓扑干净的 5 秒档会压概念外包。",
+            tags: [
+              "3D",
+              "成本"
+            ],
+            action: "用 5 个现有道具概念跑 Smart Mesh，记录面数、边流、进 UE/Blender 是否还要重拓扑。",
+            sourceType: "一手",
+            cost: "Smart Mesh 约 5 秒 / ~2 万面"
+          },
+          {
+            idx: "04",
+            title: "Comfy 0.34.0 已带 TRELLIS2 / SAM 3D Body / HDR 成片，班组周末补升级",
+            summary: "GitHub 8/26 打 v0.34.0（周五晨报前已打 tag，周末补读 changelog）：原生 Pixal3D+TRELLIS2（重网格/减面/UV/贴图烘焙）、SAM 3D Body（无额外依赖的人体检测与动画导出）、HDR/AV1/mkv/webm 保存、Seedance 2.5 1080p 与延长、Flux Video Upscale 1.5–3×、vCube 视频增强。Kling v2 生图节点已从 Partner 拿掉，给 9/15 EOL 让路。周五已写 Wan Prime / PixVerse V6 / Meshy-7，没写「整包升级」。",
+            links: [
+              {
+                label: "GitHub：ComfyUI v0.34.0",
+                url: "https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.34.0"
+              },
+              {
+                label: "Comfy changelog",
+                url: "https://docs.comfy.org/changelog"
+              }
+            ],
+            value: "周末没升的工位先升到 0.34.0，才能用 Omni 1.1 节点和 TRELLIS2/SAM 3D Body 模板。HDR 保存对引擎/后期交片有用。",
+            impact: "Partner 能力按版本进班组。不跟 release 会在 9/15 Kling 下线那天才发现节点消失。",
+            tags: [
+              "3D",
+              "视频"
+            ],
+            action: "所有出片机升到 Comfy 0.34.0+，打开 TRELLIS2 与 SAM 3D Body 模板各跑 1 次，确认 Kling v2 节点已红。",
+            sourceType: "一手"
+          }
+        ]
+      },
+      B: {
+        tag: "B 层",
+        title: "AI 上游信息",
+        hint: "模型 / Agent / 开源 / 机器人 / 安全 / 产品化",
+        items: [
+          {
+            idx: "01",
+            title: "@OpenAI 8/28：拟 11/12 停 Cursor 里的 GPT，Astra 不给新东家",
+            summary: "8/28 OpenAI 官方博客：已通知 SpaceX，拟结束向 Cursor 提供 OpenAI 模型的合同，建议关停日 2026-11-12，按合同给满通知期。理由是无法确信 SpaceX 会遵守使用条款（引 Musk 公司过往违约、xAI 违反 ToS 的证词），且要对即将到来的 Astra 使用负责。现有模型可过渡到该日，Cursor 也可能更早切断。帮助中心同步：可用 Azure/Bedrock/网关自接，但 Tab/Auto/Cloud Agent/CLI 不一定走自定义端点。",
+            links: [
+              {
+                label: "OpenAI：Cursor 合同决定",
+                url: "https://openai.com/index/our-decision-on-cursor-following-its-acquisition-by-spacex/"
+              },
+              {
+                label: "OpenAI 帮助中心：Cursor 里用模型",
+                url: "https://help.openai.com/en/articles/20001506-using-openai-models-in-cursor"
+              }
+            ],
+            value: "用 Cursor 写 Comfy 节点、批处理、检查脚本的同事，11/12 前要能不靠 Cursor 内置 GPT 交货。Agent 编排不要绑死「Cursor + GPT」这一对。",
+            impact: "模型厂开始用变更控制条款收回分发。工具层和模型层会拆开卖，美术自动化栈要按「编辑器 / 模型 / 网关」三列写 SLA。",
+            tags: [
+              "Agent",
+              "成本"
+            ],
+            action: "盘点依赖 Cursor 内置 GPT 的脚本和 Cloud Agent，列 11/12 前的多后端切换（API 直连 / Claude / 网关）。",
+            sourceType: "一手",
+            cost: "过渡到 11/12",
+            conduction: "本周禁止新开「只在 Cursor 里跑的 GPT 批处理」；已有任务改成 API/网关可复现，11 月关停不当成突发。"
+          },
+          {
+            idx: "02",
+            title: "@karpathy 8/29 刊出：Vibe Coding 抬地板，Agentic Engineering 保质量条",
+            summary: "8/29 Singju Post 刊出 Karpathy 与红杉 Stephanie Zhan 在 AI Ascent 2026 的访谈转写。原演讲更早，此为周末新刊。Karpathy：vibe coding 把每个人能做的地板抬起来；agentic engineering 是专业软件原来的质量条还在——不允许因为 vibe 引入漏洞，你仍对软件负责，但可以更快。Agent 是尖、会错、随机但很强的实体，怎么协调它们加速又不掉质量条，才是这门工程。原帖本环境无 X 直连未核到，以上为转写。",
+            links: [
+              {
+                label: "Singju Post：Karpathy 访谈转写",
+                url: "https://singjupost.com/andrej-karpathy-from-vibe-coding-to-agentic-engineering-w-stephanie-zhan-transcript/"
+              }
+            ],
+            value: "美术 Agent 可以帮拆需求、出变体、排 Comfy 图，但不能把「过审」外包给模型。质量门仍是人：风格条、商用授权、引擎规范。",
+            impact: "上游把 Agent 从酷炫 Demo 说成工程纪律。和周五 HF 事故同一方向：闸和验收比分数值钱。",
+            tags: [
+              "Agent"
+            ],
+            action: "给现网出图 Agent 加一条人审清单（风格/授权/引擎规范），没有清单的任务本周不扩无人值守。",
+            sourceType: "转述",
+            conduction: "本周只把 Agent 当加速层，不把验收权交出去；夜间批图继续沿用周五的隔离和停机开关。"
+          },
+          {
+            idx: "03",
+            title: "Anthropic × Salesforce Claudeforce：Dario 把「安全、可信、能干活」绑进企业默认模型",
+            summary: "8/26–27 Salesforce 与 Anthropic 宣布 Claudeforce（周五晨报未收入，周末补）。Forkast 转述：Claude 成为 Salesforce 生态默认推理引擎；Salesforce in Claude 插件带 37 个销售技能，9 月公开 beta。Dario Amodei：「We believe frontier intelligence should be safe, trusted, and deeply capable… companies can point Claude at the customer information and business context… and use it to actually run and grow their businesses。」Salesforce 原 PR 链 404，以上为 Forkast 转述。Salesforce 官网亚太稿未能 200。",
+            links: [
+              {
+                label: "Forkast：Claudeforce 与 Dario 原话",
+                url: "https://forkast.news/salesforces-claudeforce-deal-with-anthropic-signals-the-end-of-model-agnostic-enterprise-ai/"
+              }
+            ],
+            value: "企业 Agent 在往「默认一家 + 技能包 + 治理」走，不是继续模型无关。美术侧自己的出图 Agent 也要决定默认模型，并写成可替换，而不是随编辑器绑死。",
+            impact: "默认模型会变成平台锁。和 B1 的 Cursor/GPT 拆伙一起看：分发层正在选边。",
+            tags: [
+              "Agent",
+              "授权"
+            ],
+            action: "把美术 Agent 的默认模型写成配置项（GPT / Claude / 本地），本周先改配置不改业务。",
+            sourceType: "转述",
+            conduction: "编排层本周只做「模型可热切」：Cursor 里的 GPT 和 Claude 技能包都不当成唯一入口。"
+          }
+        ]
+      }
+    },
+    actions: [
+      "FastH3 只做实验：有 B200/H100 就按官方 launcher 跑 1 条 10 秒 T2VA，对照 Acc-8Step 墙钟；没卡则维持周五 Acc-8Step + Auto-Chain，不改 SOP。",
+      "Omni 1.1 进图：Comfy 升到能选 Omni Flash 1.1 的版本，同一分镜 360p 出 3 版再 720p 延长，记接缝与身份漂。",
+      "3D 拓扑对照：5 个道具跑 Tripo Smart Mesh，对比 Lux3D Turbo / Meshy-7 的边流、面数、进引擎返工。",
+      "Cursor/GPT 备份：列出依赖 Cursor 内置 GPT 的脚本和 Cloud Agent，11/12 前改成 API 或网关可复现。",
+      "版本扫雷：出片机升 Comfy 0.34.0+；Kling v2.x 继续赶 9/15；夜间批图隔离和停机开关不撤。"
+    ]
+  },
+  "2026-09-01": {
+      "meta": {
+        "date": "2026-09-01",
+        "kicker": "DAILY AI ART INTELLIGENCE",
+        "title": "每日 AI 美术情报",
+        "tagline": "面向全栈游戏美术负责人 / AI 降本增效研究"
+      },
+      "editorFrame": [
+        "Magpie 把玩法和画面拆开：引擎继续管规则和状态，Render Server 拿白盒帧用 Wan2.2-5B 生成视频。H100 上一段 chunk 约 620ms、算力侧约 32fps，端到端约 1.55s。作者自己说延迟还进不了正式对战，但灰盒原型可以先不铺全套美术资产。",
+        "Studio Atelico 8/31 上 80.lv：端侧模型只吃工作室约稿画 + 公开的 Artist Rights Contract，玩家用文字捏生物，规则和风格条由策划写死。玩家向生成开始有「授权可交代」的样本，不只是生产加速。",
+        "上游：@NotTomBrown 说 Anthropic 会加 Cursor 里的 Claude 算力，接 OpenAI 11/12 关停；OpenAI 发集体网络防御公开信，点名 AI 时代的 Agent 攻击和可追溯身份——夜间批处理要隔离。"
+      ],
+      "layers": {
+        "A": {
+          "tag": "A 层",
+          "title": "游戏美术应用层",
+          "hint": "点卡片展开价值与行业判断 →",
+          "items": [
+            {
+              "idx": "01",
+              "title": "Magpie：引擎管玩法，白盒帧进 Render Server 出生成视频，H100 端到端约 1.55s",
+              "summary": "arXiv 8/27（2608.27168）Mogo AI / 南京大学 / 南安普顿：Magpie 把 Game Engine 和 Render Server 拆开。设计师在引擎里写关卡和规则；运行时引擎解析操作、维护状态、输出白盒帧，独立 Render Server 用 Wan2.2-TI2V-5B 把白盒变成生成视频。初始化只吃文本 + 首帧定风格，之后白盒是唯一持续去噪条件，相机位只用来取历史——操作、状态、物件属性和事件信号不进生成模型。约 300 小时 UE 人工对局（30+ 场景，1920×1080 / 60fps），覆盖走跑跳、驾驶、坐下、碰撞和 idle。H100 单卡、1280×768：chunk 约 620ms、算力侧约 32.2fps、峰值约 34GB；引擎攒 20 帧约 0.83s + 传输约 0.1s + 推理 0.62s ≈ 1.55s。作者写明：约 1.6s 延迟进不了要即时反馈的对战，无音频、无复杂战斗、5B 上不了端侧。项目页 zhanxy.xyz/Magpie-website。",
+              "links": [
+                {
+                  "label": "arXiv：Magpie abs",
+                  "url": "https://arxiv.org/abs/2608.27168"
+                },
+                {
+                  "label": "arXiv：Magpie html",
+                  "url": "https://arxiv.org/html/2608.27168"
+                },
+                {
+                  "label": "项目页：Magpie-website",
+                  "url": "https://zhanxy.xyz/Magpie-website"
+                }
+              ],
+              "value": "灰盒关卡可以先给策划看「大概长什么样」，不用等全套贴图/灯光。玩法验收仍走引擎，别把生成画面当碰撞真相。",
+              "impact": "视频基座开始抢「引擎渲染」而不是只抢预告片。和昨天 Tripo 抢拓扑是两条线：一条出能绑的线，一条出能玩的白盒观感。",
+              "tags": [
+                "视频",
+                "3D"
+              ],
+              "action": "有 H100 的实验机对照论文时间线，拿一条现有白盒关卡估端到端延迟；没卡就只记「原型可看、正式对战不可用」，不改 SOP。",
+              "sourceType": "一手",
+              "cost": "H100 端到端约 1.55s"
+            },
+            {
+              "idx": "02",
+              "title": "Studio Atelico：端侧模型只吃约稿画 + ARC，玩家向生物生成绑死策划约束",
+              "summary": "8/31 80.lv 访谈 Studio Atelico CEO Piero Molino（团队来自 Uber / Meta / SEGA / Creative Assembly）。同时做端侧伦理 AI 引擎和手机卡牌 Bobium Brawlers：玩家用文字描述生物，几秒内出符合视觉识别的立绘和可玩卡组，规则由策划写。图像模型用内部约稿训练——主美 José Luna 从约 20 张扩到约 100 张，专门补「紫龙过拟合」「无机物也要有眼睛」这类洞。公开 Artist Rights Contract：同意、项目级授权、预付、分享收益。端侧推理去掉按次账单，才能把生成当核心玩法而不是偶尔彩蛋。十几个原型后的结论：AI 自由度太大，规则会显得任意，玩家建不起心智模型；验收走统计置信度 + 清单 + 红队，不是像素级可复现。",
+              "links": [
+                {
+                  "label": "80 Level：Atelico 端侧约稿模型访谈",
+                  "url": "https://80.lv/articles/interview-new-indie-game-uses-local-ai-model-trained-entirely-on-studio-s-own-artists"
+                }
+              ],
+              "value": "玩家向生成第一次有「训练数据可交代 + 端侧 + 策划约束」的完整样本。做生物/NPC 捏造前先问三件事：数据从哪来、规则谁写、出了店要不要标。",
+              "impact": "美术的活从「画全图鉴」变成「画够约束集 + 盯统计异常」。按张计价的外包会碰到永远画不完的长尾描述。",
+              "tags": [
+                "生图",
+                "授权"
+              ],
+              "action": "列一条玩家向生成需求（生物/头像/涂鸦），对照 Atelico：训练数据来源、ARC 级授权、端侧还是云、策划约束清单；缺一项本周不立项。",
+              "sourceType": "一手"
+            },
+            {
+              "idx": "03",
+              "title": "Sprite Fusion：真像素模型，16/32/64 + idle/run/attack，15 积分一次",
+              "summary": "Phaser 新闻：Sprite Fusion 作者 Hugo Duprez 在做给游戏开发者的像素模型，不是照片套像素滤镜。已能出 16×16 / 32×32 / 64×64 静帧，以及 idle / run / attack 短循环；也可导入已有精灵用提示词补动画。生成结果进浏览器像素编辑器修剩下的 10%。积分：Starter $9/月 450、Creator $19/月 1050、Pro $49/月 3000，当月不清零。生成 15 积分（12 张，Large 为 2 张），静帧带动画也是 15。套餐含商用。作品廊 spritefusion.com/pixel-art-gallery。",
+              "links": [
+                {
+                  "label": "Phaser：Sprite Fusion 像素生成器",
+                  "url": "https://phaser.io/news/2026/08/sprite-fusion-tilemap-editor-phaser"
+                },
+                {
+                  "label": "Sprite Fusion：像素作品廊",
+                  "url": "https://www.spritefusion.com/pixel-art-gallery"
+                }
+              ],
+              "value": "2D 原型期可以按「提示词出格 → 编辑器修像素 → 导出进 Phaser」试，不必先找像素外包。",
+              "impact": "像素资产的地板在往「格对齐、调色盘可控、能直接进引擎」挪。通用生图再套滤镜会更难看。",
+              "tags": [
+                "生图",
+                "成本"
+              ],
+              "action": "用现有 1 个 32×32 角色跑静帧 + idle/run，进编辑器修完导出，记积分消耗和能不能不重画关键帧。",
+              "sourceType": "一手",
+              "cost": "$9–49/月 · 15 积分/次"
+            },
+            {
+              "idx": "04",
+              "title": "Midjourney V8.2 Edit：过去 24 小时画质补丁，脏了就重跑",
+              "summary": "Midjourney 官网更新：V8.2 的 edit 模型做了画质更新，过去 24 小时 edit 出问题的重试一次，继续收反馈。没有新能力、没有价目、没有分辨率承诺——就是质量补丁。",
+              "links": [
+                {
+                  "label": "Midjourney：Edit Image Quality Update",
+                  "url": "https://updates.midjourney.com/edit-image-quality-update/"
+                }
+              ],
+              "value": "还在用 V8.2 Edit 修宣发/立绘的工位，昨天脏的结果不要当最终观感。",
+              "impact": "闭源编辑模型的「能用」是滚动的。SOP 里别锁死某一天的 edit 观感当验收条。",
+              "tags": [
+                "生图"
+              ],
+              "action": "抽 5 张过去 24 小时 Edit 发糊/脏边的图重跑，对比是否还要回退到重绘。",
+              "sourceType": "一手"
+            },
+            {
+              "idx": "05",
+              "title": "PhysX-CoT：单图出能仿真的 3D，UE5 解析 94.1% / 碰撞 96.8% / 关节 92%",
+              "summary": "8/24 arXiv 2608.08053（今天当「能仿真的资产」层补进，不和昨天 Tripo 抢同一条拓扑新闻）。中科院空天院等：把单图 3D 从「看起来像」改成可检查的物理推理链——部件分解、2D/3D 框、关系、粗几何、表面线索分开监督；位置用 3D 框、形状用局部编码。骨干 Qwen3-VL-8B，4×A800。UE5 标准化协议：解析 94.1%、碰撞 96.8%、关节有效 92.0%。相对 PhysX-Anything：CD 0.041 vs 0.095，F-score 0.480 vs 0.256。作者承认：解码器冻结、体素粗、透明/非刚体仍差，没有生产级插件。",
+              "links": [
+                {
+                  "label": "arXiv：PhysX-CoT abs",
+                  "url": "https://arxiv.org/abs/2608.08053"
+                },
+                {
+                  "label": "arXiv：PhysX-CoT html",
+                  "url": "https://arxiv.org/html/2608.08053"
+                }
+              ],
+              "value": "和昨天 Tripo Smart Mesh（能用的边流）错层：这条问的是进 UE 会不会倒、会不会穿、关节能不能转。可交互道具/机关灰盒可以盯论文指标，别当出模器。",
+              "impact": "3D 生成开始分成「好看 / 线干净 / 能仿真」三档。班组选型表要加一列物理有效，不能只看面数。",
+              "tags": [
+                "3D"
+              ],
+              "action": "选 3 个要进物理的道具（含关节的优先），记下 Tripo/Lux3D 出模后还要补碰撞/关节的工时；PhysX-CoT 只做客研对照，不写进生产 SOP。",
+              "sourceType": "一手"
+            }
+          ]
+        },
+        "B": {
+          "tag": "B 层",
+          "title": "AI 上游信息",
+          "hint": "模型 / Agent / 开源 / 机器人 / 安全 / 产品化",
+          "items": [
+            {
+              "idx": "01",
+              "title": "@NotTomBrown 8/29：Cursor 从 Sonnet 3.5 就是可信伙伴，会加 Claude 算力",
+              "summary": "Wccftech 转述 8/29 @NotTomBrown（Anthropic 联合创始人 / Chief Compute Officer）：「Cursor has been a trusted partner of Anthropic since Sonnet 3.5. We'll continue to increase compute to support Claude models in Cursor and are excited for what comes next with them at SpaceX。」原帖本环境无 X 直连未核到。接周五 OpenAI 拟 11/12 停 Cursor 里的 GPT——这不是重复那条关停，是分发层已经有人补位。同篇转述 Cursor CEO：OpenAI 模型大约只占 5% 流量。",
+              "links": [
+                {
+                  "label": "Wccftech：Anthropic 加 Cursor 里 Claude 算力",
+                  "url": "https://wccftech.com/anthropic-pounces-as-openai-abandons-spacexs-cursor-vowing-to-increase-claude-compute-even-as-openai-cites-contract-distrust/"
+                }
+              ],
+              "value": "11/12 前 Cursor 里的默认后备很可能会更偏 Claude，不是「无模型可用」。写节点/批处理的人把 Claude 跑通同一脚本，比继续赌 GPT 内置更划算。",
+              "impact": "模型厂在编辑器里选边。美术自动化不要赌「Cursor 内置某一家」长期稳定。",
+              "tags": [
+                "Agent",
+                "成本"
+              ],
+              "action": "把周五那张「Cursor 内置 GPT 依赖表」补一列 Claude 是否已能跑通同一脚本。",
+              "sourceType": "转述",
+              "cost": "接 11/12 GPT 关停",
+              "conduction": "本周 Cursor 任务默认留 Claude 和 API 两条；新开的节点/批处理禁止写死 GPT 内置。"
+            },
+            {
+              "idx": "02",
+              "title": "@OpenAI 集体网络防御公开信：AI 时代攻击、Agent 身份要可追溯",
+              "summary": "OpenAI 发布 Collective Cyberdefense 公开信：窗口期内 AI 赋能的网络攻击会更普遍、更复杂；现状安全不够。对企业：立刻把网络防御当一把手事项，提高采购/自建/部署的安全条，包括 AI 生成的代码；升级最小权限和纵深防御。对前沿模型厂：提供可观察性，确保 Agent 身份可追溯、可问责。没有点名游戏引擎，但夜间批图、看图 Agent、自动写节点都在这个攻击面里。",
+              "links": [
+                {
+                  "label": "OpenAI：Collective Cyberdefense",
+                  "url": "https://openai.com/collective-cyberdefense/"
+                }
+              ],
+              "value": "周五 HF 事故报告之后的制度层：不是再讲一次越权故事，是要求身份可追溯 + 提高 AI 生成代码的验收条。",
+              "impact": "无人值守批处理从「省人力」变成「要能点名是哪个 Agent 干的」。",
+              "tags": [
+                "Agent"
+              ],
+              "action": "给现网批处理 Agent 建身份清单（谁启动、碰哪些盘、能否出网），缺身份的任务停掉通宵。",
+              "sourceType": "一手",
+              "conduction": "夜间 Comfy / 出图 Agent 本周必须有独立身份和停机开关；AI 写的节点脚本按「生成代码」加人工过安全门，不能直接合进生产图。"
+            },
+            {
+              "idx": "03",
+              "title": "Google Play 第三方 AI 接入仍要贴标：玩家向生物生成过不了「埋进隐私政策」",
+              "summary": "Promise Legal 2026 合规综述（转述，非 Google 原文）：Google Play 生成式 AI 标注 4/15 已强制；7/15 更新把责任扩到第三方接入——玩家输入进外部 LLM/生图 API、结果展示在游戏里，必须在输出旁边可见标注，写进隐私政策或商店页不算。轻违规警告 7–14 天改；有害/欺骗可直接下架。Steam 对 live-generated 另要护栏。和今天 A2 Atelico 同一类：玩家向生物/NPC 生成一旦上架，标注和护栏是产品功能不是法务附录。",
+              "links": [
+                {
+                  "label": "Promise Legal：AI 游戏资产与商店披露",
+                  "url": "https://blog.promise.legal/ai-game-assets-copyright-steam-disclosure-2026/"
+                }
+              ],
+              "value": "做 Atelico 那种「玩家打字出生物」之前，先设计标签位置和内容护栏，不要等过审再补。",
+              "impact": "玩家向生成的合规成本会反推技术选型：端侧（Atelico）少一次第三方贴标，云 API 必须贴。",
+              "tags": [
+                "授权"
+              ],
+              "action": "对照 Play 7/15 规则，把现有或规划中的玩家向生成列一张表：云 or 端、标在哪、护栏谁做。",
+              "sourceType": "转述",
+              "conduction": "本周但凡立项「玩家可见的生成」（头像、生物、涂鸦），产品文档必须写清：店面（Play/Steam）、是否第三方 API、标签出现在哪、不当内容怎么拦。"
+            }
+          ]
+        }
+      },
+      "actions": [
+        "Magpie 只做客研：有 H100 就按论文时间线估一条白盒关卡的端到端延迟；没卡则维持「灰盒仍用手或引擎渲染」，不改 SOP。",
+        "玩家向生成立项闸：对照 Atelico 列数据来源 / ARC 级授权 / 端侧还是云 / 策划约束；缺一项不立项。同步写 Play/Steam 标签位置。",
+        "Sprite Fusion 试像素：1 个 32×32 角色跑静帧 + idle/run，编辑器修完导出，记积分和能否替代外包关键帧。",
+        "3D 分档：Tripo Smart Mesh 继续跑拓扑；另选 3 个要进物理的道具记碰撞/关节返工；PhysX-CoT 只对照指标不进生产。",
+        "Cursor/Agent：GPT 依赖表补 Claude 列；批处理 Agent 建身份和停机开关；V8.2 Edit 脏图抽 5 张重跑。Kling v2.x 继续 9/15。"
+      ]
+    },
+  "2026-09-02":     {
+      "meta": {
+        "date": "2026-09-02",
+        "kicker": "DAILY AI ART INTELLIGENCE",
+        "title": "每日 AI 美术情报",
+        "tagline": "面向全栈游戏美术负责人 / AI 降本增效研究"
+      },
+      "editorFrame": [
+        "Runway 8/31 发 Solaris：Interface World Model，界面按帧实时生成，不再先设计再转代码；720p 实时交互，早期接入。对游戏美术：交互预告/试玩页/Agent 训练环境是近窗，正式关卡别指望替换引擎渲染。",
+        "Comfy 合作节点跟上 Omni 1.1 Flash（对话编辑、延长、4K）和 Wan 3.0 Prime；旧 gemini-omni-flash-preview 计划 9/30 退役——本周要清依赖。",
+        "上游：Gemini Agentic Video 长视频降本（最高约 −66%）；Claude Fable 5.1 缓存读降价（典型约 −25%）；Sora API 9/24 关停倒计时（约 3 周）——依赖要本周盘点。"
+      ],
+      "layers": {
+        "A": {
+          "tag": "A 层",
+          "title": "游戏美术应用层",
+          "hint": "点卡片展开价值与行业判断 →",
+          "items": [
+            {
+              "idx": "01",
+              "title": "Runway Solaris：界面按帧实时生成的 Interface World Model，720p 早期接入",
+              "summary": "Runway 8/31 发布 Solaris：把 Gen-4.5 改造成 Interface World Model——不再「先画 UI 再写成代码」，而是由 LLM 推理、Solaris 按帧渲染可交互界面。官方称 720p 实时交互，开放 early access 表单。用户研究里相对手写 UI 偏好约 61%/71%。文本密集页、长会话和无障碍仍弱。对游戏美术近窗是交互预告、试玩落地页、Agent 训练沙盒；正式关卡渲染仍归引擎。",
+              "links": [
+                {
+                  "label": "Runway：Introducing Solaris",
+                  "url": "https://runway.com/news/research/introducing-solaris"
+                },
+                {
+                  "label": "TechTimes：Solaris 零代码实时界面",
+                  "url": "https://www.techtimes.com/articles/326134/20260901/runway-solaris-launches-app-interfaces-now-run-live-video-zero-code.htm"
+                }
+              ],
+              "value": "宣发/试玩页可以先试「提示词出可点界面」，少写一轮前端；别拿它当关卡渲染器。",
+              "impact": "视频基座开始抢「可交互界面」而不是只抢预告片。和 Magpie 白盒生成渲染错层：一条管观感原型，一条管可点 UI。",
+              "tags": [
+                "视频",
+                "Agent"
+              ],
+              "action": "挑 1 个现有试玩/活动落地页，对照 early access 能力估「能否少写前端」；正式关卡渲染需求不进评估。",
+              "sourceType": "一手",
+              "cost": "Early access · 720p"
+            },
+            {
+              "idx": "02",
+              "title": "ComfyUI Partner：Gemini Omni 1.1 Flash + WAN3-Prime 进合作节点，Veo 2/3.0 从 Veo 节点移除",
+              "summary": "Comfy 文档 changelog：Partner Nodes 跟上 Gemini Omni 1.1 Flash（对话式编辑、延长、4K）和 WAN3-Prime（更高每秒单价档）。Google Veo 2 / 3.0 已从 Veo 相关节点移除——旧图里绑死这两档会直接断。和 Google 官方 Omni 1.1 Flash 开发者博文同一窗口。",
+              "links": [
+                {
+                  "label": "Comfy：Changelog",
+                  "url": "https://docs.comfy.org/changelog"
+                },
+                {
+                  "label": "Google：Build with Gemini Omni 1.1 Flash",
+                  "url": "https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-omni-1-1-flash/"
+                }
+              ],
+              "value": "云视频工作流可以升到 Omni 1.1 / Wan 3.0 Prime 合作节点；先扫图里还有没有 Veo 2/3.0。",
+              "impact": "Partner 节点节奏在加快，生产图对「预览 ID」和「已下架档」更敏感。",
+              "tags": [
+                "视频",
+                "成本"
+              ],
+              "action": "打开现网 Comfy 图：列出 Omni / Wan / Veo 节点版本；Veo 2/3.0 本周替换或删边。",
+              "sourceType": "一手"
+            },
+            {
+              "idx": "03",
+              "title": "Omni Preview → 1.1：gemini-omni-flash-preview 9/30 退役，360p 草稿约 1/3 价",
+              "summary": "交叉 Google 官方与多家 API 解读：gemini-omni-flash-preview 计划 9/30 退役，生产应迁到 Omni 1.1 Flash GA。Google 称 360p 草稿约 1/3 成本、最高约 60% 更快；可对话编辑并累计延长到约 40s。要原生音频或更长片长仍看 Veo。本周不清 Preview 依赖，月末会整图报错。",
+              "links": [
+                {
+                  "label": "EvoLink：Omni Flash vs 1.1 Flash",
+                  "url": "https://evolink.ai/blog/gemini-omni-flash-vs-1-1-flash"
+                },
+                {
+                  "label": "Google：Omni 1.1 Flash",
+                  "url": "https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-omni-1-1-flash/"
+                },
+                {
+                  "label": "Apidog：Omni 1.1 Flash vs Veo 3.1",
+                  "url": "https://apidog.com/blog/gemini-omni-1-1-flash-vs-veo-3-1/"
+                }
+              ],
+              "value": "草稿链路可以压到 360p 试导演；成片再升档。Preview ID 必须在 9/30 前清干净。",
+              "impact": "云视频从「能出」变成「按分辨率计价 + 版本强退役」。SOP 里禁止再锁 Preview 模型 ID。",
+              "tags": [
+                "视频",
+                "成本"
+              ],
+              "action": "全库搜 gemini-omni-flash-preview，改成 1.1；草稿默认 360p 记一笔单价对比。",
+              "sourceType": "转述",
+              "cost": "360p 约 1/3 价 · Preview 9/30 退役"
+            },
+            {
+              "idx": "04",
+              "title": "UELTX2：UE5 本地桥接 LTX-2 / ComfyUI，12GB 起、不上云",
+              "summary": "itch.io / GitHub：UELTX2 在 UE5 里本地调 LTX-2（经 ComfyUI），面向 flipbook、VFX、previz。最低约 12GB 显存、推荐 24GB，Windows。素材不上传云——对 NDA 关卡和未公开角色更友好。不是替换 Sequencer 成片，是把生成视频嵌进编辑器预览环。",
+              "links": [
+                {
+                  "label": "itch.io：UELTX2",
+                  "url": "https://gregorigin.itch.io/ueltx2"
+                },
+                {
+                  "label": "GitHub：UELTX2-Unreal-to-LTX-2",
+                  "url": "https://github.com/gregorik/UELTX2-Unreal-to-LTX-2-Curated-Generation"
+                }
+              ],
+              "value": "有 24GB 卡的 TA 可以在 UE 里直接刷 VFX/flipbook 草稿，少一轮导出去云端再导回。",
+              "impact": "本地视频生成开始贴引擎边。云 API 仍强在画质，本地强在保密和迭代半径。",
+              "tags": [
+                "视频"
+              ],
+              "action": "有 24GB 窗机的人装一版跑 3 条 flipbook；12GB 只验证能否出片，不写进全组 SOP。",
+              "sourceType": "一手",
+              "cost": "12GB 起 / 24GB 推荐 · 本地"
+            },
+            {
+              "idx": "05",
+              "title": "约 3 周：OpenAI Sora 2 / Videos API 2026-09-24 关停，官方无替代模型",
+              "summary": "OpenAI deprecations 页：2026-03-24 通知，sora-2 / sora-2-pro 及 Videos API 于 2026-09-24 shutdown，Recommended replacement 栏为 —。Help 页同步说明 App 已停、API 倒计时关闭。凡用 Sora 做预告/PV/概念动态的管线有硬截止。",
+              "links": [
+                {
+                  "label": "OpenAI：Deprecations（Sora 9/24）",
+                  "url": "https://developers.openai.com/api/docs/deprecations"
+                },
+                {
+                  "label": "OpenAI Help：Sora discontinuation",
+                  "url": "https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation"
+                }
+              ],
+              "value": "本周必须盘点依赖并定迁移表，别等到月底才导出。",
+              "impact": "云视频选型窗口收紧；Veo / Kling / Wan / Runway 要进对照表。",
+              "tags": [
+                "视频",
+                "成本"
+              ],
+              "action": "列出所有 Sora 任务 → 导出存档 → 同一分镜对标 Veo 3.1 / Kling / Wan 3.0 / Runway，写迁移表。",
+              "sourceType": "一手",
+              "cost": "API 9/24 关停"
+            }
+          ]
+        },
+        "B": {
+          "tag": "B 层",
+          "title": "AI 上游信息",
+          "hint": "模型 / Agent / 开源 / 机器人 / 安全 / 产品化",
+          "items": [
+            {
+              "idx": "01",
+              "title": "GoogleDeepMind：Gemini Agentic Video Understanding，长视频分析最高约 −88% token / −66% 成本",
+              "summary": "9/1：Gemini 3.7/3.6 Flash 与 3.5 Flash-Lite 上线 agentic video——模型动态搜帧/音/转写，而非固定 FPS 灌入。官方称最高约 −88% token、−66% 成本、+7% 准确率；亚秒级时刻检索、异常检测、精确计数。API/AI Studio/Enterprise Agent Platform；processing:\"agentic\"；无额外功能费。",
+              "links": [
+                {
+                  "label": "GoogleDeepMind：Agentic Video in Gemini",
+                  "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/"
+                }
+              ],
+              "value": "长试玩/过场审片可以少烧 token：按需搜帧而不是整段灌入。",
+              "impact": "视频理解从「固定采样」切到「可查询视频」；美术 QA 账单与命中率可一起算。",
+              "tags": [
+                "视频",
+                "成本"
+              ],
+              "action": "拿 3 条 10–60 分钟试玩/过场片，对照 static vs agentic，记 10 个已知缺陷命中率与账单。",
+              "sourceType": "一手",
+              "conduction": "长试玩/过场审片可以当「可查询视频」而不是整段帧倒进模型；美术 QA 本周试一条周会流程。",
+              "cost": "官方称最高约 −66% 成本"
+            },
+            {
+              "idx": "02",
+              "title": "Anthropic：Claude Fable 5.1——缓存读降价，典型约 −25%、高 Agent 约 −45%；EFS 秋季分批",
+              "summary": "9/1：Fable 5.1 与 Mythos 5.1 同权重不同护栏。缓存读降 75%（$0.25/百万），典型工作负载约比 Fable 5 便宜 25%，高 Agent 可约 45%。EFS 秋季分批（客户云存监控+ZDR）；上线前合格客户可用 ZDR。Canva 测例提到节奏游戏原型。",
+              "links": [
+                {
+                  "label": "Anthropic：Claude Fable and Mythos 5.1",
+                  "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1"
+                }
+              ],
+              "value": "常驻批处理/Code 节点可以先迁 Fable 5.1，按缓存读新价重算任务成本。",
+              "impact": "接 11/12 GPT 关停窗口，Claude 侧成本更好算；EFS/ZDR 与降价同批。",
+              "tags": [
+                "Agent",
+                "成本"
+              ],
+              "action": "把一条常驻 Claude Code/美术节点批处理迁到 claude-fable-5-1，对比 $/任务。",
+              "sourceType": "一手",
+              "conduction": "Cursor/批处理默认试 Fable 5.1；算力账本按缓存读新价重算。接 11/12 GPT 关停，Claude 侧成本更好算。",
+              "cost": "缓存读 −75% · 典型约 −25%"
+            },
+            {
+              "idx": "03",
+              "title": "OpenAI Path to Astra：达 Critical 网络安全门槛，发布延后；长跑 Agent 或被监控暂停",
+              "summary": "9/1：OpenAI 认定 Astra 达 Preparedness Framework Critical 网络安全能力门槛（可无逐步引导发现零日并构造利用）。开发与发布部分延后以加强防护；即将上线但高级网络安全能力限测，经 Daybreak Blue 扩防御用途。误对齐/滥用监控可能误伤合法长跑任务——ChatGPT/Codex 会要求人工确认，API 侧任务会停。",
+              "links": [
+                {
+                  "label": "OpenAI：Path to Astra",
+                  "url": "https://openai.com/index/path-to-astra/"
+                }
+              ],
+              "value": "通宵美术 Agent 不能假设「一跑到天亮」——要检查点与可恢复。",
+              "impact": "前沿模型上线节奏被安全闸拖住；长跑 Agent 面会更常被暂停。",
+              "tags": [
+                "Agent"
+              ],
+              "action": "通宵出图/批处理 Agent 加检查点与人工续跑入口；API 长任务写重试与状态落盘。",
+              "sourceType": "一手",
+              "conduction": "通宵美术 Agent 必须设检查点与可恢复续跑；长任务走 API 时要防监控误停，关键步骤落盘。"
+            }
+          ]
+        }
+      },
+      "actions": [
+        "Sora：列出所有依赖任务 → 导出存档 → 同一分镜对标 Veo 3.1 / Kling / Wan 3.0 / Runway，写迁移表（9/24 硬截止）。",
+        "Solaris 只做客研/试玩页：填 early access，挑 1 个落地页估能否少写前端；正式关卡渲染不替引擎。",
+        "Omni Preview 9/30 清依赖：全库替换 gemini-omni-flash-preview→1.1；草稿默认 360p 记单价；Veo 2/3.0 边删掉。",
+        "Gemini agentic：拿 3 条 10–60 分钟试玩/过场片，对照 static vs agentic，记缺陷命中率与账单。",
+        "Fable 5.1：迁一条常驻 Claude Code/美术批处理比 $/任务；有 24GB 卡可选试 UELTX2/本地 LTX flipbook。"
+      ]
+    }
+,
+  "2026-09-03": {
+  "meta": {
+    "date": "2026-09-03",
+    "kicker": "DAILY AI ART INTELLIGENCE",
+    "title": "每日 AI 美术情报",
+    "tagline": "面向全栈游戏美术负责人 / AI 降本增效研究"
+  },
+  "editorFrame": [
+    "世界模型开始抢「几何机位」：World Labs Atlas 用摄像机位当原生输入，官方称最长约 1 分钟 1440p，还能出点云/高斯。early access。预告环绕可以按镜头设计，正式关卡别指望替换引擎。",
+    "生图编辑进办公流、灰盒开始能玩：Google Pics（Nano Banana）GA 进 Docs/Slides；Gemini 3.8 Flash 在 Antigravity 用 Nano Banana 贴图写出可玩 3D 关卡。策划侧会先用起来，班组要划哪些物料能直出。",
+    "上游同价不等于更便宜：3.8 Flash 引入价不变但任务账单可能抬头；@AIatMeta 的 Muse Spark 1.3 官方称工具调用约 −20%。Sora 9/24、Kling v2 9/15、Omni Preview 9/30 倒计时继续。"
+  ],
+  "layers": {
+    "A": {
+      "tag": "A 层",
+      "title": "游戏美术应用层",
+      "hint": "点卡片展开价值与行业判断 →",
+      "items": [
+        {
+          "idx": "01",
+          "title": "World Labs Atlas：几何机位控镜，最长约 1 分钟 1440p，还能出点云/高斯",
+          "summary": "9/1 World Labs（李飞飞）官方：Atlas 从零预训练的 omni 世界模型，原生吃文本/图/视频/3D。摄像机位是几何输入而不是「pan left」提示词；官方称最长约 1 分钟 1440p。空间重建少到 2–3 张图；输出点云或 3D Gaussian splat，对接现有 Marble。官方评测摄像机跟随相对 MiniMax H3 / Gemini Omni Flash / FLUX 3 / Seedance 2.5 更受偏好。现为合作伙伴 early access，无公开 API/价。",
+          "links": [
+            {
+              "label": "World Labs：Atlas",
+              "url": "https://www.worldlabs.ai/blog/atlas"
+            },
+            {
+              "label": "The Decoder：Atlas 转述",
+              "url": "https://the-decoder.com/world-labs-unveils-atlas-a-single-ai-model-that-generates-reconstructs-and-simulates-3d-worlds-from-just-a-few-photos/"
+            }
+          ],
+          "value": "预告/过场可以按「概念图 + 设计机位」出可控环绕，而不是抽卡。点云/高斯只做客研灰盒，正式关卡仍走引擎网格。",
+          "impact": "视频竞争点从「像不像」挪到「机位是不是几何可控」。和昨天 Solaris（可点界面）错层：一条管镜头，一条管交互壳。",
+          "tags": [
+            "视频",
+            "3D"
+          ],
+          "action": "填 Atlas early access；拿 1 张现有场景概念图设计一条环绕机位，估能否替代抽卡式预告。正式关卡渲染不进评估。",
+          "sourceType": "一手"
+        },
+        {
+          "idx": "02",
+          "title": "Google Pics 正式可用：Nano Banana 对象级编辑进 Docs/Slides，pics.new",
+          "summary": "9/1 Google 官方：Google Pics GA，底层 Nano Banana。对象分割局部改、图内文字改/翻译、一次出多版、升到 2K/4K。独立站 pics.new，并嵌进 Docs/Slides，Drive 随后。面向 AI Pro/Ultra 与 Workspace Business/Enterprise；生成功能至少用到 2027-02-28 额度更高。Rapid 域 9/1 起最多约 15 天放量，Scheduled 域 9/15。",
+          "links": [
+            {
+              "label": "Google：Try Google Pics",
+              "url": "https://blog.google/products-and-platforms/products/workspace/google-pics/"
+            },
+            {
+              "label": "Workspace 更新：Pics GA",
+              "url": "https://workspaceupdates.googleblog.com/2026/09/google-pics-brings-pro-level-ai-image-creation-and-editing-to-Google-Workspace.html"
+            }
+          ],
+          "value": "活动物料/本地化海报可以在 Slides 里点图改字，少一轮导去 PS。别拿它当角色立绘生产器。",
+          "impact": "Workspace 把「能改的生图」塞进策划/运营日常。美术要定：哪些物料允许 Pics 直出，哪些仍走班组 SOP。",
+          "tags": [
+            "生图"
+          ],
+          "action": "用 pics.new 拿 1 张现有活动图做对象分割 + 图内文字翻译，记和 PS/Canva 比省了几步。",
+          "sourceType": "一手"
+        },
+        {
+          "idx": "03",
+          "title": "Bernini v2 进 Comfy：语义规划 + Wan2.2 双 DiT，一条工作流六种剪辑任务",
+          "summary": "9/1 ComfyUI Wiki：社区把字节 Bernini-Diffusers-v2（Apache-2.0）打成 Comfy 自定义节点。Qwen2.5-VL 规划器出语义 token，再由 Wan2.2 高/低噪双 DiT（0.875 切换）渲染。按接口自动选 t2v / r2v / v2v / rv2v / 风格迁移。HF 权重 ByteDance/Bernini-Diffusers-v2；官方推荐 Hopper。OpenS2V 63.83。rzgar 原仓本环境 404，RunningHub 全量包可用。",
+          "links": [
+            {
+              "label": "ComfyUI Wiki：Bernini v2",
+              "url": "https://comfyui-wiki.com/en/news/2026-09-01-bernini-v2-comfyui"
+            },
+            {
+              "label": "Hugging Face：Bernini-Diffusers-v2",
+              "url": "https://huggingface.co/ByteDance/Bernini-Diffusers-v2"
+            },
+            {
+              "label": "GitHub：RunningHub 全量包",
+              "url": "https://github.com/RH-RunningHub/ComfyUI-RH-Bernini-Full"
+            }
+          ],
+          "value": "本地视频剪辑（换背景/参考改镜头）可以先试一条 v2v，对照云端 Kling/Wan 账单。没 H100 只做客研。",
+          "impact": "开源视频从「会出片」挪到「能按语义剪」。剪辑外包的短单会先被内部化。",
+          "tags": [
+            "视频"
+          ],
+          "action": "有 Hopper/大显存的机子装 RunningHub 包跑 1 条 5–10 秒 v2v；没卡就只记「本地剪辑客研」，不改 SOP。",
+          "sourceType": "一手"
+        },
+        {
+          "idx": "04",
+          "title": "Gemini 3.8 Flash × Nano Banana：Antigravity 里一句话出可玩 3D 关卡",
+          "summary": "9/2 Google 官方演示：3.8 Flash 在 Antigravity 用循环指令写出可玩 3D 关卡，谜题和环境叙事在，贴图走 Nano Banana。The Decoder 转述称 3D 生成观感有提升——实际是编码 Agent 调生图，不是 Flash 自己出网格。同日还有 DOS 版 Google Maps 单提示可玩。这是灰盒原型近窗，不是关卡生产器。",
+          "links": [
+            {
+              "label": "Google：Gemini 3.8 Flash",
+              "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"
+            },
+            {
+              "label": "The Decoder：3.8 Flash 转述",
+              "url": "https://the-decoder.com/gemini-3-8-flash-is-googles-third-budget-model-in-six-weeks-while-frontier-models-remain-mia/"
+            }
+          ],
+          "value": "策划验收可以用「一句话出可点灰盒 + Nano Banana 贴图」看节奏，别把生成网格当碰撞真相。",
+          "impact": "编码 Agent 开始碰美术灰盒。和 9/1 Magpie（引擎白盒→视频）错层：一条管观感视频，一条管可玩原型。",
+          "tags": [
+            "3D",
+            "Agent"
+          ],
+          "action": "在 Antigravity 用 3.8 Flash 试 1 条现有灰盒关卡（贴图指定 Nano Banana），记能不能玩、贴图花了多久。",
+          "sourceType": "一手"
+        },
+        {
+          "idx": "05",
+          "title": "Diffusion Compiler：3090 Ti 上 Krea 2 Turbo 出图约 2.2×，H3 还在路上",
+          "summary": "9/1 ComfyUI Wiki：alexone 的 C++20 Diffusion Compiler 把 Krea 2 Turbo 编成无 libtorch 的本地运行时。RTX 3090 Ti、1024²、8 步 Euler：prompt→PNG 26.58s vs Comfy/PyTorch 59.14s（约 2.2×）。加速主要来自去 warmup 和更快的文本编码/VAE，热步并不更快。H3 ConvRot INT8 单步约 1.72×，端到端尚未过验收。实验栈，计划接 Comfy 钩子。",
+          "links": [
+            {
+              "label": "ComfyUI Wiki：Diffusion Compiler",
+              "url": "https://comfyui-wiki.com/en/news/2026-09-01-diffusion-compiler"
+            },
+            {
+              "label": "GitHub：diffusion-compiler",
+              "url": "https://github.com/CodeAlexx/diffusion-compiler"
+            }
+          ],
+          "value": "本地 Krea 2 Turbo 批量草稿如果卡在 Python 开销，可以记一笔墙钟上限。生产继续走 Comfy。",
+          "impact": "本地生图的下一刀是推理壳，不是再下一个模型。没过验收的编译器不能进 SOP。",
+          "tags": [
+            "生图",
+            "成本"
+          ],
+          "action": "有 3090 级卡的实验机按 README 跑同一条 Krea 2 Turbo，对照 Comfy 墙钟；没卡或编不过就只记「未进 SOP」。",
+          "sourceType": "一手",
+          "cost": "3090 Ti 约 26.6s vs 59.1s"
+        }
+      ]
+    },
+    "B": {
+      "tag": "B 层",
+      "title": "AI 上游信息",
+      "hint": "模型 / Agent / 开源 / 机器人 / 安全 / 产品化",
+      "items": [
+        {
+          "idx": "01",
+          "title": "GoogleDeepMind：Gemini 3.8 Flash 同价更能干，但任务账单可能更贵",
+          "summary": "9/2 Google 官方：3.8 Flash 接 3.7，入 $0.75 / 出 $3.75 每百万 token，引入价收到 2026-12-31，之后翻倍到 $1.50 / $7.50。官方称复杂任务会多推理、多工具——「更勤奋」。The Decoder 引 Artificial Analysis：Intelligence Index 59 vs 3.7 的 56，但每任务约 $0.58 vs $0.40（约 +40%）。效率优先可继续 3.7。Cyber 档走 Fairwind，美术用不到。",
+          "links": [
+            {
+              "label": "GoogleDeepMind：3.8 Flash",
+              "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"
+            },
+            {
+              "label": "DeepMind 模型卡",
+              "url": "https://deepmind.google/models/model-cards/gemini-3-8-flash/"
+            },
+            {
+              "label": "The Decoder：账单与指数",
+              "url": "https://the-decoder.com/gemini-3-8-flash-is-googles-third-budget-model-in-six-weeks-while-frontier-models-remain-mia/"
+            }
+          ],
+          "value": "写节点/批处理 Agent 可以先换 3.8 Flash 试质量，但必须记 token 账单；省钱任务留 3.7。",
+          "impact": "Flash 节奏在加快，单价不变不等于账单不变。选型表要拆「质量档」和「效率档」。",
+          "tags": [
+            "Agent",
+            "成本"
+          ],
+          "action": "把一条常驻 Gemini 美术/节点任务迁到 3.8 Flash，对照 3.7 的质量和 $/任务。",
+          "sourceType": "一手",
+          "conduction": "Cursor/批处理默认可试 3.8 Flash，效率优先任务继续 3.7；引入价盯 12/31。",
+          "cost": "引入价 $0.75/$3.75 · 至 12/31"
+        },
+        {
+          "idx": "02",
+          "title": "@AIatMeta 9/2：Muse Spark 1.3，官方称工具调用约 −20%、token 约 −25%",
+          "summary": "9/2 Meta 研究博客（@AIatMeta 同日发帖，本环境未直读原帖）：Muse Spark 1.3 今日进 Muse Code 与 Meta Model API。相对 1.2，内部工程师对比约少 20% 工具调用、约少 25% token，更少废话。会问清再动、不可逆操作先确认。max reasoning 还在安全测试。Axios 转述 AI 主管 Alexandr Wang：对标前沿，铺 24/7 个人 Agent。价与前代相同（Axios）。",
+          "links": [
+            {
+              "label": "Meta：Introducing Muse Spark 1.3",
+              "url": "https://research.meta.ai/blog/introducing-muse-spark-1-3"
+            },
+            {
+              "label": "Axios：Wang 谈 1.3",
+              "url": "https://www.axios.com/2026/09/02/meta-debuts-muse-spark-13-as-personal-agent-work-continues"
+            }
+          ],
+          "value": "若已在用 Muse Code/API 写节点，本周换 1.3 看墙钟和 token；24/7 个人 Agent 还不是生产承诺。",
+          "impact": "上游一边降 Agent 账单，一边把 max/Cyber 档留在安全闸后。接 Astra / Mythos 的「能力 gated」。",
+          "tags": [
+            "Agent",
+            "成本"
+          ],
+          "action": "Muse Code 里把一条现网节点任务换到 Spark 1.3，记工具调用次数和 token。",
+          "sourceType": "一手",
+          "conduction": "有 Muse 的工位本周切 1.3；通宵无人值守仍不开放，max reasoning 没过安全测试就当没有。",
+          "cost": "官方称工具调用约 −20% · token 约 −25%"
+        },
+        {
+          "idx": "03",
+          "title": "3.8 Flash 注入更硬：Gray Swan 攻击成功率约 5.5%；Cyber 档只给防御方",
+          "summary": "9/2 同一篇 Google 博文：3.8 Flash 在 Gray Swan IPI 上攻击成功率约 5.5%（The Decoder 转述官方图；Opus 5 约 4.8%）。3.8 Flash Cyber 走 Fairwind，给政府/关键基础设施/软件维护方，护栏更松、专攻漏洞发现和补丁。Chrome 安全组称正确补丁量约 2.6× 更大商业模型。美术侧申请不到 Cyber，也不该申请。",
+          "links": [
+            {
+              "label": "Google：3.8 Flash / Cyber",
+              "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"
+            },
+            {
+              "label": "The Decoder：注入与 Cyber 数字",
+              "url": "https://the-decoder.com/gemini-3-8-flash-is-googles-third-budget-model-in-six-weeks-while-frontier-models-remain-mia/"
+            }
+          ],
+          "value": "看图/批处理 Agent 换 3.8 Flash 能吃一点注入加固，仍要隔离和停机开关。别等 Cyber 档。",
+          "impact": "接上周 HF 事故和 Astra Critical：前沿实验室继续把进攻能力锁在白名单。生产 Agent 的闸比模型分数更值钱。",
+          "tags": [
+            "Agent"
+          ],
+          "action": "夜间批图 Agent 默认模型改 3.8 Flash 标准档，保留网络隔离 + 停机开关；不申请 Cyber。",
+          "sourceType": "转述",
+          "conduction": "美术 Agent 只用 3.8 Flash 标准档；隔离和熔断不撤。Cyber / Fairwind 与生产出图无关。"
+        }
+      ]
+    }
+  },
+  "actions": [
+    "Atlas：填 early access，拿 1 张场景概念图设计环绕机位，估能否替代抽卡式预告；正式关卡渲染不进评估。",
+    "Google Pics：pics.new 对 1 张活动图做对象分割 + 图内文字翻译，划哪些物料允许直出、哪些仍走班组 SOP。",
+    "3.8 Flash：Antigravity 试 1 条灰盒关卡（贴图走 Nano Banana）；编码 Agent 迁 3.8 并记 $/任务，省钱任务留 3.7。",
+    "Bernini：有大显存的机子跑 1 条 5–10 秒 v2v；没卡只做客研。Sora 9/24 / Kling v2 9/15 / Omni Preview 9/30 倒计时表继续填。",
+    "Muse Spark 1.3：有 Muse Code 的工位换一条节点任务记工具调用；夜间批图 Agent 改 3.8 Flash 标准档，隔离不撤。"
+  ]
+}
 };
