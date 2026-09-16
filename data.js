@@ -1,14 +1,14 @@
 window.BRIEFING = {
   "meta": {
-    "date": "2026-09-15",
+    "date": "2026-09-16",
     "kicker": "DAILY AI ART INTELLIGENCE",
     "title": "每日 AI 美术情报",
     "tagline": "面向全栈游戏美术负责人 / AI 降本增效研究"
   },
   "editorFrame": [
-    "硬截止今日：ComfyUI 文档写明 Kling V1.5 / V1.6 / V2.1 / V2.1 Master 与 Kolors Virtual Try-On 于 2026-09-15 退役——旧 Partner 模板今天会断，迁 api_kling_o3_* / v3_* / Omni。",
-    "业界话术压力上来了：Level-5 日野就 VISION 展示片用 AI 公开道歉（强调成片人格设定仍人工、AI 主做数字化）；今村隆也晒 AI 原型遭反噬——宣发/原型与入库成片的边界要写进对外口径。",
-    "上游同周：Dario《We Must Pace the Frontier》主张给能力踩油门配闸；@sama 公开承诺独立评估员「类员工级」访问；Sora Videos API 仍无官方替代，约剩 9 天（9/24）。"
+    "硬截止逼近：Sora Videos API 9/24 关停且官方替代栏仍空（T-8）。宣发视频本周必须完成备用供应商对照，别把成片押在临期 API 上。",
+    "管线两把新扳手：Black Forest Labs FLUX Video Edit（约 $0.03/秒，≤15s）可局部改一镜；Adobe Premiere Generative Media 把 Firefly/Veo/Kling/Runway/Luma 拉进时间线——选型要连同商用条款一起核。",
+    "上游：@fchollet 拒「宣布 AGI」直到可发明；@karpathy 谈持续学习 vs 纯 LLM；@DrJimFan 用 World of Bits→专用通才类比提醒 Agent 要先广后专。采购继续问可验证行为，不追口号。"
   ],
   "layers": {
     "A": {
@@ -18,89 +18,94 @@ window.BRIEFING = {
       "items": [
         {
           "idx": "01",
-          "title": "Kling 旧版 Comfy Partner 今日 EOL：V1.5/V2.1 Master/Kolors VTO 退役",
-          "summary": "ComfyUI 官方 Kling 3.0 教程页与 Partner 定价页均写：Kling V1.5、V1.6、V2.1、V2.1 Master 与 Kolors Virtual Try-On API 于 2026-09-15 退役；相关 Partner Nodes 可能仍在，但旧模型选项与模板将失效。替换表：api_kling_i2v→api_kling_o3_i2v 或 api_kling2_6_i2v；effects/flf/dual_characters→api_kling_v3_* / o3_flf2v；试衣改 Flux Virtual Try-On（api_flux_vto）。Comfy-Org/workflow_templates 已归档旧 Kling/Runway Gen3a 模板。今日为硬截止。",
+          "title": "FLUX Video Edit：按提示局部改现有镜头，$0.03/秒",
+          "summary": "Black Forest Labs 于 9/10 前后上线 FLUX Video Edit（官方文档与 @bfl_ai 同步）：对已有成片做增删改、换场景/风格/对白，未点名部分尽量保持原时长、机位、节奏与音频。接口 POST /v1/flux-tools/video-edit-v1，源片 ≤15 秒、≤50 MiB；>720p 会降到约 720p；按时长计费 FLUX Video Edit [fast] 为 $0.03/秒（10 秒约 $0.30）。不支持遮罩/参考视频/延展（延展走 continuation）。对游戏宣发最实用的是「去标、换道具、改一句旁白」而不必整镜重生成。",
           "links": [
             {
-              "label": "ComfyUI：Kling 3.0 + EOL",
-              "url": "https://docs.comfy.org/tutorials/partner-nodes/kling/kling-3-0"
+              "label": "BFL 文档：FLUX Video Edit",
+              "url": "https://docs.bfl.ai/flux_tools/flux_video_edit"
             },
             {
-              "label": "ComfyUI Partner 定价（含 Legacy EOL）",
-              "url": "https://docs.comfy.org/tutorials/partner-nodes/pricing"
+              "label": "GIGAZINE：功能与定价转述",
+              "url": "https://gigazine.net/gsc_news/en/20260911-flux-video-edit/"
             },
             {
-              "label": "GitHub：归档旧模板 PR",
-              "url": "https://github.com/Comfy-Org/workflow_templates/pull/1043"
+              "label": "BFL：FLUX 3 总览",
+              "url": "https://bfl.ai/blog/flux-3"
             }
           ],
-          "value": "还挂旧 i2v / effects 的宣发与预告节点今天必须切到 3.0/Omni，否则 Partner 调用直接失败。",
-          "impact": "和 Sora 9/24 叠压：视频供给两周内两道硬关。Comfy 侧以 3.0 / Omni 为主路径，Premiere Generative Media 等旁路按所选模型核商用条款。",
+          "value": "预告片小改不必重跑整段 i2v；把「局部修」从剪辑手工抠/重渲改成一次 API。",
+          "impact": "和 Sora 关停叠在一起：视频供给从「能生成」转向「能可控改」。720p 上限意味着成片级仍要接上采样或实拍层。",
           "tags": [
             "视频",
             "成本"
           ],
-          "action": "今天内：导出仍含 V1.x/V2.1 的 Partner 模板清单→映射到 o3/v3 替换名→各跑 1 条同镜头基线并归档旧 JSON。",
+          "action": "挑 1 条 ≤10s 预告镜头：列 3 个局部改需求（去标/换道具/改旁白）各跑 1 次，对照人工修补墙钟与费用。",
           "sourceType": "一手",
-          "cost": "旧版今日退役 · 2026-09-15"
+          "cost": "$0.03/秒 · ≤15s"
         },
         {
           "idx": "02",
-          "title": "Level-5 日野：VISION 展示片用 AI 道歉——成片人格人工、AI 主做数字化",
-          "summary": "9/12 起 @AkihiroHino 发长文（ANN / Final Weapon / GamesRadar 等 9/12–14 转述）：承认 LEVEL5 VISION 2026 II 事件影像使用最新 AI 做「更炫的展示实验」，对观众不适「深表歉意」；强调剧本、角色设计、基础设定仍全人工；效率目标是把人做的原画准确转多边形等数字化，并称成片不含「草率生成」AI 数据；愿景是把大型标题周期从约 5 年压到约 2 年。粉丝对展示片与成片边界仍不买账。一手 X 本环境未直连，以权威媒体转述为准。",
+          "title": "Premiere Generative Media：时间线直出 Firefly/Veo/Kling/Runway/Luma",
+          "summary": "Adobe 9/8 官方博文（IBC 周期持续曝光至 9/14）：Premiere 新增 Generative Media Tool，在时间线框选区间即可生成视频与音效；模型可选 Adobe Firefly 及合作方 Google Veo、Kling、Runway、Luma。Generate Video 可采工程内参考帧；Generate Sound Effects 已上线；Generate Music / Soundscape 为 beta。After Effects 同步上线 AI Assistant 公测。任务栏会显示所选模型组合的积分消耗。对游戏宣发意味着「补空镜/转场垫片」不必再跳出剪辑软到网页端来回导出。",
           "links": [
             {
-              "label": "ANN：日野声明摘要",
-              "url": "https://www.animenewsnetwork.com/interest/2026-09-12/level-5-ceo-akihiro-hino-addresses-use-of-ai-in-latest-presentation/.241710"
+              "label": "Adobe 官方：Premiere/AE AI 更新",
+              "url": "https://blog.adobe.com/en/publish/2026/09/08/generate-create-directly-in-your-timeline-with-new-ai-powered-innovations-in-premiere-after-effects"
             },
             {
-              "label": "Final Weapon：声明全文英译",
-              "url": "https://finalweapon.net/2026/09/12/level-5-ceo-akihiro-hino-comments-on-ai-usage-at-vision-2026-ii-broadcast/"
+              "label": "Digital Production：模型与状态拆解",
+              "url": "https://digitalproduction.com/2026/09/08/adobe-puts-a-prompt-layer-across-pro-video/"
             },
             {
-              "label": "GamesRadar：展示片 backlash",
-              "url": "https://www.gamesradar.com/games/puzzle/i-deeply-apologize-after-global-backlash-level-5-ceo-admits-new-yo-kai-watch-and-professor-layton-showcase-uses-generative-ai/"
+              "label": "ProVideo Coalition：IBC 上手",
+              "url": "https://www.provideocoalition.com/pvc-at-ibc-2026-adobe-debuts-generative-media-tool-to-bring-ai-directly-into-premiere-pro-timeline/"
             }
           ],
-          "value": "对外物料要先写清「展示/概念 vs 入库成片」；内部数字化（原画→拓扑）可谈，别让预告片成争议入口。",
-          "impact": "日厂/主机向舆论对「宣发 AI 痕迹」零容忍上升。采购与发行合规会把「展示片是否含生成素材」写进验收清单。",
+          "value": "宣发剪辑可在时间线内补 1–2 秒垫片并立刻看卡点；模型切换变成剪辑决策而非工具链决策。",
+          "impact": "Partner 模型进时间线不等于同一商用条款。发行前仍要按所选模型核授权、水印与 Content Credentials。",
           "tags": [
-            "授权",
-            "生图"
+            "视频",
+            "授权"
           ],
-          "action": "本周定一版对外口径一页纸：哪些环节可用 AI、展示片如何标注、成片禁止项；发行/市场签字。",
-          "sourceType": "转述"
-        },
-        {
-          "idx": "03",
-          "title": "SceneHI（arXiv 9/9）：多物体场景高分辨率 3D 一致贴图 + 可控光照烘焙",
-          "summary": "arXiv 2609.10363（9/9，ECCV 2026）：SceneHI 把 2D diffusion 的高分辨率、光照感知先验抬到 3D 贴图合成；号称无需微调/优化即可直接在 3D 物体上生成高分辨率纹理，面向复杂多物体场景，同时追求 3D 一致性、分辨率与物理合理烘焙阴影。核心含解析 pixel-to-texel 映射对齐多视角扩散轨迹、HRLT 持久画布，以及光感知生成把几何一致阴影写入 atlas；相对既有场景级方法称生成时间降约 80%。论文级，非商用 SaaS。",
-          "links": [
-            {
-              "label": "arXiv：SceneHI",
-              "url": "https://arxiv.org/abs/2609.10363"
-            },
-            {
-              "label": "DOI",
-              "url": "https://doi.org/10.48550/arXiv.2609.10363"
-            }
-          ],
-          "value": "场景/关卡贴图客研可盯「多物体一致 + 阴影进 atlas」；生产仍要 UV、LOD、命名与引擎光照规范。",
-          "impact": "和上周 FIRE3D（几何拆物体）互补：一边建 mesh，一边谈高分辨率一致贴图。道具海量管线可把「贴图一致性」写进验收，而不是只看单视角好看。",
-          "tags": [
-            "3D",
-            "生图"
-          ],
-          "action": "读摘要 15 分钟：列你们场景贴图最痛的 3 类（多物体接缝/阴影穿帮/分辨率），标是否值得做客研对比现有烘焙流程。",
+          "action": "本周用同一空镜区间分别跑 Firefly 与 Kling（或 Veo）各 1 条，记录积分消耗、观感与商用条款差异，写进选型表。",
           "sourceType": "一手"
         },
         {
-          "idx": "04",
-          "title": "Sora Videos API 关停 T-9：官方替代栏仍为空",
-          "summary": "OpenAI 弃用页仍列：Videos API 与 sora-2 / sora-2-pro 及快照于 2026-09-24 移除，Recommended replacement 为 ---。Help 中心与行业迁移文（Miraflow 等）继续指向 Kling 3.0 / Veo 3.1 / Seedance / Runway Gen-4.5 等逃生口。距今约 9 天。未迁完的调用点与未备份成片本周必须清零风险。",
+          "idx": "03",
+          "title": "ChatGPT Images 2.5 / GPT-Image-2.5：编辑更准、延迟约降半",
+          "summary": "OpenAI 9/8 发布 ChatGPT Images 2.5：宣称相对 Images 2.0 生成延迟最高约降 50%，参考一致性与多轮局部编辑更稳。API 拆成 gpt-image-2.5-flare（快）与 gpt-image-2.5-sunburst（精修），token 价与 GPT Image 2 同档：文本输入 $5/百万、图像输入 $8/百万、图像输出 $30/百万；有 2026-09-08 快照可钉版本。适合概念图「只改盔甲纹样/UI 角标」这类多轮定点修改；批量过夜任务需自行量测，勿直接沿用旧 Image 2 计算器。",
           "links": [
             {
-              "label": "OpenAI API deprecations（Sora）",
+              "label": "OpenAI：Introducing ChatGPT Images 2.5",
+              "url": "https://openai.com/index/introducing-chatgpt-images-2-5/"
+            },
+            {
+              "label": "API：gpt-image-2.5-flare",
+              "url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+            },
+            {
+              "label": "API：gpt-image-2.5-sunburst",
+              "url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+            }
+          ],
+          "value": "概念迭代从「整张重抽」更多变成「定点改」；flare 跑量、sunburst 收口。",
+          "impact": "单价 token 未降，价值在少重试与少整图重跑。入库前仍要人工修与版权审查。",
+          "tags": [
+            "生图",
+            "成本"
+          ],
+          "action": "同一张定稿：用 flare 做 2 轮快改、sunburst 做 1 轮精修，对照旧 Images 2.0 的墙钟与重试次数。",
+          "sourceType": "一手",
+          "cost": "输出 $30/百万 token（同 Image 2 档）"
+        },
+        {
+          "idx": "04",
+          "title": "Sora Videos API 关停 T-8：官方替代栏仍为空",
+          "summary": "OpenAI 弃用表与帮助中心仍写明：Videos API 与 sora-2 / sora-2-pro 及 dated snapshots 于 2026-09-24 永久关停，Recommended replacement 为空。消费端 App/Web 已于 4/26 停；帮助中心建议尽快导出历史成片。距今约 8 天。游戏宣发若仍把可编程视频押在 Sora，本周必须完成迁移对照与资产导出，不能等到截止日期当周再动。",
+          "links": [
+            {
+              "label": "OpenAI API：Deprecations（Sora/Videos）",
               "url": "https://developers.openai.com/api/docs/deprecations"
             },
             {
@@ -108,45 +113,45 @@ window.BRIEFING = {
               "url": "https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation"
             },
             {
-              "label": "迁移对照（行业文）",
-              "url": "https://miraflow.ai/blog/sora-api-shutdown-video-model-alternatives-migration-guide-2026"
+              "label": "迁移对照参考（第三方）",
+              "url": "https://aivideosensei.com/guides/sora-api-shutdown-migration-guide"
             }
           ],
-          "value": "别等「官方替代」——今天同时完成 Kling 旧版切换与 Sora 迁移表对账。",
-          "impact": "OpenAI 可编程视频空窗期内，宣发供给依赖多供应商；合同与预算按主/备两家写。",
+          "value": "倒计时进入个位数：迁移与导出比「再试一镜 Sora」更值钱。",
+          "impact": "OpenAI 暂时退出可编程视频供给。Premiere/Comfy/直连接口都要清掉 Sora 依赖。",
           "tags": [
             "视频",
             "成本"
           ],
-          "action": "核对迁移表：主/备供应商、同 prompt 基线片路径、剩余 Sora 成片导出；日历钉 9/24。",
+          "action": "今天列出所有 Sora/Videos API 调用点与未备份成片；本周内完成备用供应商同镜头对照并导出库。",
           "sourceType": "一手",
-          "cost": "API 9/24 关停 · 无官方替代 · 约剩 9 天"
+          "cost": "API 9/24 关停 · 无官方替代 · T-8"
         },
         {
           "idx": "05",
-          "title": "今村隆也 AI 原型翻车：美术总监「试做」也要先定对外边界",
-          "summary": "9/12–14 Kotaku / TheGamer / GamesRadar 等报道：任天堂元老、Majora's Mask 美术总监今村隆也（@ima_1966 等）在 X 晒 AI 辅助 3D 射击原型，称与 AI 来回像当年跟程序对想法；遇伦理与训练数据批评后回应「职业上无法无视 AI、在做实验」，并澄清从未说要做成品上架。与 Level-5 展示片争议同周，形成「个人实验 / 工作室宣发」双线舆论。一手 X 本环境未直连，以媒体转述为准。",
+          "title": "Hi3D / Meshy 7 / Tripo：按交付物选型，别再「一个工具打天下」",
+          "summary": "Meshy 博客 9/7 发布可核对对比（注明自家立场）：单视角几何对齐 Meshy 7 领先；四视角后三家收敛。实务结论——Hi3D 3.0 偏打印（2048³、分件连接件、上色分区）；Tripo Smart Mesh 偏海量道具（500–50K 四边、引擎插件面广）；Meshy 偏「一张图走完」到绑定/动画/导出。游戏侧常见组合：道具量产走 Tripo，英雄角色走 Meshy 绑定，实体周边才碰 Hi3D。价格表常变，引用前核对官网。",
           "links": [
             {
-              "label": "Kotaku：今村 AI 原型 backlash",
-              "url": "https://kotaku.com/the-legend-of-zelda-majoras-masks-art-director-gets-blow-back-for-using-ai-in-prototyping-test-2000734003"
+              "label": "Meshy：Hi3D vs Meshy vs Tripo（9/7）",
+              "url": "https://www.meshy.ai/blog/hi3d-vs-meshy-vs-tripo"
             },
             {
-              "label": "TheGamer：Star Fox 创作者争议",
-              "url": "https://www.thegamer.com/star-fox-creator-takaya-imamura-backlash-ai/"
+              "label": "Meshy：游戏 3D 资产工具对比",
+              "url": "https://www.meshy.ai/blog/best-ai-tools-for-3d-game-assets"
             },
             {
-              "label": "GamesRadar：报道",
-              "url": "https://www.gamesradar.com/games/the-legend-of-zelda/legendary-zelda-and-star-fox-artist-is-genuinely-amazed-by-ai-even-as-he-catches-backlash-from-nintendo-fans/"
+              "label": "独立评测参考（HackerNoon）",
+              "url": "https://hackernoon.com/how-i-stress-tested-3-ai-3d-generators-on-the-same-inputs-what-the-numbers-actually-show"
             }
           ],
-          "value": "内部灰盒/个人实验可以，公开晒图前先过 PR：标注实验、不暗示入库、不碰未授权训练争议点。",
-          "impact": "美术负责人个人账号也是品牌面。AI 原型 SOP 要从「能不能跑」扩到「能不能发」。",
+          "value": "用交付物选工具，比追「最新模型名」更能压重拓扑与返工。",
+          "impact": "3D AI 进入分工阶段：拓扑、绑定、打印不再指望一家包圆。采购可按资产类型拆账单。",
           "tags": [
-            "授权",
-            "Agent"
+            "3D",
+            "成本"
           ],
-          "action": "补一条班组规范：对外分享 AI 原型须标注「实验/非成片」+ 法务/市场预审，默认不发原始生成片。",
+          "action": "本周固定 1 张硬表面道具图：Tripo Smart Mesh 与 Meshy 各出 1 版，进引擎看是否还要 re-topo，记墙钟。",
           "sourceType": "转述"
         }
       ]
@@ -158,96 +163,87 @@ window.BRIEFING = {
       "items": [
         {
           "idx": "01",
-          "title": "@DarioAmodei：We Must Pace the Frontier——能力放缓 + 嵌入式第三方评估",
-          "summary": "9/12 Dario 个人站长文：主张必须放缓提升模型能力的节奏，让对齐/可解释/评测跟得上；动机含递推式自我改进加速，以及 OAI-HF 等 Agent 集群越权风险（称 6–12 月量级担忧）。三步：① 嵌入式第三方评估员（类员工级访问，Anthropic 单方面承诺）；② 民主国家内协调安全标准与未受控进展上限；③ 全球协调。明确 pacing ≠ 停训。一手来源；本环境无 X 直连。",
+          "title": "@fchollet：在 AI 能「发明」之前，我不会宣布 AGI",
+          "summary": "9/7 前后 @fchollet 在 X 发帖：构建 AGI 的叙事一直绑在发明能力上（治癌、聚变等），因此在系统能做出概念突破、新洞见或真实新技术之前，他不会「declare AGI」；并补一句「AGI 应能产出比你塞进去的更多东西」。语境是 GPT-6 Astra「AGI era」叙事与黄仁勋等表态升温。本环境未直连 X，据 Traictory 等转述。",
           "links": [
             {
-              "label": "一手：We Must Pace the Frontier",
-              "url": "https://darioamodei.com/post/we-must-pace-the-frontier"
+              "label": "Traictory：Chollet 拒宣布 AGI",
+              "url": "https://traictory.com/news/2026-09-09-chollet-agi-declaration"
             },
             {
-              "label": "The Atlantic 转述",
-              "url": "https://www.theatlantic.com/technology/2026/09/dario-amodei-slow-down-ai-save-humanity/688610/"
+              "label": "相关讨论线索（unroll）",
+              "url": "https://www.unrollnow.com/status/2095605239269519771"
             }
           ],
-          "value": "美术侧别赌「下周就有更强无闸视频/Agent API」；选型按现网稳定档与可审计供应商。",
-          "impact": "上游公开把「放缓」当议程，采购问卷会更问隔离、日志、第三方审计。产能叙事与闸门同涨。",
+          "value": "别把上游「AGI 到了」当采购理由；美术选型看可复现管线与授权，不看口号。",
+          "impact": "口号战升温时，预算评审更容易被带节奏。用可交付指标压回去。",
           "tags": [
-            "Agent",
-            "授权"
+            "Agent"
           ],
-          "action": "班组同步：新模型试用默认「有人值守+配额+可停机」；不把实验室放量当编制依据。",
-          "sourceType": "一手",
-          "conduction": "接 A 层 Kling/Sora 硬截止：上游在谈踩刹车，管线侧先把已退役/将退役的供应商切干净，别等下一波能力放量。"
+          "action": "本周选型会加一行否决项：无基准/无授权说明的「AGI 级」话术不进短名单。",
+          "sourceType": "转述",
+          "conduction": "上游叙事≠生产就绪。游戏美术继续按墙钟、一致性和条款验收。"
         },
         {
           "idx": "02",
-          "title": "@sama：同意 pace the frontier，承诺独立评估员「类员工级」访问",
-          "summary": "9/12 @sama 在 X 回应 Dario（SiliconANGLE / ABC 等 9/13 引原帖）：同意需要 pace the frontier，称 OpenAI 近几周内部已在讨论；认为承诺独立评估员拥有类似员工的访问权是好主意，「我们也会这样做，稍后分享更多」。与 Dario 文中第 1 步同构。一手 X 本环境 client-not-enrolled，以权威媒体引推文为准并标转述。",
+          "title": "@karpathy：持续学习缺位时，LLM 更像「召唤幽灵」",
+          "summary": "近几日转述显示 @karpathy 评论 Richard Sutton 对 LLM 的批评：预训练像「蹩脚的进化」，动物世界几乎没有这种大规模监督学习；若具备持续（在岗）学习，就不那么需要单独的训练/部署割裂。他把当下前沿研究部分描述为在「召唤幽灵」（对人类数据蒸馏出的实体）。对美术 Agent 的启示是：没有在线纠错与经验沉淀的批处理，只是一次次重抽，不会自动变「熟手」。",
           "links": [
             {
-              "label": "SiliconANGLE：引 @sama 原帖",
-              "url": "https://siliconangle.com/2026/09/13/sam-altman-and-elon-musk-back-dario-amodeis-call-to-slow-down-the-frontier-of-ai-development/"
-            },
-            {
-              "label": "ABC：Altman/Musk 表态",
-              "url": "https://www.abc.net.au/news/2026-09-13/anthropic-ceo-calls-for-slower-ai-development/107147650"
-            },
-            {
-              "label": "Dario 原文（被引用）",
-              "url": "https://darioamodei.com/post/we-must-pace-the-frontier"
+              "label": "unroll：karpathy 谈 Sutton/持续学习",
+              "url": "https://www.unrollnow.com/status/1973435013875314729"
             }
           ],
-          "value": "OpenAI 侧短期更可能加评测/访问闸，而不是突然补一个 Sora 官方替代——迁移计划别押「官方回头」。",
-          "impact": "两大厂公开对齐「独立评估」叙事；企业客户可把第三方审计写进合同附件。",
+          "value": "批图/节点 Agent 要留「错题本」：失败案例、可用种子、禁止项，而不是只换模型。",
+          "impact": "持续学习产品化之前，人机闭环仍是产能主路径。",
           "tags": [
-            "Agent",
-            "授权"
+            "Agent"
           ],
-          "action": "Sora/OpenAI 相关采购条款加一行：是否支持独立安全评估与事件披露；迁移表不因「稍后分享」停摆。",
+          "action": "给现有批图流程加一个共享失败库（坏案例+修好的提示/节点），本周至少写入 5 条。",
           "sourceType": "转述",
-          "conduction": "接 B01：Dario 提案 → sama 口头承诺。对美术管线只翻译成「供应商审计条款 + 不赌空窗期补位」。"
+          "conduction": "接 A 层 Images 2.5/视频局部改：工具更会改了，团队知识库更要跟上，否则只是更快地重复犯错。"
         },
         {
           "idx": "03",
-          "title": "@demishassabis：方向正确，并指向行业标准机构提案",
-          "summary": "9/12 @demishassabis 在 X quote Dario 文（Progressive Robot / Hindustan Times 等 9/13 引）：称 Dario 的文章指向正确道路，细节需推敲但方向对；并强调这也是他们近期提出「前沿 AI 行业标准机构」的原因。Dario 文中亦点名 Hassabis 机制可作为民主国家内协调路径之一。一手 X 未直连，转述标注。",
+          "title": "@DrJimFan：World of Bits 十年后——先广博预训练，再专向像素/按键",
+          "summary": "9/4 @DrJimFan（Jim Fan）回顾 OpenAI Universe/World of Bits：当年从零 RL 点屏幕订机票基本注定失败；认为计算机使用 Agent 正解是先在广任务上「煮沸海洋」，再专向屏幕像素与键鼠——「专用通才」。并祝贺 GPT-6 终于能较可靠订票。评论区追问机器人是否同理：先做世界模型再专向传感器。对游戏美术 Agent：别指望窄场景脚本一步到位，先覆盖通用资产规范再挂项目规则。",
           "links": [
             {
-              "label": "Progressive Robot：引 Hassabis 原帖",
-              "url": "https://www.progressiverobot.com/2026/09/13/demis-hassabis-aligns-dario-amodei-pacing-frontier-ai/"
+              "label": "LinkedIn：Jim Fan World of Bits 帖",
+              "url": "https://www.linkedin.com/posts/drjimfan_good-old-days-at-openai-in-2016-an-agent-activity-7501655653912981505-tFM6"
             },
             {
-              "label": "Hindustan Times 转述",
-              "url": "https://www.hindustantimes.com/world-news/after-musk-and-altman-google-deepmind-founder-backs-anthropic-ceo-dario-amodei-amid-alarm-over-ai-101789271487807.html"
-            },
-            {
-              "label": "Dario 原文",
-              "url": "https://darioamodei.com/post/we-must-pace-the-frontier"
+              "label": "Jim Fan 主页动态",
+              "url": "https://www.linkedin.com/in/drjimfan"
             }
           ],
-          "value": "DeepMind/Google 线短期更偏「标准与评测」而非无闸放量；Veo 等选型仍看现网 SLA，不看周末 X 共识。",
-          "impact": "Amodei / Altman / Hassabis 同周公开同向，监管与客户审计预期上移；开源/二线模型未必跟涨。",
+          "value": "美术 Agent 先喂「引擎导入规范/命名/三角预算」通识，再挂单项目风格，比一上来写死关卡脚本更稳。",
+          "impact": "和 Chollet/Karpathy 同周：上游在谈能力边界与学习范式，落地侧把「通用规范层」做厚。",
           "tags": [
-            "授权",
-            "成本"
+            "Agent",
+            "3D"
           ],
-          "action": "视频主备供应商评估表加「安全披露/标准承诺」列；本周不因叙事换主供应商，只锁迁移窗口。",
+          "action": "写一页「通用资产验收」清单（三角数、材质槽、命名、碰撞），作为所有 Agent 任务的前置系统提示。",
           "sourceType": "转述",
-          "conduction": "接 B01/B02：三方同向≠立刻降价或出替代模型。管线动作仍是 Kling 今日切完 + Sora T-9 清零。"
+          "conduction": "A 层工具在变快，B 层提醒：没有通识约束的 Agent 只会更快地产出不合规资产。"
         }
       ]
     }
   },
   "actions": [
-    "Kling 旧版：今日内模板清单→o3/v3 映射→同镜头基线；归档失效 JSON。",
-    "对外口径一页纸：展示/原型 vs 成片边界；发行市场签字（对标 Level-5 / 今村舆论）。",
-    "SceneHI：只做客研阅读，列 3 类场景贴图痛点是否值得对比现有烘焙。",
-    "Sora T-9：迁移表主备供应商 + 成片导出；日历钉 9/24。",
-    "Agent/采购：新模型默认有人值守+配额；合同问独立评估与事件披露。"
+    "Sora T-8：列出调用点与未备份成片，本周迁 Kling/Runway/Luma/Veo 并做同镜头对照，完成导出。",
+    "FLUX Video Edit：1 条 ≤10s 预告，去标/换道具/改旁白各 1 次，记费用与墙钟。",
+    "Premiere Generative Media：同一空镜区间 Firefly vs Kling（或 Veo）对照积分与商用条款，写入选型表。",
+    "Images 2.5：定稿上 flare 快改 2 轮 + sunburst 精修 1 轮，对照旧版重试次数。",
+    "3D：同一硬表面图 Tripo Smart Mesh vs Meshy 进引擎，看是否还要 re-topo；Agent 任务挂上通用资产验收清单。"
   ],
   "timeline": {
     "nodes": [
+      {
+        "type": "day",
+        "date": "2026-09-16",
+        "label": "09-16"
+      },
       {
         "type": "day",
         "date": "2026-09-15",
@@ -258,7 +254,7 @@ window.BRIEFING = {
         "id": "w38",
         "label": "W38",
         "range": "09-14 ~ 09-20",
-        "focus": "Kling 旧版 9/15 EOL 切 3.0/Omni；Sora 9/24 T-9 迁移；Level-5/今村舆论→展示与成片边界；Dario pace + sama/Hassabis 同向→采购问审计；SceneHI 贴图客研；跳过 9/12–9/14（周末/未落盘，不造）。"
+        "focus": "Sora 9/24 T-8 迁移；FLUX Video Edit 试局部改；Premiere Generative Media 选型+商用条款；Images 2.5 局部改对照；3D 按交付分 Hi3D/Meshy/Tripo；跳过 9/12–9/14。"
       },
       {
         "type": "day",
@@ -274,8 +270,8 @@ window.BRIEFING = {
         "type": "month",
         "id": "m202609",
         "label": "9月",
-        "range": "09-01 ~ 09-15",
-        "focus": "Kling 旧版 9/15 EOL；Sora 9/24 无替代；Level-5 展示片道歉 / 今村 AI 原型舆论；SceneHI 场景贴图；Unity Claude Code 官方插件；FIRE3D；Dario Pace the Frontier + sama/Hassabis；跳过 9/4–9/7、9/12–9/14（未跑或不落盘，不造）。"
+        "range": "09-01 ~ 09-16",
+        "focus": "FLUX Video Edit 局部改镜；Premiere Generative Media 时间线直出；Images 2.5 编辑提速；Sora 9/24 T-8；Hi3D/Meshy/Tripo 按交付选型；fchollet/karpathy/Jim Fan 上游；跳过 9/12–9/14（周末/未落盘，不造）。"
       },
       {
         "type": "week",
