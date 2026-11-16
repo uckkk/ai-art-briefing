@@ -229,9 +229,27 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 /* —— 报头 —— */
 .masthead { margin-bottom: var(--s-7); }
 .masthead__top {
-  display: flex; align-items: center; justify-content: flex-end;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap;
   gap: var(--s-4); margin-bottom: var(--s-4);
 }
+.site-nav {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  margin-right: auto;
+}
+.site-nav a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+.site-nav a[aria-current="page"] {
+  color: var(--text);
+  background: var(--surface-2);
+}
+.site-nav a:hover { color: var(--text); }
 .theme-toggle {
   display: inline-flex; align-items: center; gap: var(--s-2);
   background: transparent; color: var(--text-dim);
@@ -435,6 +453,7 @@ h1, h2, h3, .masthead__title, .layer__title, .actions__title,
 }
 .foot p { margin: 0 0 var(--s-2); }
 .foot__sub { color: var(--text-faint); opacity: 0.8; }
+.foot a { color: inherit; }
 
 /* —— 周/月总结视图（主界面内联切换，非弹窗） —— */
 .summary-view { margin-bottom: var(--s-8); }
