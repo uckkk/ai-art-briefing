@@ -1,0 +1,119 @@
+.weekly {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 64px) clamp(18px, 5vw, 28px) 88px;
+}
+
+.weekly .site-nav {
+  margin: 0 0 28px;
+}
+
+.weekly-head {
+  margin-bottom: 28px;
+}
+
+.kicker {
+  margin: 0 0 8px;
+  color: var(--text-faint);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.weekly h1 {
+  margin: 0 0 12px;
+  font-family: Fraunces, Georgia, serif;
+  font-size: clamp(2rem, 1.2rem + 3.2vw, 3.3rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+.range,
+.dek,
+.closing,
+.empty {
+  margin: 0;
+  color: var(--text-dim);
+}
+
+.dek {
+  margin-top: 12px;
+  color: var(--text);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.toc {
+  margin: 0 0 12px;
+}
+
+.toc ol {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.toc a,
+.weekly-foot a,
+.card a,
+.sources a {
+  color: inherit;
+}
+
+.issue,
+.card {
+  padding: 22px 0;
+  border-top: 1px solid var(--border);
+}
+
+.issue h2,
+.card h2 {
+  margin: 0 0 10px;
+  font-family: Fraunces, Georgia, serif;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.issue p,
+.card p,
+.closing {
+  margin: 0 0 12px;
+  line-height: 1.75;
+}
+
+.value {
+  color: var(--text-dim);
+}
+
+.sources {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sources a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  overflow-wrap: anywhere;
+}
+
+.weekly-foot {
+  margin-top: 28px;
+  color: var(--text-faint);
+  font-size: 0.875rem;
+}
+
+.weekly-foot p {
+  margin: 0 0 8px;
+}
+
+@media (max-width: 640px) {
+  .weekly h1 { letter-spacing: -0.02em; }
+  .issue,
+  .card { padding: 18px 0; }
+}

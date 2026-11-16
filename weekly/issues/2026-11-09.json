@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "id": "2026-11-09",
+  "end": "2026-11-16",
+  "title": "技术周报 · 11 月 9 日至 16 日",
+  "dek": "这一周核对过的变化，主要在可反复改的图像、透明素材、贴图回烘、成片遮罩，以及桌面运行时的修补。正文写在本站，链接留作对照。",
+  "items": [
+    {
+      "title": "Seedream 5.5：连续编辑，并直接生成透明素材",
+      "body": [
+        "字节 Seed 团队在 2026-11-09 的官方说明里发布了 Seedream 5.5。文中写的三项变化是：连续编辑时保住没有要求改动的像素，并减轻变色和细节变糊，演示里同一张图连续改了 100 次；可以直接生成带透明通道的图像，包括整块透明和局部半透明；光影、材质、皮肤和密集小字更接近可以拿去用的成稿。",
+        "Comfy 官方博客在 2026-11-11 写明，这个模型已经以 Partner Node 放进 ComfyUI，既可以按文字生成，也可以按参考图修改。ComfyUI v0.45.0 的发布说明（页面时间为 2026-11-10）同样列出了 Seedream 5.5。"
+      ],
+      "value": "图标、技能部件和需要反复改的立绘，经常卡在抠图，以及改一处就弄坏其余部分。原生透明通道和锁定未改区域，针对的就是这两件日常的事。官方演示不能代替自己的角色和界面验收。",
+      "links": [
+        {
+          "label": "Seed 官方说明：Seedream 5.5",
+          "url": "https://seed.bytedance.com/en/blog/more-realistic-images-more-stable-editing-across-100-rounds-introducing-seedream-5-5/"
+        },
+        {
+          "label": "Comfy 博客：Partner Node 已可用",
+          "url": "https://blog.comfy.org/p/seedream-55-is-now-available-via"
+        },
+        {
+          "label": "ComfyUI v0.45.0 发布说明",
+          "url": "https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.45.0"
+        }
+      ]
+    },
+    {
+      "title": "MiniMax H3 Image 可以在 ComfyUI 本机运行",
+      "body": [
+        "Comfy 官方博客 2026-11-10 说明，MiniMax H3 Image 已能在 ComfyUI 里直接运行。它是开放权重：不接参考图就是文生图，接上参考图就是编辑。采样被模型固定为 6 步、guidance 为 1，没有负向提示词可调。原生输出包括 4096×4096，以及 4:3、3:2、16:9、21:9 等比例。博客写的是按该尺寸生成，不是先出小图再放大。",
+        "同一天发布的 ComfyUI v0.45.0 说明里有对 MiniMax-H3-image 的支持。博客还写了另一条路：不下载权重，用 Partner Node 走接口。本机运行需要自行准备扩散模型、VAE，以及和 MiniMax H3 视频模型共用的文本编码器。"
+      ],
+      "value": "希望底图留在本机的小组，可以用它做设定图和局部修改。4096 一级的直出适合先看材质和轮廓。步数已经由模型定死，不能靠把步数调高来补画质。",
+      "links": [
+        {
+          "label": "Comfy 博客：MiniMax H3 Image",
+          "url": "https://blog.comfy.org/p/minimax-h3-image-is-now-available"
+        },
+        {
+          "label": "ComfyUI v0.45.0 发布说明",
+          "url": "https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.45.0"
+        }
+      ]
+    },
+    {
+      "title": "LTX AlphaGen：用云端节点从成片抽出遮罩",
+      "body": [
+        "ComfyUI 的 LTX Video VFX 文档把 AlphaGen 记为云端节点：输入一段已经做好的视频，按帧返回灰度遮罩，白色表示前景，不保留声音。文档给出的上限是 10 秒，宽高不超过 3840×2160。页面写明这个节点还没有现成模板，要从节点库里自己连接。它不重新生成镜头，只处理成片。",
+        "ComfyUI 更新日志把 AlphaGen、SDR 转 HDR、重构画幅和放大写在 2026-11-10 的 v0.45.1。对应改动于 2026-11-10 合并。文档同时说明这些是云端接口，需要登录并消耗额度，不会把模型下到本地。"
+      ],
+      "value": "过场和技能视频里，头发、烟和半透明边缘最耗抠像。这个节点适合拿 10 秒以内的短镜头试遮罩能不能用。它不是本机模型，排期时要算云端额度和画面上限。",
+      "links": [
+        {
+          "label": "ComfyUI 文档：LTX Video VFX / AlphaGen",
+          "url": "https://docs.comfy.org/tutorials/partner-nodes/lightricks/ltx-video-vfx"
+        },
+        {
+          "label": "ComfyUI 更新日志：v0.45.1",
+          "url": "https://docs.comfy.org/changelog"
+        },
+        {
+          "label": "对应改动：2026-11-10 合并",
+          "url": "https://github.com/Comfy-Org/ComfyUI/pull/17664"
+        }
+      ]
+    },
+    {
+      "title": "GPT Image 的 V3 节点和 SVG 节点，不是新模型",
+      "body": [
+        "ComfyUI v0.45.0（发布页时间为 2026-11-10）写明新增了 GPT Image V3、GIF 和 SVG 节点。这里核对的是 V3 和 SVG 两份节点文档。V3 节点文档列出的模型是已有的 gpt-image-2.6 与 gpt-image-2.5，各有 Flare 和 Sunburst，可以文生图，也可以接最多 16 张参考图做编辑，并能选择透明背景；还可以在第一张参考图上画标记，指出要改的位置。SVG 节点文档写明输出是 SVG 标记，供矢量工具继续编辑，可选模型是 gpt-image-2.6 的两个版本。",
+        "这些节点的代码在 2026-11-08 合并，随 11 月 10 日的版本发布。更新日志里有 “New model” 的说法，和节点文档不一致。节点文档没有把 V3 写成一个新的模型名称，因此这里只把它记成节点。"
+      ],
+      "value": "界面图标、简单图形和标题字如果能直接得到可编辑的 SVG，就少一步从位图描摹。在参考图上标出区域，也适合只重画界面的某一块。节点仍然调用既有模型，不会因为换了节点名字就变成一个新产品。",
+      "links": [
+        {
+          "label": "节点文档：OpenAIGPTImageNodeV3",
+          "url": "https://docs.comfy.org/built-in-nodes/OpenAIGPTImageNodeV3"
+        },
+        {
+          "label": "节点文档：OpenAIGPTImageSVGNode",
+          "url": "https://docs.comfy.org/built-in-nodes/OpenAIGPTImageSVGNode"
+        },
+        {
+          "label": "ComfyUI v0.45.0 发布说明",
+          "url": "https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.45.0"
+        }
+      ]
+    },
+    {
+      "title": "UltraTex：把多视角画面回烘成 UV 贴图",
+      "body": [
+        "ComfyUI 在 2026-11-09 合并了贴图回烘和 UltraTex 支持，并列入 2026-11-10 发布的 v0.45.0。合并说明写的是：用 FLUX.2 Klein 9B 的 LoRA，把一张参考图画到网格的多个视角上，再把这些视角烘焙回该网格的 UV 贴图。新节点负责准备条件、从多视角回烘，以及为渲染提供一组相机。权重页列出了应放入模型目录的文件，并指向原始模型库。"
+      ],
+      "value": "角色和道具如果已经有网格和 UV，缺的是颜色、金属度和粗糙度，回烘可以把参考图落回贴图，而不是只留下几张视角图。接缝、被挡住的区域和贴图分辨率仍然要人工看过。它适合做材质初稿。",
+      "links": [
+        {
+          "label": "ComfyUI 改动说明：贴图回烘与 UltraTex",
+          "url": "https://github.com/Comfy-Org/ComfyUI/pull/17636"
+        },
+        {
+          "label": "权重文件清单：Comfy-Org/UltraTex",
+          "url": "https://huggingface.co/Comfy-Org/UltraTex"
+        },
+        {
+          "label": "ComfyUI v0.45.0 发布说明",
+          "url": "https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.45.0"
+        }
+      ]
+    },
+    {
+      "title": "Electron 45.3.0 至 45.3.3 连续修补",
+      "body": [
+        "Electron 官方发布页记录了四次小版本：45.3.0 在 2026-11-11，45.3.1 在 2026-11-12，45.3.2 在 2026-11-13，45.3.3 在 2026-11-15。改动集中在桌面运行时，包括扩展接口崩溃、退出时可能挂起、窗口阴影和鼠标事件，以及 45.3.2 里画布字体遇到前导空格会被拒绝的问题。45.3.3 修正开发工具扩展的一处竞态，并把 Node.js 更新到 24.22.3、Chromium 更新到 156.0.8078.100。",
+        "这不是某款绘图或三维软件的功能更新。只有内置这一代 Electron 的本地工具才会受到影响，而且要等该工具自己发布新版本。这里没有核对任何具体软件是否已经升级。"
+      ],
+      "value": "本地桌面工具如果基于 Electron 45，这四次发布主要是少遇崩溃和窗口异常。美术流程本身没有因此多出生成能力。要不要升级，看工具自己的说明。",
+      "links": [
+        {
+          "label": "Electron 45.3.0",
+          "url": "https://releases.electronjs.org/release/v45.3.0"
+        },
+        {
+          "label": "Electron 45.3.1",
+          "url": "https://releases.electronjs.org/release/v45.3.1"
+        },
+        {
+          "label": "Electron 45.3.2",
+          "url": "https://releases.electronjs.org/release/v45.3.2"
+        },
+        {
+          "label": "Electron 45.3.3",
+          "url": "https://releases.electronjs.org/release/v45.3.3"
+        }
+      ]
+    }
+  ],
+  "closing": "本期只写入逐条打开过原始页面的条目。同一份更新日志里还有其他接口节点，这里没有逐一展开。"
+}

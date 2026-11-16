@@ -11,7 +11,7 @@
   <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260821a" />
+  <link rel="stylesheet" href="styles.css?v=20261116a" />
   <link rel="stylesheet" href="skins.css?v=20260821a" />
 </head>
 <body>
@@ -27,6 +27,10 @@
   <div class="page">
     <header class="masthead">
       <div class="masthead__top">
+        <nav class="site-nav" aria-label="栏目">
+          <a href="./index.html" aria-current="page">日报</a>
+          <a href="./weekly/index.html">周报</a>
+        </nav>
         <div class="skin-switcher" id="skinSwitcher">
           <button class="skin-btn" id="skinBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
             <span class="skin-btn__dot" id="skinDot" aria-hidden="true"></span>
@@ -89,6 +93,7 @@
 
     <footer class="foot">
       <p>本简报每日 9:00 自动更新并推送。上游信息源来自你指定的高信号账号清单（@karpathy @fchollet @ylecun @ilyasut @OpenAI @AnthropicAI @GoogleDeepMind @hwchase17 @goodside @DrJimFan 等）。</p>
+      <p class="foot__sub"><a href="./weekly/index.html">技术周报</a>按周另存，每一期的正文在本站。</p>
       <p class="foot__sub">解释性内容（价值 / 行业影响 / 传导路径）收纳于每张卡片的二级浮层，主视图只保留可读摘要。</p>
     </footer>
   </div>
